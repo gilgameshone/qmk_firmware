@@ -1,13 +1,14 @@
 Gilgamesh keymap
 
 ##BASE
-“
-‘ u o w p     q d v r f
- 
-a i o y g     l h t n s
-< >
-, . - c j     k m b x z
-TAB LWR SPC OSS RSE RET
+|--|--|--|--|--|--|--|--|--|--|--|
+|“ |  |  |  |  |  |  |  |  |  |  |
+|‘ |u |o |w |p |  |q |d |v |r |f |
+|  |  |  |  |  |  |  |  |  |  |  |
+|a |i |o |y |g |  |l |h |t |n |s |
+|< |> |  |  |  |  |  |  |  |  |  |
+|, |. |- |c |j |  |k |m |b |x |z |
+|  |  |TAB|LWR|SPC| |OSS|RSE|RET| | |
 
 ##LWR
                   ; ^ ( ) :
