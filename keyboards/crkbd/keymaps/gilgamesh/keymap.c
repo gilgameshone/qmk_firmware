@@ -99,10 +99,37 @@ SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LALT)SS_TAP(X
 
 
 // combos
+<<<<<<< HEAD
 const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_capsword, CW_TOGG),
+=======
+
+const uint16_t PROGMEM combo_esc[] = {KC_U, KC_O, KC_W, COMBO_END};
+const uint16_t PROGMEM combo_tab[] = {KC_O, KC_W, COMBO_END};
+const uint16_t PROGMEM combo_en[] = {KC_COMM, KC_DOT, KC_MINS, COMBO_END};
+const uint16_t PROGMEM combo_jp[] = {KC_DOT, KC_MINS, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_optbksp[] = {KC_H, KC_T, KC_N, COMBO_END};
+const uint16_t PROGMEM combo_bksp[] = {KC_T, KC_N, KC_S, COMBO_END};
+const uint16_t PROGMEM combo_ret[] = {KC_M, KC_B, KC_X, COMBO_END};
+const uint16_t PROGMEM combo_optdel[] = {KC_V, KC_D, KC_R, COMBO_END};
+const uint16_t PROGMEM combo_del[] = {KC_D, KC_R, KC_F, COMBO_END};
+const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
+
+
+combo_t key_combos[COMBO_COUNT] = {
+  COMBO(combo_esc, KC_ESC),
+  COMBO(combo_tab, KC_TAB),
+  COMBO(combo_en, KC_LNG2),
+  COMBO(combo_jp, KC_LNG1),
+  COMBO(combo_optbksp, LALT(KC_BSPC)),
+  COMBO(combo_bksp, KC_BSPC),
+  COMBO(combo_ret, KC_ENT),
+  COMBO(combo_optdel, LALT(KC_DEL)),
+  COMBO(combo_del, KC_DEL),
+  COMBO(combo_capsword, CAPS_WORD),
+>>>>>>> Create keymap.c
      // keycodes with modifiers are possible too!
 };
 
@@ -132,6 +159,7 @@ bool caps_word_press_user(uint16_t keycode) {
 
 // Shift + esc = ~
 const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, S(KC_GRV));
+<<<<<<< HEAD
 // GUI + esc = `
 const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, KC_GRV);
 // SHIFT + ' = "
@@ -146,6 +174,30 @@ const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, K
 const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT,  KC_PPLS, KC_SCLN);
 // SHIFT + * = ;
 const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_PAST, JP_COLN);
+=======
+
+// GUI + esc = `
+const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, KC_GRV);
+
+// SHIFT + ' = "
+const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
+
+// SHIFT + 7 = ^
+const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, JP_CIRC);
+
+// SHIFT + 2 = @
+const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, JP_AT);
+
+// SHIFT + 0 = _
+const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, KC_RO);
+
+// SHIFT + + = :
+const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT,  KC_PPLS, KC_SCLN);
+
+// SHIFT + * = ;
+const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_PAST, JP_COLN);
+
+>>>>>>> Create keymap.c
 const key_override_t **key_overrides = (const key_override_t *[]){
     &tilde_esc_override,
     &grave_esc_override,
