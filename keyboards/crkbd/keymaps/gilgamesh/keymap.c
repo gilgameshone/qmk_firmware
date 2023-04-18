@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include <stdio.h>
-#include "keymap_japanese.h"
-#include "sendstring_japanese.h"
+#include "keymap_jp.h"
+#include "sendstring_jis.h"
 
 
 enum crkbd_layers {
@@ -100,18 +100,24 @@ SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LALT)SS_TAP(X
 
 // combos
 <<<<<<< HEAD
+<<<<<<< HEAD
 const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_capsword, CW_TOGG),
 =======
 
+=======
+>>>>>>> fixed breaking changes from QMK update, mostly
 const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
 
-
 combo_t key_combos[COMBO_COUNT] = {
+<<<<<<< HEAD
   COMBO(combo_capsword, CAPS_WORD),
 >>>>>>> Create keymap.c
+=======
+  COMBO(combo_capsword, CW_TOGG),
+>>>>>>> fixed breaking changes from QMK update, mostly
      // keycodes with modifiers are possible too!
 };
 
@@ -140,6 +146,7 @@ bool caps_word_press_user(uint16_t keycode) {
 // key overides
 
 // Shift + esc = ~
+<<<<<<< HEAD
 const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, S(KC_GRV));
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -161,8 +168,11 @@ const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_
 
 =======
 >>>>>>> removed unused combos:wq
+=======
+const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, JP_TILD);
+>>>>>>> fixed breaking changes from QMK update, mostly
 // GUI + esc = `
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, KC_GRV);
+const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, JP_GRV;
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 // SHIFT + 7 = ^
@@ -170,16 +180,20 @@ const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, K
 // SHIFT + 2 = @
 const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, JP_AT);
 // SHIFT + 0 = _
-const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, KC_RO);
+const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, JP_UNDS);
 // SHIFT + + = :
-const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT,  KC_PPLS, KC_SCLN);
+const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT,  JP_PLUS, JP_SCLN);
 // SHIFT + * = ;
+<<<<<<< HEAD
 const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_PAST, JP_COLN);
 <<<<<<< HEAD
 
 >>>>>>> Create keymap.c
 =======
 >>>>>>> removed unused combos:wq
+=======
+const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, JP_ASTR, JP_COLN);
+>>>>>>> fixed breaking changes from QMK update, mostly
 const key_override_t **key_overrides = (const key_override_t *[]){
     &tilde_esc_override,
     &grave_esc_override,
@@ -202,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
          KC_A,    KC_I,    KC_E,    KC_Y,    KC_G,                         KC_L,    KC_H,    KC_T,    KC_N,    KC_S,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_COMM,  KC_DOT, KC_MINS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
+      KC_COMM,  KC_DOT, KC_PMNS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                   KC_TAB,     LWR,  KC_SPC,  OSM(MOD_LSFT), RSE,   KC_ENT
                              //`--------------------------'  `--------------------------'
@@ -231,9 +245,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_LWR] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      KC_PPLS,    KC_7,    KC_8,    KC_9, KC_PAST,
+      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                      JP_MINS,    KC_4,    KC_5,    KC_6, KC_SLSH,
+      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX,    FUN2,    FUN1,     SYM, XXXXXXX,                       JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
