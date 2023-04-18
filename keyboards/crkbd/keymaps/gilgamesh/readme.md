@@ -35,7 +35,7 @@ Lower contains a number pad that uses the typical number row keys. The shifted v
 |Sft|Opt|Cmd|Ctl|   |   | - | 4 | 5 | 6 | / |
 |   |   |   |   |   |   | \|| ! | @ | # | _ |
 |   |FN2|FN1|SYM|   |   | ¥ | 1 | 2 | 3 | 0 |
-|•••|•••|•••|XXX|•••|   |DEL|SYM|BkS|•••|•••|
+|•••|•••|...|XXX|...|   |DEL|SYM|BkS|•••|•••|
 
 ## SYM
 
@@ -48,7 +48,7 @@ This layer is vital for home row access to brackets.
 |   |Meh|Hyp|   |   |   | ; | [ | ] | ^ | : |
 |Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | @ | ? |
 |   |FN2|FN1|XXX|   |   | \|| { | } | ` | _ |
-|•••|•••|•••|XXX|•••|•••|•••|XXX|•••|•••|•••|
+|•••|•••|...|XXX|...|•••|...|XXX|...|•••|•••|
 
 
 ## RSE
@@ -60,9 +60,9 @@ The navigation keys are on the left side of the keyboard because the most freque
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
 |Undo|Cut |Copy|Pste|Redo|| |   |Hyp|Meh|   | 
-|⬅︎  |⬆︎   |⬇︎  |➡︎   | [ | |  |Ctl|Cmd|Opt|Sft| 
+|←  |↑  |↓  |→︎  | [ |   |   |Ctl|Cmd|Opt|Sft| 
 |Home|PgDn|PgUp|End | ] | | |EXT|MSE|   |   |
-|•••|•••| ` |EXT|SPC|   |•••|XXX|•••|•••|•••|
+|•••|•••| ` |EXT|SPC|   |...|XXX|...|•••|•••|
 |   |   |ESC|   |   |   |   |   |   |   |   |
 |   |   |~  |   |   |   |   |   |   |   |   |
 
@@ -72,14 +72,14 @@ The Extend layer is to place miscellaneous keys on the home row, notably Play/Pa
 It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition.
 
 ### Caps Word
-The mostly useless Caps Lock key is relegated here, in favour of the smart QMK Caps Word that is enabled by pressing both home index finger keys (Y and H) and automatically turns off on space or other keypress. 
+The mostly useless Caps Lock key is relegated here, in favour of the smart QMK Caps Word that is enabled by pressing both home index finger keys (`Y` and `H`) and automatically turns off on space or other keypress. 
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
 |Caps|L2en|L1jp||   |   |   |   |Hyp|Meh|   | 
 |Mute|VolUp|VolDn|Play| | | |Ctl|Cmd|Opt|Sft| 
 |    |Dfine|Gtrns|GooGL|| | |XXX|MSE|   |   |
-|•••|•••|•••|XXX|•••|•••|•••|XXX|•••|•••|•••|
+|•••|•••|...|XXX|...|•••|...|XXX|...|•••|•••|
 
 ## MSE
 
@@ -90,7 +90,7 @@ The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys
 |   |BT2|BT2|BT3|SRCBLK||PWR|   |Hyp|Meh|   |
 |MLT|MUP|MDN|MRT|SRCSEL||SLP|Ctl|Cmd|Opt|Sft|
 |WLT|WUP|WDN|WRT|SRC|   |WKE|EXT|XXX|   |   |
-|•••|•••|•••|•••|•••|•••|•••|XXX|•••|•••|•••|
+|•••|•••|...|...|...|•••|...|XXX|...|•••|•••|
 
 ## FN1
 
@@ -101,7 +101,7 @@ Function keys are rarely used on Mac but here for prosperity. Base layer switche
 |   |Meh|Hyp|   |Dvarf|    |PRS|F9 |F10|F11|F12|
 |Sft|Opt|Cmd|Ctl|Dvorak|   |SCL|F5 | F6| F7| F8|
 |OSTOGG|FN2|XXX|SYM|Qwerty||PSE|F1 | F2| F3| F4|
-|•••|•••|•••|XXX|•••|•••|•••|•••|•••|•••|•••|
+|•••|•••|...|XXX|...|•••|...|...|...|•••|•••|
 
 ## FN2
 
@@ -112,7 +112,16 @@ Who need function keys up to 24? absolutely nobody. QMK Bootloader and QMK Reboo
 |QBT|Meh|Hyp|   |   |   |   |F21|F22|F23|F24|
 |Sft|Opt|Cmd|Ctl|   |   |INS|F17|F18|F19|F20|
 |QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
-|•••|•••|•••|XXX|•••|•••|•••|•••|•••|•••|•••|
+|•••|•••|...|XXX|...|•••|...|...|...|•••|•••|
 
 [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
-[-] TODO Fix shift override
+[x] DONE Fix shift override
+[ ] TODO Finish whole keymap below
+
+### Whole keymap
+
+|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|QBT| " |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|   | ' | ⎌ |   | U |   |   | O  |   |   | W  |   |   | P |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|CPS|   |   |L2EN|  |  |L1JP   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |

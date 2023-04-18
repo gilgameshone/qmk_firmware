@@ -187,9 +187,10 @@ const key_override_t hyphen_tilde_override = ko_make_basic(MOD_MASK_SHIFT, KC_PM
 
 // below are broken
 // SHIFT + 7 = ^
-const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, JP_CIRC);
+const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, KC_EQL);
 
 // SHIFT + 2 = @
+<<<<<<< HEAD
 const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, JP_AT);
 <<<<<<< HEAD
 // SHIFT + 0 = _
@@ -208,6 +209,9 @@ const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_
 const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, JP_ASTR, JP_COLN);
 >>>>>>> fixed breaking changes from QMK update, mostly
 =======
+=======
+const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, KC_LBRC);
+>>>>>>> edited readme
 
 // SHIFT + + = ;
 const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT, JP_PLUS, JP_SCLN);
