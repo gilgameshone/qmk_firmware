@@ -15,7 +15,7 @@ There are no dual function keys, such as tap-hold keys.
 | ‘ | u | o | w | p |   | q | d | v | r | f |
 |   |   |   |   |   |   |   |   |   |   |   |
 | a | i | o | y | g |   | l | h | t | n | s |
-| < | > | ~ |   |   |   |   |   |   |   |   |
+| < | > | \ |   |   |   |   |   |   |   |   |
 | , | . | - | c | j |   | k | m | b | x | z |
 |•••|•••|TAB|LWR|SPC|   |OSS|RSE|RET|•••|•••|
 
@@ -116,12 +116,3 @@ Who need function keys up to 24? absolutely nobody. QMK Bootloader and QMK Reboo
 
  - [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
  - [x] DONE Fix shift override
- - [ ] TODO Finish whole keymap below
-
-### Whole keymap
-
-|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|...|•••|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|QBT| " |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|   | ' | ⎌ |   | U |   |   | O  |   |   | W  |   |   | P |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|CPS|   |   |L2EN|  |  |L1JP   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |

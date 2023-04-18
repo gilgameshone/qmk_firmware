@@ -182,10 +182,9 @@ const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUO
 // SHIFT + 0 = _
 const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, JP_UNDS);
 
-// SHIFT + - = ~ on base
-const key_override_t hyphen_tilde_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, JP_TILD);
+// SHIFT + - = \ on base (in macOS native apps)
+const key_override_t hyphen_tilde_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, A(JP_YEN));
 
-// below are broken
 // SHIFT + 7 = ^
 const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, KC_EQL);
 
