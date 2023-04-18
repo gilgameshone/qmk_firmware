@@ -15,7 +15,7 @@ There are no dual function keys, such as tap-hold keys.
 | ‘ | u | o | w | p |   | q | d | v | r | f |
 |   |   |   |   |   |   |   |   |   |   |   |
 | a | i | o | y | g |   | l | h | t | n | s |
-| < | > |   |   |   |   |   |   |   |   |   |
+| < | > | ~ |   |   |   |   |   |   |   |   |
 | , | . | - | c | j |   | k | m | b | x | z |
 |•••|•••|TAB|LWR|SPC|   |OSS|RSE|RET|•••|•••|
 
@@ -45,9 +45,9 @@ This layer is vital for home row access to brackets.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   |   |   | ; | [ | ] |   | : |
-|Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | & | ? |
-|   |FN2|FN1|XXX|   |   | \|| { | } | # | _ |
+|   |Meh|Hyp|   |   |   | ; | [ | ] | ^ | : |
+|Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | @ | ? |
+|   |FN2|FN1|XXX|   |   | \|| { | } | ` | _ |
 |•••|•••|•••|XXX|•••|•••|•••|XXX|•••|•••|•••|
 
 
@@ -115,3 +115,4 @@ Who need function keys up to 24? absolutely nobody. QMK Bootloader and QMK Reboo
 |•••|•••|•••|XXX|•••|•••|•••|•••|•••|•••|•••|
 
 [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
+[-] TODO Fix shift override
