@@ -4,7 +4,7 @@ The keys are laid out on a 3x5 grid + 3 thumb keys per hand.
 
 ## BASE
 
-The base layer uses Dvarf[1](https://o-x-e-y.github.io/layouts/dvarf/index.html) for the alpha arrangement, but can be swapped via FN2 layer.
+The base layer uses Dvarf<sup>[1](https://o-x-e-y.github.io/layouts/dvarf/index.html)</sup> for the alpha arrangement, but can be swapped via FN2 layer.
 The shifted characters are above, accessed by One Shot Shift. 
 Numbers, symbols and navigation keys are in the Lower and Raise layers respectively.
 There are no dual function keys, such as tap-hold keys.
