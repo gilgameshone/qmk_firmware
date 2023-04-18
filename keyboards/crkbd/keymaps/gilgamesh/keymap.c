@@ -19,8 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include <stdio.h>
-#include "keymap_jp.h"
-#include "sendstring_jis.h"
+#include "sendstring_japanese.h"
 
 
 enum crkbd_layers {
@@ -136,6 +135,7 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_DEL:
         case KC_UNDS:
         case KC_MINS:
+        case KC_PMNS:
             return true;
 
         default:
@@ -144,7 +144,6 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 // key overides
-
 // Shift + esc = ~
 <<<<<<< HEAD
 const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, S(KC_GRV));
@@ -170,15 +169,29 @@ const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_
 >>>>>>> removed unused combos:wq
 =======
 const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, JP_TILD);
+<<<<<<< HEAD
 >>>>>>> fixed breaking changes from QMK update, mostly
 // GUI + esc = `
 const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, JP_GRV;
+=======
+
+>>>>>>> attempeted to fix shift override, still broken
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
+
+// SHIFT + 0 = _
+const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, JP_UNDS);
+
+// SHIFT + - = ~ on base
+const key_override_t hyphen_tilde_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, JP_TILD);
+
+// below are broken
 // SHIFT + 7 = ^
 const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, JP_CIRC);
+
 // SHIFT + 2 = @
 const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, JP_AT);
+<<<<<<< HEAD
 // SHIFT + 0 = _
 const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, JP_UNDS);
 // SHIFT + + = :
@@ -194,17 +207,32 @@ const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_
 =======
 const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, JP_ASTR, JP_COLN);
 >>>>>>> fixed breaking changes from QMK update, mostly
+=======
+
+// SHIFT + + = ;
+const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT, JP_PLUS, JP_SCLN);
+
+// SHIFT + * = :
+const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, JP_ASTR, JP_COLN);
+
+// Cmd + esc = `
+const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, JP_GRV);
+
+
+>>>>>>> attempeted to fix shift override, still broken
 const key_override_t **key_overrides = (const key_override_t *[]){
     &tilde_esc_override,
-    &grave_esc_override,
     &quots_quotd_override,
+    &zero_under_override,
+    &hyphen_tilde_override,
     &seven_circumflex_override,
     &two_at_override,
-    &zero_under_override,
     &plus_scolon_override,
     &asterisk_colon_override,
+    &grave_esc_override,
     NULL
 };
+
 
 
 // keymap
@@ -267,11 +295,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_SYM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      JP_SCLN, JP_LBRC, JP_RBRC, XXXXXXX, JP_COLN,
+      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_CIRC, JP_COLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                       JP_EQL, JP_LPRN, JP_RPRN,   JP_AT, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR, JP_HASH, JP_UNDS,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR,  JP_GRV, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
