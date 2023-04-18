@@ -114,9 +114,9 @@ Who need function keys up to 24? absolutely nobody. QMK Bootloader and QMK Reboo
 |QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
 |•••|•••|...|XXX|...|•••|...|...|...|•••|•••|
 
-[1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
-[x] DONE Fix shift override
-[ ] TODO Finish whole keymap below
+ - [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
+ - [x] DONE Fix shift override
+ - [ ] TODO Finish whole keymap below
 
 ### Whole keymap
 
