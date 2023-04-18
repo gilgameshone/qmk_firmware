@@ -1,62 +1,107 @@
-Gilgamesh keymap
+# Gilgamesh keymap
 
 ## BASE
+The base layer uses Dvarf[1] https://o-x-e-y.github.io/layouts/dvarf/index.html for the alpha arrangement, but can be swapped via FN2 layer.
+The shifted characters are above, accessed by One Shot Shift. 
+Numbers, symbols and navigation keys are in the Lower and Raise layers respectively.
+There are no dual function keys, such as tap-hold keys.
 
-|1 |2 |3 |4 |5 |6 |7 |8 |9 |10|11|
-|--|--|--|--|--|--|--|--|--|--|--|
-|“ |  |  |  |  |  |  |  |  |  |  |
-|‘ |u |o |w |p |  |q |d |v |r |f |
-|  |  |  |  |  |  |  |  |  |  |  |
-|a |i |o |y |g |  |l |h |t |n |s |
-|< |> |  |  |  |  |  |  |  |  |  |
-|, |. |- |c |j |  |k |m |b |x |z |
-|•••|••• |TAB|LWR|SPC| |OSS|RSE|RET|•••|•••|
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+| “ |   |   |   |   |   |   |   |   |   |   |
+| ‘ | u | o | w | p |   | q | d | v | r | f |
+|   |   |   |   |   |   |   |   |   |   |   |
+| a | i | o | y | g |   | l | h | t | n | s |
+| < | > |   |   |   |   |   |   |   |   |   |
+| , | . | - | c | j |   | k | m | b | x | z |
+|•••|•••|TAB|LWR|SPC|   |OSS|RSE|RET|•••|•••|
+
+### Modifier keys
+
+The same side keys as the layer key (RSE or LWR) feature the modifier keys on the home row, on every layer below Base. This reduces finger contortion when chording with modifiers. Hyper and Meh keys are not real modifiers but chords of normal modifiers -- Hyper is ever modifier key, and Meh is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. Hyper calls Alfred and Meh calss Rectangle, a window manager. Infrequent layer keys are also avaliable on the bottom row.   
 
 ## LWR
+Lower contains a number pad that uses the typical number row keys. The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. 
 
-|1 |2 |3 |4 |5 |6 |7 |8 |9 |10|11|
-|--|--|--|--|--|--|--|--|--|--|--|
-|  |  |  |  |  |  |  |  |  |  |  |
-|  |  |  |  |  |  |; |^ |( |) |: |
-|  |Meh|Hyp|  |  |  |+ |7 |8 |9 |* |
-|  |   |  |  |  |  |  |= |$ |% |& |? |
-|Sft|Opt|Cmd|Ctl|   |- |4 |5 |6 |/|
-|  |   |   |    |   |  | \|| !| @| #| _|
-|   | FN2| FN1| SYM|  | | ¥| 1| 2| 3| 0|
- |•••|••• |  |   |    | | DEL |SYM |BkSp |•••|••• |
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+|   |   |   |   |   |   | ; | ^ | ( | ) | : |
+|   |Meh|Hyp|   |   |   | + | 7 | 8 | 9 | * |
+|   |   |   |   |   |   | = | $ | % | & | ? |
+|Sft|Opt|Cmd|Ctl|   |   | - | 4 | 5 | 6 | / |
+|   |   |   |   |   |   | \|| ! | @ | # | _ |
+|   |FN2|FN1|SYM|   |   | ¥ | 1 | 2 | 3 | 0 |
+|•••|•••|•••|***|•••|   |DEL|SYM|BkS|•••|•••|
 
-##SYM
-    Meh Hyp       ; [ ]   :
-Sft Opt Cmd Ctl   = ( ) & ?
-    FN2 FN1 SYM   | { } # _
+## SYM
+The Symbol layer is accessed via either both thumb layer keys in succession or a layer thumb key and and index finger key.
+Most characters are simply the shifted versions, more eaisly accessed from the thumbs rather than the pinky finger shift. 
+This layer is vital for home row access to brackets.
 
-
-##RSE
-Undo Cut  Copy Pste Redo      Hyp Meh  
-⬅︎    ⬆︎    ⬇︎     ➡︎    [       Ctl Cmd Opt Sft  
-Home PgDn PgUp End   ]     EXT MSE 
-            `
-          ESC  EXT SPC
-            ~
-
-##EXT
-Caps L2en L1jp 
-Mute VolUp VolDn Play 
-     Dfine Gtrns GooGL
-
-##MSE
-    BT2 BT2 BT3 SRCBLK     PWR
-MLT MUP MDN MRT SRCSEL     SLP
-WLT WUP WDN WRT SRC        WKE
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+|   |Meh|Hyp|   |   |   | ; | [ | ] |   | : |
+|Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | & | ? |
+|   |FN2|FN1|***|   |   | \|| { | } | # | _ |
+|•••|•••|•••|***|•••|•••|•••|***|•••|•••|•••|
 
 
-##FN1
-       Dvarf    PRS F9  F10 F11 F12
-       Dvorak   SCL F5  F6  F7  F8
-OSTOGG Qwerty   PSE F1  F2  F3  F4
+## RSE
+The Raise layer includes navigation, copy and paste, and some redundant square brackets.
+Here, we also have Grave Escape -- ESC on press, tilde when shifted, and grave mark with Command key held.
+The Navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right, placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers.
 
-##FN2
-QBT                 F21  F22  F23  F24
-                INS F17  F18  F19  F20
-QRB                 F13  F14  F15  F16
 
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+|Undo|Cut |Copy|Pste|Redo|| |   |Hyp|Meh|   |  
+|⬅︎  |⬆︎   |⬇︎  |➡︎   | [ | | |Ctl|Cmd|Opt|Sft|  
+|Home|PgDn|PgUp|End | ] | | |EXT|MSE|   |   |
+|•••|•••| ` |EXT|SPC|   |•••|***|•••|•••|•••|
+|•••|•••|ESC|   |   |   |•••|***|•••|•••|•••|
+|•••|•••|~  |   |   |   |•••|***|•••|•••|•••|
+
+## EXT
+The Extend layer is to place miscellaneous keys on the homerow, notably Play/Pause. 
+It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition.
+The mostly useless Caps Lock key is relegated here, in favour of the smart QMK Caps Word that is enabled by pressing both home index finger keys (Y and T) and automatically turns off on Space or other keypress.  
+
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+|Caps|L2en|L1jp||   |   |   |   |Hyp|Meh|   |  
+|Mute|VolUp|VolDn|Play| | | |Ctl|Cmd|Opt|Sft|  
+|    |Dfine|Gtrns|GooGL|| | | |EXT|MSE| |   |
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+
+## MSE
+
+The Mouse layer has mouse direction keys, mouse wheel direction keys, mouse buttons, and Mac print screen options. The power, sleep, and wake keys are in a contorted position to aviod accidental press.
+
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+|   |BT2|BT2|BT3|SRCBLK||PWR|   |   |   |   |
+|MLT|MUP|MDN|MRT|SRCSEL||SLP|   |   |   |   |
+|WLT|WUP|WDN|WRT|SRC|   |WKE|   |   |   |   |
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+
+## FN1
+
+Funciton keys are rarely used on Mac but here for prosperity. Base layer switch and One Shot Toggle keys are in contorted positions.
+
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+|   |   |   |   |Dvarf| |PRS|F9 |F10|F11|F12|
+|   |   |   |   |Dvorak||SCL|F5 | F6| F7| F8|
+|OSTOGG||   |   |Qwerty||PSE|F1 | F2| F3| F4|
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+
+## FN2
+
+Who need function keys up to 24? absolutely nobody. QMK Bootloader and QMK Reboot are in contorted positions to aviod accidental press.
+
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|---|---|---|---|---|---|---|---|---|---|---|
+|QBT|   |   |   |   |   |   |F21|F22|F23|F24|
+|   |   |   |   |   |   |INS|F17|F18|F19|F20|
+|QRB|   |   |   |   |   |   |F13|F14|F15|F16|
+|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
