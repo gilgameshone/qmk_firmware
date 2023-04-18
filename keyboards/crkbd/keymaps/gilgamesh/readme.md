@@ -70,7 +70,9 @@ The navigation keys are on the left side of the keyboard because the most freque
 
 The Extend layer is to place miscellaneous keys on the home row, notably Play/Pause. 
 It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition.
-The mostly useless Caps Lock key is relegated here, in favour of the smart QMK Caps Word that is enabled by pressing both home index finger keys (Y and T) and automatically turns off on space or other keypress. 
+
+### Caps Word
+The mostly useless Caps Lock key is relegated here, in favour of the smart QMK Caps Word that is enabled by pressing both home index finger keys (Y and H) and automatically turns off on space or other keypress. 
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
