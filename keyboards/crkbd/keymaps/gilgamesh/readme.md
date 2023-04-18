@@ -25,7 +25,7 @@ Modifier keys are on the same side as the layer key (RSE or LWR) on the home row
 
 ## LWR
 
-Lower contains a number pad that uses the typical number row keys. The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. 
+Lower contains a number pad that uses the typical number row keys. The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. XXX indicates key held to access layer.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -57,15 +57,14 @@ The Raise layer includes navigation, copy and paste, and some redundant square b
 Here, we also have Grave Escape -- ESC on press, tilde when shifted, and grave mark with Command key held.
 The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers.
 
-
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
 |Undo|Cut |Copy|Pste|Redo|| |   |Hyp|Meh|   | 
 |⬅︎  |⬆︎   |⬇︎  |➡︎   | [ | |  |Ctl|Cmd|Opt|Sft| 
 |Home|PgDn|PgUp|End | ] | | |EXT|MSE|   |   |
 |•••|•••| ` |EXT|SPC|   |•••|XXX|•••|•••|•••|
-|•••|•••|ESC|   |   |   |   |   |   |   |   |
-|•••|•••|~  |   |   |   |   |   |   |   |   |
+|   |   |ESC|   |   |   |   |   |   |   |   |
+|   |   |~  |   |   |   |   |   |   |   |   |
 
 ## EXT
 
@@ -77,8 +76,8 @@ The mostly useless Caps Lock key is relegated here, in favour of the smart QMK C
 |---|---|---|---|---|---|---|---|---|---|---|
 |Caps|L2en|L1jp||   |   |   |   |Hyp|Meh|   | 
 |Mute|VolUp|VolDn|Play| | | |Ctl|Cmd|Opt|Sft| 
-|    |Dfine|Gtrns|GooGL|| | |EXT|MSE|   |   |
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|    |Dfine|Gtrns|GooGL|| | |XXX|MSE|   |   |
+|•••|•••|•••|XXX|•••|•••|•••|XXX|•••|•••|•••|
 
 ## MSE
 
@@ -86,10 +85,10 @@ The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |BT2|BT2|BT3|SRCBLK||PWR|   |   |   |   |
-|MLT|MUP|MDN|MRT|SRCSEL||SLP|   |   |   |   |
-|WLT|WUP|WDN|WRT|SRC|   |WKE|   |   |   |   |
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |BT2|BT2|BT3|SRCBLK||PWR|   |Hyp|Meh|   |
+|MLT|MUP|MDN|MRT|SRCSEL||SLP|Ctl|Cmd|Opt|Sft|
+|WLT|WUP|WDN|WRT|SRC|   |WKE|EXT|XXX|   |   |
+|•••|•••|•••|•••|•••|•••|•••|XXX|•••|•••|•••|
 
 ## FN1
 
@@ -97,10 +96,10 @@ Function keys are rarely used on Mac but here for prosperity. Base layer switche
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |   |   |   |Dvarf| |PRS|F9 |F10|F11|F12|
-|   |   |   |   |Dvorak||SCL|F5 | F6| F7| F8|
-|OSTOGG||   |   |Qwerty||PSE|F1 | F2| F3| F4|
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |Meh|Hyp|   |Dvarf|    |PRS|F9 |F10|F11|F12|
+|Sft|Opt|Cmd|Ctl|Dvorak|   |SCL|F5 | F6| F7| F8|
+|OSTOGG|FN2|XXX|SYM|Qwerty||PSE|F1 | F2| F3| F4|
+|•••|•••|•••|XXX|•••|•••|•••|•••|•••|•••|•••|
 
 ## FN2
 
@@ -108,9 +107,9 @@ Who need function keys up to 24? absolutely nobody. QMK Bootloader and QMK Reboo
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
-|QBT|   |   |   |   |   |   |F21|F22|F23|F24|
-|   |   |   |   |   |   |INS|F17|F18|F19|F20|
-|QRB|   |   |   |   |   |   |F13|F14|F15|F16|
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|QBT|Meh|Hyp|   |   |   |   |F21|F22|F23|F24|
+|Sft|Opt|Cmd|Ctl|   |   |INS|F17|F18|F19|F20|
+|QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
+|•••|•••|•••|XXX|•••|•••|•••|•••|•••|•••|•••|
 
 [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
