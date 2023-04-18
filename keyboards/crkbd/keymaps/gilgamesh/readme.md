@@ -1,6 +1,6 @@
 # Gilgamesh keymap
 A 36-key keyboard layout on QMK firmware that uses 5-7 layers and does not use tap-hold keys.
-The keys are laid out on a 3x5 grid + 3 thumb keys per hand.
+The keys are laid out on a 3x5 grid + 3 thumb keys per hand. It is optimised to be used on Mac machines expecting a JIS keyboard. 
 
 ## BASE
 
