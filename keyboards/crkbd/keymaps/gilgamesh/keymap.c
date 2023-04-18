@@ -215,7 +215,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MINS,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,   LWR,  KC_SPC,    OSM(MOD_LSFT), RSE,  KC_ENT
+                                  KC_TAB,   LWR,    KC_SPC,  OSM(MOD_LSFT), RSE,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
@@ -226,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,   LWR,  KC_SPC,    OSM(MOD_LSFT), RSE,  KC_ENT
+                                  KC_TAB,   LWR,    KC_SPC,  OSM(MOD_LSFT), RSE,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_LWR] = LAYOUT_split_3x5_3(
@@ -248,7 +248,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_HOME, KC_PGUP, KC_PGDN,  KC_END, KC_NUHS,                      XXXXXXX,     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, XXXXXXX
+                                 KC_ESC,   EXT,     KC_SPC,    XXXXXXX,     RSE, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_SYM] = LAYOUT_split_3x5_3(
