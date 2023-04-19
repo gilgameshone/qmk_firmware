@@ -65,3 +65,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 >>>>>>> removed unused combos:wq
 #define TAPPING_TERM 175
 #define COMBO_ONLY_FROM_LAYER 0
+#define TAPPING_TOGGLE 2
