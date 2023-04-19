@@ -48,7 +48,7 @@ This layer is vital for home row access to brackets.
 |   |Meh|Hyp|   |   |   | ; | [ | ] | ^ | : |
 |Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | @ | ? |
 |   |FN2|FN1|XXX|   |   | \|| { | } | ` | _ |
-|•••|•••|...|XXX|...|•••|...|XXX|...|•••|•••|
+|•••|•••|...|XXX|...|   |...|XXX|...|•••|•••|
 
 
 ## RSE
@@ -79,7 +79,7 @@ The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `
 |Caps|L2en|L1jp||   |   |   |   |Hyp|Meh|   | 
 |Mute|VolUp|VolDn|Play| | | |Ctl|Cmd|Opt|Sft| 
 |    |Dfine|Gtrns|GooGL|| | |XXX|MSE|   |   |
-|•••|•••|...|XXX|...|•••|...|XXX|...|•••|•••|
+|•••|•••|...|XXX|...|   |...|XXX|...|•••|•••|
 
 ## MSE
 
@@ -90,7 +90,7 @@ The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys
 |   |BT2|BT2|BT3|SRCBLK||PWR|   |Hyp|Meh|   |
 |MLT|MUP|MDN|MRT|SRCSEL||SLP|Ctl|Cmd|Opt|Sft|
 |WLT|WUP|WDN|WRT|SRC|   |WKE|EXT|XXX|   |   |
-|•••|•••|...|...|...|•••|...|XXX|...|•••|•••|
+|•••|•••|...|...|...|   |...|XXX|...|•••|•••|
 
 ## FN1
 
@@ -101,7 +101,7 @@ Function keys are rarely used on Mac but here for prosperity. Base layer switche
 |   |Meh|Hyp|   |Dvarf|    |PRS|F9 |F10|F11|F12|
 |Sft|Opt|Cmd|Ctl|Dvorak|   |SCL|F5 | F6| F7| F8|
 |OSTOGG|FN2|XXX|SYM|Qwerty||PSE|F1 | F2| F3| F4|
-|•••|•••|...|XXX|...|•••|...|...|...|•••|•••|
+|•••|•••|...|XXX|...|   |...|...|...|•••|•••|
 
 ## FN2
 
@@ -112,7 +112,7 @@ Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Rebo
 |QBT|Meh|Hyp|   |   |   |   |F21|F22|F23|F24|
 |Sft|Opt|Cmd|Ctl|   |   |INS|F17|F18|F19|F20|
 |QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
-|•••|•••|...|XXX|...|•••|...|...|...|•••|•••|
+|•••|•••|...|XXX|...|   |...|...|...|•••|•••|
 
  - [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
  - [x] DONE Fix shift override
