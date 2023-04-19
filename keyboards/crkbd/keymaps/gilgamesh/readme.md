@@ -15,7 +15,7 @@ There are no dual function keys, such as tap-hold keys.
 | ‘ | u | o | w | p |   | q | d | v | r | f |
 |   |   |   |   |   |   |   |   |   |   |   |
 | a | i | o | y | g |   | l | h | t | n | s |
-| < | > | \ |   |   |   |   |   |   |   |   |
+| < | > |   |   |   |   |   |   |   |   |   |
 | , | . | - | c | j |   | k | m | b | x | z |
 |•••|•••|TAB|LWR|SPC|   |OSS|RSE|RET|•••|•••|
 
@@ -25,7 +25,7 @@ Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home
 
 ## LWR
 
-Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. XXX indicates key held to access layer. Thumb keys here change to forwards and backwards delete.
+Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. `XXX` indicates key held to access layer. Thumb keys here change to forwards and backwards delete.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -46,22 +46,22 @@ This layer is vital for home row access to brackets.
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
 |   |Meh|Hyp|   |   |   | ; | [ | ] | ^ | : |
-|Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | @ | ? |
-|   |FN2|FN1|XXX|   |   | \|| { | } | ` | _ |
+|Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | & | ? |
+|   |FN2|FN1|XXX|   |   | \|| { | } | @ | _ |
 |•••|•••|...|XXX|...|   |...|XXX|...|•••|•••|
 
 
 ## RSE
 
-The Raise layer includes navigation, copy and paste, and some redundant square brackets.
+The Raise layer includes navigation and copy and paste keys.
 Here, we also have `Grave Escape` -- `ESC` on press, `tilde` when shifted, and `grave` mark with `Command` key held.
-The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. The redundant square brackets have been replaced with `ESC` and `TAB` in 34 key versions of the keymap.
+The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. 
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
 |Undo|Cut |Copy|Pste|Redo|| |   |Hyp|Meh|   | 
-|←  |↑  |↓  |→  | [ |   |   |Ctl|Cmd|Opt|Sft| 
-|Home|PgDn|PgUp|End | ] | | |EXT|MSE|   |   |
+|←   |↑   |↓   |→   |   | | |Ctl|Cmd|Opt|Sft| 
+|Home|PgDn|PgUp|End |   | | |EXT|MSE|   |   |
 |•••|•••| ` |EXT|SPC|   |...|XXX|...|•••|•••|
 |   |   |ESC|   |   |   |   |   |   |   |   |
 |   |   |~  |   |   |   |   |   |   |   |   |
@@ -72,7 +72,7 @@ The Extend layer is to place miscellaneous keys on the home row, notably Play/Pa
 It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition.
 
 ### Caps Word
-The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `Caps Word` that is enabled by pressing both home index finger keys (`Y` and `H`) and automatically turns off on space or other keypress. 
+The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `Caps Word` that is enabled by pressing both home index finger keys on the Base layer (`Y` and `H`) and automatically turns off on space or other keypress. 
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -117,6 +117,6 @@ Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Rebo
  - [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
  - [x] DONE Fix shift override
  - [*] This keymap takes inspiration from the great Miryoku<sup>[2](https://github.com/manna-harbour/miryoku)</sup>, the excellent Seniply<sup>[3](https://stevep99.github.io/seniply/)</sup>, and many others.
- - [ ] TODO Remove duplicate keys to reduce redundancy.
+ - [x] DONE Remove duplicate keys to reduce redundancy.
  - [ ] TODO Replace Dvorak with layer toggle version of Dvarf.
  
