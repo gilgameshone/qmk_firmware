@@ -119,4 +119,5 @@ Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Rebo
  - [*] This keymap takes inspiration from the great Miryoku<sup>[2](https://github.com/manna-harbour/miryoku)</sup>, the excellent Seniply<sup>[3](https://stevep99.github.io/seniply/)</sup>, and many others.
  - [x] DONE Remove duplicate keys to reduce redundancy.
  - [ ] TODO Replace Dvorak with layer toggle version of Dvarf.
+ - [*] Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.  
  
