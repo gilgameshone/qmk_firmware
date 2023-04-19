@@ -19,9 +19,9 @@ There are no dual function keys, such as tap-hold keys.
 | , | . | - | c | j |   | k | m | b | x | z |
 |•••|•••|TAB|LWR|SPC|   |OSS|RSE|RET|•••|•••|
 
-### Modifier keys
+### Modifier keys and layer keys
 
-Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home row, on every layer below Base. This reduces finger contortion when chording with modifiers. To use modifiers with alpha keys, simply release the layer key. `Hyper` and `Meh` keys are not real modifiers but chords of normal modifiers -- `Hyper` is every modifier key, and `Meh` is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. `Hyper` is configured to call Alfred and `Meh` to call Rectangle, a window manager. Infrequent layer keys are also available on the bottom row. `Shift` has a low priority here as its duplicatie `One Shot Shift` on the base layer is used for prose. 
+Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home row, on every layer below Base. This reduces finger contortion when chording with modifiers. To use modifiers with alpha keys, simply release the layer key. `Hyper` and `Meh` keys are not real modifiers but chords of normal modifiers -- `Hyper` is every modifier key, and `Meh` is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. `Hyper` is configured to call Alfred and `Meh` to call Rectangle, a window manager. Infrequent layer keys are also available on the bottom row. `Shift` has a low priority here as its duplicatie `One Shot Shift` on the base layer is used for prose. The extra layer keys are below the modifier keys and can be toggled on.
 
 ## LWR
 
@@ -39,7 +39,7 @@ Lower contains a number pad that uses the typical number row keys (not the actua
 
 ## SYM
 
-The Symbol layer is accessed via either left then right thumb layer keys in succession or the left thumb layer key and an index finger key.
+The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession or by toggle with the left thumb layer key and an index finger key.
 Most characters are simply the shifted versions, more easily accessed from the thumbs rather than the pinky finger shift. 
 This layer is vital for home row access to brackets.
 
@@ -68,7 +68,7 @@ The navigation keys are on the left side of the keyboard because the most freque
 
 ## EXT
 
-The Extend layer is to place miscellaneous keys on the home row, notably Play/Pause. 
+The Extend layer is to place miscellaneous keys on the home row, notably Play/Pause. It is accessed like `SYM` but mirrored. 
 It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition.
 
 ### Caps Word
@@ -118,6 +118,6 @@ Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Rebo
  - [x] DONE Fix shift override
  - [*] This keymap takes inspiration from the great Miryoku<sup>[2](https://github.com/manna-harbour/miryoku)</sup>, the excellent Seniply<sup>[3](https://stevep99.github.io/seniply/)</sup>, and many others.
  - [x] DONE Remove duplicate keys to reduce redundancy.
- - [ ] TODO Replace Dvorak with layer toggle version of Dvarf.
+ - [x] DONE Replace Dvorak with layer toggle version of Dvarf.
  - [*] Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.  
  

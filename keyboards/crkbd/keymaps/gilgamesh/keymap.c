@@ -253,13 +253,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_DVORAK] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      JP_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,                         KC_F,    KC_G,    KC_C,    KC_R,    KC_L,
+      JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-         KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                         KC_D,    KC_H,    KC_T,    KC_N,    KC_S,
+         KC_A,    KC_I,    KC_E,    KC_Y,    KC_G,                         KC_L,    KC_H,    KC_T,    KC_N,    KC_S,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_MINS,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,
+      KC_COMM,  KC_DOT, KC_PMNS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,   LWR,    KC_SPC,  OSM(MOD_LSFT), RSE,  KC_ENT
+                                  KC_TAB,TT(_LWR),  KC_SPC,  OSM(MOD_LSFT),TT(_RSE),KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
@@ -279,7 +279,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,    FUN2,    FUN1,     SYM, XXXXXXX,                       JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
+      XXXXXXX,TT(_FUN2),TT(_FUN1),TT(_SYM), XXXXXXX,                     JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX,     LWR, XXXXXXX,     KC_DEL,     SYM, KC_BSPC
                              //`--------------------------'  `--------------------------'
@@ -290,7 +290,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                      XXXXXXX, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                      XXXXXXX,     EXT,     MSE, XXXXXXX, XXXXXXX,
+      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                      XXXXXXX,TT(_EXT),TT(_MSE), XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   EXT,     KC_SPC,    XXXXXXX,     RSE, XXXXXXX
                              //`--------------------------'  `--------------------------'
@@ -301,7 +301,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
+      XXXXXXX, _______, _______, _______, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
@@ -312,7 +312,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY, XXXXXXX,    XXXXXXX, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      XXXXXXX,     EXT,     MSE, XXXXXXX, XXXXXXX,
+      XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      XXXXXXX, _______, _______, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
@@ -323,7 +323,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R,LSG(KC_4),                     KC_SLEP, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,LSG(KC_3),                     KC_WAKE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,LSG(KC_3),                     KC_WAKE, _______, _______, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
