@@ -116,3 +116,7 @@ Who need function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Reboo
 
  - [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
  - [x] DONE Fix shift override
+ - [*] This keymap takes inspiration from the great Miryoku<sup>[2](https://github.com/manna-harbour/miryoku)</sup>, the excellent Seniply<sup>[3](https://stevep99.github.io/seniply/)</sup>, and many others.
+ - [ ] TODO Remove duplicate keys to reduce redundancy.
+ - [ ] TODO Replace Dvorak with layer toggle version of Dvarf.
+ 
