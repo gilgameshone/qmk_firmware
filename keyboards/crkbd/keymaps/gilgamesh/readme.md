@@ -105,7 +105,7 @@ Function keys are rarely used on Mac but here for prosperity. Base layer switche
 
 ## FN2
 
-Who need function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Reboot are in contorted positions to avoid accidental press.
+Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Reboot are in contorted positions to avoid accidental press.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
