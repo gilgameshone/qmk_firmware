@@ -182,9 +182,6 @@ const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUO
 // SHIFT + 0 = _
 const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, JP_UNDS);
 
-// SHIFT + - = \ on base (in macOS native apps)
-const key_override_t hyphen_tilde_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, A(JP_YEN));
-
 // SHIFT + 7 = ^
 const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, KC_EQL);
 
@@ -221,13 +218,15 @@ const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, JP_
 // Cmd + esc = `
 const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, JP_GRV);
 
+<<<<<<< HEAD
 
 >>>>>>> attempeted to fix shift override, still broken
+=======
+>>>>>>> removed duplicate keys
 const key_override_t **key_overrides = (const key_override_t *[]){
     &tilde_esc_override,
     &quots_quotd_override,
     &zero_under_override,
-    &hyphen_tilde_override,
     &seven_circumflex_override,
     &two_at_override,
     &plus_scolon_override,
@@ -289,9 +288,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     XXXXXXX, XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, KC_RBRC,                      XXXXXXX, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                      XXXXXXX, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, KC_NUHS,                      XXXXXXX,     EXT,     MSE, XXXXXXX, XXXXXXX,
+      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                      XXXXXXX,     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   EXT,     KC_SPC,    XXXXXXX,     RSE, XXXXXXX
                              //`--------------------------'  `--------------------------'
@@ -300,9 +299,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_CIRC, JP_COLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                       JP_EQL, JP_LPRN, JP_RPRN,   JP_AT, JP_QUES,
+      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR,  JP_GRV, JP_UNDS,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
