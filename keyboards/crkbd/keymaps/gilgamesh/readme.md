@@ -4,8 +4,8 @@ The keys are laid out on a 3x5 grid + 3 thumb keys per hand. It is optimised to 
 
 ## BASE
 
-The base layer uses Dvarf<sup>[1](https://o-x-e-y.github.io/layouts/dvarf/index.html)</sup> for the alpha arrangement, but can be swapped via FN2 layer.
-The shifted characters are above, accessed by One Shot Shift. 
+The base layer uses Dvarf<sup>[1](https://o-x-e-y.github.io/layouts/dvarf/index.html)</sup> for the alpha arrangement. This can be swapped on the fly via FN2 layer.
+The shifted characters are above, accessed by `One Shot Shift`. 
 Numbers, symbols and navigation keys are in the Lower and Raise layers respectively.
 There are no dual function keys, such as tap-hold keys.
 
@@ -21,11 +21,11 @@ There are no dual function keys, such as tap-hold keys.
 
 ### Modifier keys
 
-Modifier keys are on the same side as the layer key (RSE or LWR) on the home row, on every layer below Base. This reduces finger contortion when chording with modifiers. Hyper and Meh keys are not real modifiers but chords of normal modifiers -- Hyper is every modifier key, and Meh is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. Hyper calls Alfred and Meh calls Rectangle, a window manager. Infrequent layer keys are also available on the bottom row.
+Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home row, on every layer below Base. This reduces finger contortion when chording with modifiers. To use modifiers with alpha keys, simply release the layer key. `Hyper` and `Meh` keys are not real modifiers but chords of normal modifiers -- `Hyper` is every modifier key, and `Meh` is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. `Hyper` is configured to call Alfred and `Meh` to call Rectangle, a window manager. Infrequent layer keys are also available on the bottom row. `Shift` has a low priority here as its duplicatie `One Shot Shift` on the base layer is used for prose. 
 
 ## LWR
 
-Lower contains a number pad that uses the typical number row keys. The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. XXX indicates key held to access layer.
+Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. XXX indicates key held to access layer. Thumb keys here change to forwards and backwards delete.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -39,7 +39,7 @@ Lower contains a number pad that uses the typical number row keys. The shifted v
 
 ## SYM
 
-The Symbol layer is accessed via either both thumb layer keys in succession or a layer thumb key and and index finger key.
+The Symbol layer is accessed via either left then right thumb layer keys in succession or the left thumb layer key and an index finger key.
 Most characters are simply the shifted versions, more easily accessed from the thumbs rather than the pinky finger shift. 
 This layer is vital for home row access to brackets.
 
@@ -54,8 +54,8 @@ This layer is vital for home row access to brackets.
 ## RSE
 
 The Raise layer includes navigation, copy and paste, and some redundant square brackets.
-Here, we also have Grave Escape -- ESC on press, tilde when shifted, and grave mark with Command key held.
-The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers.
+Here, we also have Grave Escape -- `ESC` on press, `tilde` when shifted, and `grave` mark with `Command` key held.
+The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. The redundant square brackets have been replaced with `ESC` and `TAB` in 34 key versions of the keymap.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -72,7 +72,7 @@ The Extend layer is to place miscellaneous keys on the home row, notably Play/Pa
 It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition.
 
 ### Caps Word
-The mostly useless Caps Lock key is relegated here, in favour of the smart QMK Caps Word that is enabled by pressing both home index finger keys (`Y` and `H`) and automatically turns off on space or other keypress. 
+The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `Caps Word` that is enabled by pressing both home index finger keys (`Y` and `H`) and automatically turns off on space or other keypress. 
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -105,7 +105,7 @@ Function keys are rarely used on Mac but here for prosperity. Base layer switche
 
 ## FN2
 
-Who need function keys up to 24? absolutely nobody. QMK Bootloader and QMK Reboot are in contorted positions to avoid accidental press.
+Who need function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Reboot are in contorted positions to avoid accidental press.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
