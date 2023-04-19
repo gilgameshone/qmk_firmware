@@ -95,11 +95,12 @@ The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys
 ## FN1
 
 Function keys are rarely used on Mac but here for prosperity. Base layer switches and One Shot Toggle keys are in contorted positions to avoid accidental press.
+`Dvarf TT` enables layer toggles on all layer keys with 2 keypresses for one-handed use. If you are stuck in a layer there is a layer escape key on the furthest thumb key (where `TAB` was for `LWR`, `SYM`, `FN1` and `FN2`; and where `RET` was for `RSE`, `EXT` and `MSE`.)
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
 |---|---|---|---|---|---|---|---|---|---|---|
 |   |Meh|Hyp|   |Dvarf|    |PRS|F9 |F10|F11|F12|
-|Sft|Opt|Cmd|Ctl|Dvorak|   |SCL|F5 | F6| F7| F8|
+|Sft|Opt|Cmd|Ctl|DvarfTT|   |SCL|F5 | F6| F7| F8|
 |OSTOGG|FN2|XXX|SYM|Qwerty||PSE|F1 | F2| F3| F4|
 |•••|•••|...|XXX|...|   |...|...|...|•••|•••|
 
@@ -114,10 +115,11 @@ Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Rebo
 |QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
 |•••|•••|...|XXX|...|   |...|...|...|•••|•••|
 
+### Notes
+
  - [1] Dvarf is an alpha key layout created by o-x-e-y, that is based on Dvorak.
  - [x] DONE Fix shift override
  - [*] This keymap takes inspiration from the great Miryoku<sup>[2](https://github.com/manna-harbour/miryoku)</sup>, the excellent Seniply<sup>[3](https://stevep99.github.io/seniply/)</sup>, and many others.
  - [x] DONE Remove duplicate keys to reduce redundancy.
  - [x] DONE Replace Dvorak with layer toggle version of Dvarf.
- - [*] Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.  
- 
+ - [*] Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.
