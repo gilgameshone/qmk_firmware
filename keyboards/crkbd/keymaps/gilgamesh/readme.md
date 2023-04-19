@@ -54,7 +54,7 @@ This layer is vital for home row access to brackets.
 ## RSE
 
 The Raise layer includes navigation, copy and paste, and some redundant square brackets.
-Here, we also have Grave Escape -- `ESC` on press, `tilde` when shifted, and `grave` mark with `Command` key held.
+Here, we also have `Grave Escape` -- `ESC` on press, `tilde` when shifted, and `grave` mark with `Command` key held.
 The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. The redundant square brackets have been replaced with `ESC` and `TAB` in 34 key versions of the keymap.
 
 |•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
