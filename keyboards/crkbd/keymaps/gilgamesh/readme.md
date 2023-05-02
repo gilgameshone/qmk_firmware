@@ -125,4 +125,4 @@ Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Rebo
  - [x] DONE Remove duplicate keys to reduce redundancy.
  - [x] DONE Replace Dvorak with layer toggle version of Dvarf.
  - [*] Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.
- - [4] [Gilgamesh keymap image](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.png)
+ - [4] [Gilgamesh keymap image](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.drawio.png)
