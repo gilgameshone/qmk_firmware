@@ -1,4 +1,4 @@
-![Gilgamesh keymap image](https://github.com/gilgameshone/gilgamesh-layout/blob/main/whole.png)
+![Gilgamesh keymap image](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-whole.drawio.png)
 
 # Gilgamesh keymap
 A 36-key keyboard layout on QMK firmware that uses 5-7 layers and does not use tap-hold keys.
