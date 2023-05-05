@@ -11,8 +11,7 @@ The shifted characters are above, accessed by `One Shot Shift`.
 Numbers, symbols and navigation keys are in the Lower and Raise layers respectively.
 There are no dual function keys, such as tap-hold keys.
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
-|---|---|---|---|---|---|---|---|---|---|---|
+
 | “ |   |   |   |   |   |   |   |   |   |   |
 | ‘ | u | o | w | p |   | q | d | v | r | f |
 |   |   |   |   |   |   |   |   |   |   |   |
