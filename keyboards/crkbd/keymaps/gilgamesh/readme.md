@@ -11,7 +11,7 @@ The shifted characters are above, accessed by `One Shot Shift`.
 Numbers, symbols and navigation keys are in the Lower and Raise layers respectively.
 There are no dual function keys, such as tap-hold keys.
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 | “ |   |   |   |   |   |   |   |   |   |   |
 | ‘ | u | o | w | p |   | q | d | v | r | f |
@@ -19,7 +19,7 @@ There are no dual function keys, such as tap-hold keys.
 | a | i | o | y | g |   | l | h | t | n | s |
 | < | > |   |   |   |   |   |   |   |   |   |
 | , | . | - | c | j |   | k | m | b | x | z |
-|•••|•••|TAB|LWR|SPC|   |OSS|RSE|RET|•••|•••|
+|   |   |TAB|LWR|SPC|   |OSS|RSE|RET|   |   |
 
 ### Modifier keys and layer keys
 
@@ -29,7 +29,7 @@ Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home
 
 Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. `XXX` indicates key held to access layer. Thumb keys here change to forwards and backwards delete.
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |   |   |   |   |   |   | ; | ^ | ( | ) | : |
 |   |Meh|Hyp|   |   |   | + | 7 | 8 | 9 | * |
@@ -37,7 +37,7 @@ Lower contains a number pad that uses the typical number row keys (not the actua
 |Sft|Opt|Cmd|Ctl|   |   | - | 4 | 5 | 6 | / |
 |   |   |   |   |   |   | \|| ! | @ | # | _ |
 |   |FN2|FN1|SYM|   |   | ¥ | 1 | 2 | 3 | 0 |
-|•••|•••|...|XXX|...|   |DEL|SYM|BkS|•••|•••|
+|   |   |...|XXX|...|   |DEL|SYM|BkS|   |   |
 
 ## SYM
 
@@ -45,12 +45,12 @@ The Symbol layer is accessed momentarily by holding left then right thumb layer 
 Most characters are simply the shifted versions, more easily accessed from the thumbs rather than the pinky finger shift. 
 This layer is vital for home row access to brackets.
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |   |Meh|Hyp|   |   |   | ; | [ | ] | ^ | : |
 |Sft|Opt|Cmd|Ctl|   |   | = | ( | ) | & | ? |
 |   |FN2|FN1|XXX|   |   | \|| { | } | @ | _ |
-|•••|•••|...|XXX|...|   |...|XXX|...|•••|•••|
+|   |   |...|XXX|...|   |...|XXX|...|   |   |
 
 
 ## RSE
@@ -59,12 +59,12 @@ The Raise layer includes navigation and copy and paste keys.
 Here, we also have `Grave Escape` -- `ESC` on press, `tilde` when shifted, and `grave` mark with `Command` key held.
 The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. 
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |Undo|Cut |Copy|Pste|Redo|| |   |Hyp|Meh|   | 
 |←   |↑   |↓   |→   |   | | |Ctl|Cmd|Opt|Sft| 
 |Home|PgDn|PgUp|End |   | | |EXT|MSE|   |   |
-|•••|•••| ` |EXT|SPC|   |...|XXX|...|•••|•••|
+|   |   | ` |EXT|SPC|   |...|XXX|...|   |   |
 |   |   |ESC|   |   |   |   |   |   |   |   |
 |   |   |~  |   |   |   |   |   |   |   |   |
 
@@ -76,46 +76,46 @@ It also features macro keys that use Alfred to either: Google a term, translate 
 ### Caps Word
 The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `Caps Word` that is enabled by pressing both home index finger keys on the Base layer (`Y` and `H`) and automatically turns off on space or other keypress. 
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |Caps|L2en|L1jp||   |   |   |   |Hyp|Meh|   | 
 |Mute|VolUp|VolDn|Play| | | |Ctl|Cmd|Opt|Sft| 
 |    |Dfine|Gtrns|GooGL|| | |XXX|MSE|   |   |
-|•••|•••|...|XXX|...|   |...|XXX|...|•••|•••|
+|   |   |...|XXX|...|   |...|XXX|...|   |   |
 
 ## MSE
 
 The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys, mouse buttons, and Mac print screen options. The power, sleep, and wake keys are in a contorted position to avoid accidental press. 
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |   |BT2|BT2|BT3|SRCBLK||PWR|   |Hyp|Meh|   |
 |MLT|MUP|MDN|MRT|SRCSEL||SLP|Ctl|Cmd|Opt|Sft|
 |WLT|WUP|WDN|WRT|SRC|   |WKE|EXT|XXX|   |   |
-|•••|•••|...|...|...|   |...|XXX|...|•••|•••|
+|   |   |...|...|...|   |...|XXX|...|   |   |
 
 ## FN1
 
 Function keys are rarely used on Mac but here for prosperity. Base layer switches and One Shot Toggle keys are in contorted positions to avoid accidental press.
 `Dvarf TT` enables layer toggles on all layer keys with 2 keypresses for one-handed use. If you are stuck in a layer there is a layer escape key on the furthest thumb key (where `TAB` was for `LWR`, `SYM`, `FN1` and `FN2`; and where `RET` was for `RSE`, `EXT` and `MSE`.)
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |   |Meh|Hyp|   |Dvarf|    |PRS|F9 |F10|F11|F12|
 |Sft|Opt|Cmd|Ctl|DvarfTT|   |SCL|F5 | F6| F7| F8|
 |OSTOGG|FN2|XXX|SYM|Qwerty||PSE|F1 | F2| F3| F4|
-|•••|•••|...|XXX|...|   |...|...|...|•••|•••|
+|   |   |...|XXX|...|   |...|...|...|   |   |
 
 ## FN2
 
 Who needs function keys up to 24? Absolutely nobody. QMK Bootloader and QMK Reboot are in contorted positions to avoid accidental press.
 
-|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|•••|
+|   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |QBT|Meh|Hyp|   |   |   |   |F21|F22|F23|F24|
 |Sft|Opt|Cmd|Ctl|   |   |INS|F17|F18|F19|F20|
 |QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
-|•••|•••|...|XXX|...|   |...|...|...|•••|•••|
+|   |   |...|XXX|...|   |...|...|...|   |   |
 
 ### Notes
 
