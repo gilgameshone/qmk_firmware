@@ -74,8 +74,8 @@ The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |Caps|L2en|L1jp||   |   |INS|   |Hyp|Meh|   | 
-|Mute|VolUp|VolDn|Play| |SCL|Ctl|Cmd|Opt|Sft| 
-|    |Dfine|Gtrns|GooGL||PSE|XXX|MSE|   |   |
+|Mute|VolUp|VolDn|Play|| |SCL|Ctl|Cmd|Opt|Sft| 
+|    |Dfine|Gtrns|GooGL|||PSE|XXX|MSE|   |   |
 |___|___|...|XXX|...|   |...|XXX|...|___|___|
 
 ## MSE
