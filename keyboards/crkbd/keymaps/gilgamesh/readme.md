@@ -91,8 +91,7 @@ The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys
 
 ## FN1
 
-Function keys are rarely used on Mac but here for prosperity. Base layer switches and One Shot Toggle keys are in contorted positions to avoid accidental press.
-`Dvarf TT` enables layer toggles on all layer keys with 2 keypresses for one-handed use. If you are stuck in a layer there is a layer escape key on the furthest thumb key (where `TAB` was for `LWR`, `SYM`, `FN1` and `FN2`; and where `RET` was for `RSE`, `EXT` and `MSE`.) This layer also has `Print Screen` and `Num Lock`.
+Function keys are rarely used on Mac but here for prosperity. Base layer switches and One Shot Toggle keys are in contorted positions to avoid accidental press. This layer also has `Print Screen` and `Num Lock`.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
