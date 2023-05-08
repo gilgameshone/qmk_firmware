@@ -12,6 +12,7 @@
         "mousekey": true,
         "nkro": true,
         "rgblight": true,
+<<<<<<< HEAD
         "encoder": true
     },
     "ws2812": {
@@ -19,6 +20,13 @@
     },
     "rgblight": {
         "led_count": 12,
+=======
+        "encoder": true,
+    },
+    "rgblight": {
+        "led_count": 12,
+        "pin": "GP15",
+>>>>>>> trying to update from upstream
         "animations": {
             "alternating": true,
             "breathing": true,
@@ -34,7 +42,11 @@
     },
     "encoder": {
         "rotary": [
+<<<<<<< HEAD
             {"pin_a": "GP6", "pin_b": "GP7", "resolution": 2}
+=======
+            { "pin_a": "GP6", "pin_b": "GP7", "resolution": 2 }
+>>>>>>> trying to update from upstream
         ]
     },
     "matrix_pins": {
@@ -63,6 +75,10 @@
                 {"matrix": [2, 0], "x": 0, "y": 2},
                 {"matrix": [2, 1], "x": 1, "y": 2},
                 {"matrix": [2, 2], "x": 2, "y": 2}
+<<<<<<< HEAD
+=======
+
+>>>>>>> trying to update from upstream
             ]
         }
     }
