@@ -7,3 +7,6 @@ CAPS_WORD_ENABLE = yes
 COMBO_ENABLE = yes
 TAP_DANCE_ENABLE = no
 KEY_OVERRIDE_ENABLE = yes
+SRC += keymap.c
+SRC += oneshot.c
+SRC += swapper.c
