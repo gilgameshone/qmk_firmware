@@ -98,25 +98,10 @@ SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LALT)SS_TAP(X
 
 
 // combos
-<<<<<<< HEAD
-<<<<<<< HEAD
 const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_capsword, CW_TOGG),
-=======
-
-=======
->>>>>>> fixed breaking changes from QMK update, mostly
-const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
-
-combo_t key_combos[COMBO_COUNT] = {
-<<<<<<< HEAD
-  COMBO(combo_capsword, CAPS_WORD),
->>>>>>> Create keymap.c
-=======
-  COMBO(combo_capsword, CW_TOGG),
->>>>>>> fixed breaking changes from QMK update, mostly
      // keycodes with modifiers are possible too!
 };
 
@@ -144,94 +129,11 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 // key overides
-// Shift + esc = ~
-<<<<<<< HEAD
-const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, S(KC_GRV));
-<<<<<<< HEAD
-<<<<<<< HEAD
-// GUI + esc = `
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, KC_GRV);
-// SHIFT + ' = "
-const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
-// SHIFT + 7 = ^
-const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, JP_CIRC);
-// SHIFT + 2 = @
-const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, JP_AT);
-// SHIFT + 0 = _
-const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, KC_LNG1);
-// SHIFT + + = :
-const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT,  KC_PPLS, KC_SCLN);
-// SHIFT + * = ;
-const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_PAST, JP_COLN);
-=======
-
-=======
->>>>>>> removed unused combos:wq
-=======
-const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, JP_TILD);
-<<<<<<< HEAD
->>>>>>> fixed breaking changes from QMK update, mostly
-// GUI + esc = `
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, JP_GRV;
-=======
-
->>>>>>> attempeted to fix shift override, still broken
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 
-// SHIFT + 0 = _
-const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, JP_UNDS);
-
-// SHIFT + 7 = ^
-const key_override_t seven_circumflex_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, KC_EQL);
-
-// SHIFT + 2 = @
-<<<<<<< HEAD
-const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, JP_AT);
-<<<<<<< HEAD
-// SHIFT + 0 = _
-const key_override_t zero_under_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, JP_UNDS);
-// SHIFT + + = :
-const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT,  JP_PLUS, JP_SCLN);
-// SHIFT + * = ;
-<<<<<<< HEAD
-const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_PAST, JP_COLN);
-<<<<<<< HEAD
-
->>>>>>> Create keymap.c
-=======
->>>>>>> removed unused combos:wq
-=======
-const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, JP_ASTR, JP_COLN);
->>>>>>> fixed breaking changes from QMK update, mostly
-=======
-=======
-const key_override_t two_at_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, KC_LBRC);
->>>>>>> edited readme
-
-// SHIFT + + = ;
-const key_override_t plus_scolon_override = ko_make_basic(MOD_MASK_SHIFT, JP_PLUS, JP_SCLN);
-
-// SHIFT + * = :
-const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, JP_ASTR, JP_COLN);
-
-// Cmd + esc = `
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, JP_GRV);
-
-<<<<<<< HEAD
-
->>>>>>> attempeted to fix shift override, still broken
-=======
->>>>>>> removed duplicate keys
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &tilde_esc_override,
     &quots_quotd_override,
-    &zero_under_override,
-    &seven_circumflex_override,
-    &two_at_override,
-    &plus_scolon_override,
-    &asterisk_colon_override,
-    &grave_esc_override,
     NULL
 };
 
