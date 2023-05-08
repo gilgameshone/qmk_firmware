@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "keymap_japanese.h"
 #include "sendstring_japanese.h"
 #include "oneshot.h"
-#include "swapper.h"
+
 
 
 enum crkbd_layers {
@@ -38,17 +38,6 @@ enum crkbd_layers {
     _FUN2,
 };
 
-/* #define HOME G(KC_LEFT) */
-/* #define END G(KC_RGHT) */
-/* #define FWD G(KC_RBRC) */
-/* #define BACK G(KC_LBRC) */
-/* #define TAB_L G(S(KC_LBRC)) */
-/* #define TAB_R G(S(KC_RBRC)) */
-/* #define SPACE_L A(G(KC_LEFT)) */
-/* #define SPACE_R A(G(KC_RGHT)) */
-/* #define LA_SYM MO(SYM) */
-/* #define LA_NAV MO(NAV) */
-
 #define LWR MO(_LWR)
 #define RSE MO(_RSE)
 #define SYM MO(_SYM)
@@ -61,15 +50,68 @@ enum custom_keycodes {
     GOOGL = SAFE_RANGE,
     GTRNS,
     DFINE,
-        // Custom oneshot mod implementation with no timers.
-    OS_SHFT,
-    OS_CTRL,
-    OS_ALT,
+    OS_CTL,
+    OS_OPT,
     OS_CMD,
-
-    /* SW_WIN,  // Switch to next window         (cmd-tab) */
-    /* SW_LANG, // Switch to next input language (ctl-spc) */
+    OS_SFT,
+    OS_HYP,
+    OS_MEH,
 };
+
+// ONE SHOT STUFF
+
+// ONE SHOT STUFF
+
+bool is_oneshot_cancel_key(uint16_t keycode) {
+    switch (keycode) {
+    case LWR:
+    case RSE:
+    case SYM:
+    case EXT:
+        return true;
+    default:
+        return false;
+    }
+}
+
+bool is_oneshot_ignored_key(uint16_t keycode) {
+    switch (keycode) {
+    case LWR:
+    case RSE:
+    case EXT:
+    case SYM:
+    case OS_CTL:
+    case OS_OPT:
+    case OS_CMD:
+    case OS_SFT:
+    case OS_HYP:
+    case OS_MEH:
+      return true;
+    default:
+        return false;
+    }
+}
+
+bool is_oneshot_mod_key(uint16_t keycode) {
+    switch (keycode) {
+    case OS_CTL:
+    case OS_OPT:
+    case OS_CMD:
+    case OS_SFT:
+    case OS_HYP:
+    case OS_MEH:
+        return true;
+    default:
+        return false;
+    }
+}
+
+oneshot_state os_ctl_state = os_up_unqueued;
+oneshot_state os_opt_state = os_up_unqueued;
+oneshot_state os_cmd_state = os_up_unqueued;
+oneshot_state os_sft_state = os_up_unqueued;
+oneshot_state os_hyp_state = os_up_unqueued;
+oneshot_state os_meh_state = os_up_unqueued;
 
 // macros
 
@@ -78,11 +120,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case GOOGL:
     if (record->event.pressed) {
       // when keycode GOOGL is pressed
-      SEND_STRING(SS_DOWN(X_LGUI)SS_TAP(X_C)SS_UP(X_LGUI)); // command C
-      SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LALT)SS_TAP(X_SPC)SS_UP(X_LALT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LGUI));   // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_C)SS_UP(X_LCMD)); // command C
+      SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X_SPC)SS_UP(X_LOPT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LCMD));   // open alfred
       wait_ms(50);
       SEND_STRING(SS_TAP(X_G)SS_TAP(X_SPC));  // tap G
-      SEND_STRING(SS_DOWN(X_LGUI)SS_TAP(X_V)SS_UP(X_LGUI)SS_TAP(X_ENT)); // command V + enter
+      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_V)SS_UP(X_LCMD)SS_TAP(X_ENT)); // command V + enter
     } else {
       // when keycode GOOGL is released
     }
@@ -90,11 +132,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case GTRNS:
     if (record->event.pressed) {
       // when keycode GTRNS is pressed
-      SEND_STRING(SS_DOWN(X_LGUI)SS_TAP(X_C)SS_UP(X_LGUI)); // command C
-  SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LALT)SS_TAP(X_SPC)SS_UP(X_LALT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LGUI)); // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_C)SS_UP(X_LCMD)); // command C
+  SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X_SPC)SS_UP(X_LOPT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LCMD)); // open alfred
       wait_ms(50);
       SEND_STRING(SS_TAP(X_T)SS_TAP(X_SPC));  // tap T
-      SEND_STRING(SS_DOWN(X_LGUI)SS_TAP(X_V)SS_UP(X_LGUI)SS_TAP(X_ENT));  // command V + enter
+      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_V)SS_UP(X_LCMD)SS_TAP(X_ENT));  // command V + enter
     } else {
       // when keycode GTRNS is released
     }
@@ -102,11 +144,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case DFINE:
     if (record->event.pressed) {
       // when keycode DFINE is pressed
-      SEND_STRING(SS_DOWN(X_LGUI)SS_TAP(X_C)SS_UP(X_LGUI));  // command C
-SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LALT)SS_TAP(X_SPC)SS_UP(X_LALT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LGUI)); // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_C)SS_UP(X_LCMD));  // command C
+SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X_SPC)SS_UP(X_LOPT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LCMD)); // open alfred
       wait_ms(50);
       SEND_STRING(SS_TAP(X_D)SS_TAP(X_SPC)); // tap D
-      SEND_STRING(SS_DOWN(X_LGUI)SS_TAP(X_V)SS_UP(X_LGUI)); // command V
+      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_V)SS_UP(X_LCMD)); // command V
       wait_ms(90); // wait
       SEND_STRING(SS_TAP(X_ENT)); // enter
     } else {
@@ -114,7 +156,35 @@ SEND_STRING(SS_DOWN(X_LGUI)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LALT)SS_TAP(X
     }
     break;
   }
-  return true;
+
+// one shot stuff
+ {
+    update_oneshot(
+        &os_ctl_state, KC_LCTL, OS_CTL,
+        keycode, record
+    );
+    update_oneshot(
+        &os_opt_state, KC_LOPT, OS_OPT,
+        keycode, record
+    );
+    update_oneshot(
+        &os_cmd_state, KC_LCMD, OS_CMD,
+        keycode, record
+    );
+    update_oneshot(
+        &os_sft_state, KC_LSFT, OS_SFT,
+        keycode, record
+    );
+    update_oneshot(
+        &os_hyp_state, KC_HYPR, OS_HYP,
+        keycode, record
+    );
+    update_oneshot(
+        &os_meh_state, KC_MEH, OS_MEH,
+        keycode, record
+    );
+    }
+    return true;
 };
 
 
@@ -197,75 +267,75 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_LWR] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      KC_PPLS,    KC_7,    KC_8,    KC_9, KC_PAST,
+      XXXXXXX,  OS_MEH,  OS_HYP, XXXXXXX, XXXXXXX,                      KC_PPLS,    KC_7,    KC_8,    KC_9, KC_PAST,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      OS_SHFT,  OS_ALT,  OS_CMD, OS_CTRL, XXXXXXX,                      JP_MINS,    KC_4,    KC_5,    KC_6, KC_SLSH,
+       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, KC_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,    FUN2,    FUN1,     SYM, XXXXXXX,                       JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
+      KC_TRNS, KC_TRNS, XXXXXXX,     SYM, JP_HASH,                       JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX,     LWR, XXXXXXX,     KC_DEL,     SYM, KC_BSPC
                              //`--------------------------'  `--------------------------'
   ),
   [_RSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     XXXXXXX, XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   LSG(KC_5), XXXXXXX,  OS_HYP,  OS_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, KC_RBRC,                      XXXXXXX, OS_CTRL,  OS_CMD,  OS_ALT, OS_SHFT,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                    LSG(KC_4),  OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, KC_NUHS,                      XXXXXXX,     EXT,     MSE, XXXXXXX, XXXXXXX,
+      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                    LSG(KC_3),     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_SYM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      JP_SCLN, JP_LBRC, JP_RBRC, XXXXXXX, JP_COLN,
+      XXXXXXX,  OS_MEH,  OS_HYP, XXXXXXX, XXXXXXX,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_CIRC, JP_COLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      OS_SHFT,  OS_ALT,  OS_CMD, OS_CTRL, XXXXXXX,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL,  JP_DLR,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR, JP_HASH, JP_UNDS,
+      XXXXXXX,    FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR, JP_HASH, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_EXT] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      KC_CAPS, KC_LNG2, KC_LNG1, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
+      KC_CAPS, KC_LNG2, KC_LNG1, XXXXXXX, XXXXXXX,                       KC_INS, XXXXXXX,  OS_HYP,  OS_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY, XXXXXXX,    XXXXXXX, OS_CTRL,  OS_CMD,  OS_ALT, OS_SHFT,
+      KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY, XXXXXXX,   KC_SCRL,   OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      XXXXXXX,     EXT,     MSE, XXXXXXX, XXXXXXX,
+      XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      KC_PAUS,     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_MSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,LSG(KC_5),                      KC_PWR, XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
+      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,   OS_HYP,  OS_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R,LSG(KC_4),                     KC_SLEP, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
+      KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,                     KC_SLEP,   OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,LSG(KC_3),                     KC_WAKE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_FUN1] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX,  OS_MEH,  OS_HYP, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL,DF(_DVORAK),                   KC_SCRL,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL,DF(_DVORAK),                    KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      OS_TOGG, XXXXXXX, XXXXXXX, XXXXXXX,DF(_QWERTY),                   KC_PAUS,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
+      OS_TOGG, XXXXXXX, XXXXXXX, XXXXXXX,DF(_QWERTY),                   XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_FUN2] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      QK_BOOT,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
+      QK_BOOT,  OS_MEH,  OS_HYP, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LALT, KC_LGUI, KC_LCTL, XXXXXXX,                       KC_INS,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
+       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL, XXXXXXX,                      XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        QK_RBT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -273,6 +343,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //`--------------------------'  `--------------------------'
   )
 };
+
+
+
+// OLED STUFF
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
