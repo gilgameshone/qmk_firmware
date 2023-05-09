@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include "keymap_japanese.h"
 #include "sendstring_japanese.h"
-#include "oneshot.h"
+#include "flow.h"
 
 enum crkbd_layers {
     _DVARF,
@@ -48,63 +48,38 @@ enum custom_keycodes {
     GOOGL = SAFE_RANGE,
     GTRNS,
     DFINE,
-    OS_CTL,
-    OS_OPT,
-    OS_CMD,
-    OS_SFT,
-    OS_HYP,
-    OS_MEH,
 };
 
-// ONE SHOT STUFF
+// flow STUFF
 
-#define OS_HYP (OS_CTL | OS_CMD | OS_OPT | OS_SFT)
-#define OS_MEH (OS_CTL | OS_OPT | OS_SFT)
+// flow_config should correspond to following format:
+// * layer keycode
+// * modifier keycode
+const uint16_t flow_config[FLOW_COUNT][2] = {
+    {LWR, KC_LSFT},
+    {LWR, KC_LOPT},
+    {LWR, KC_LCMD},
+    {LWR, KC_LCTL},
+    {LWR, KC_HYPR},
+    {LWR, KC_MEH},
+    {RSE, KC_RSFT},
+    {RSE, KC_ROPT},
+    {RSE, KC_RCMD},
+    {RSE, KC_RCTL},
+    {RSE, KC_HYPR},
+    {RSE, KC_MEH},
+};
 
-bool is_oneshot_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-    case LWR:
-    case RSE:
-    case SYM:
-    case EXT:
-        return true;
-    default:
-        return false;
-    }
-}
 
-bool is_oneshot_ignored_key(uint16_t keycode) {
-    switch (keycode) {
-    case LWR:
-    case RSE:
-    case EXT:
-    case SYM:
-    case OS_CTL:
-    case OS_OPT:
-    case OS_CMD:
-    case OS_SFT:
-      return true;
-    default:
-        return false;
-    }
-}
+// for layers configuration follow this format:
+// * custom layer key
+// * layer name
+/* const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = { */
+/*     {OS_TMUX, _TMUX}, */
+/*     {OS_MISC, _MISC}, */
+/*     {OS_FUNC, _FUNC}, */
+};
 
-bool is_oneshot_mod_key(uint16_t keycode) {
-    switch (keycode) {
-    case OS_CTL:
-    case OS_OPT:
-    case OS_CMD:
-    case OS_SFT:
-        return true;
-    default:
-        return false;
-    }
-}
-
-oneshot_state os_ctl_state = os_up_unqueued;
-oneshot_state os_opt_state = os_up_unqueued;
-oneshot_state os_cmd_state = os_up_unqueued;
-oneshot_state os_sft_state = os_up_unqueued;
 
 // macros
 
@@ -150,25 +125,16 @@ SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X
     break;
   }
 
-// one shot stuff
- {
-    update_oneshot(
-        &os_ctl_state, KC_LCTL, OS_CTL,
-        keycode, record
-    );
-    update_oneshot(
-        &os_opt_state, KC_LOPT, OS_OPT,
-        keycode, record
-    );
-    update_oneshot(
-        &os_cmd_state, KC_LCMD, OS_CMD,
-        keycode, record
-    );
-    update_oneshot(
-        &os_sft_state, KC_LSFT, OS_SFT,
-        keycode, record
-    );
-    }
+// flow stuff
+
+{
+    if (!update_flow(keycode, record->event.pressed, record->event.key)) return false;
+    return true;
+}
+
+void matrix_scan_user(void) {
+    flow_matrix_scan();
+}
     return true;
 };
 
@@ -226,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_COMM,  KC_DOT, KC_MINS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,     LWR,  KC_SPC,     OS_SFT,     RSE,   KC_ENT
+                                  KC_TAB,     LWR,  KC_SPC,    KC_LSFT,     RSE,   KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_DVORAK] = LAYOUT_split_3x5_3(
@@ -237,7 +203,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MINS,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,   LWR,  KC_SPC,       OS_SFT,     RSE,  KC_ENT
+                                  KC_TAB,   LWR,  KC_SPC,      KC_LSFT,     RSE,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
@@ -248,14 +214,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,   LWR,  KC_SPC,       OS_SFT,     RSE,  KC_ENT
+                                  KC_TAB,   LWR,  KC_SPC,      KC_LSFT,     RSE,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_LWR] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, JP_TILD,                      KC_PPLS,    KC_7,    KC_8,    KC_9, KC_PAST,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, KC_SLSH,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, KC_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_TRNS, KC_TRNS, XXXXXXX,     SYM, JP_HASH,                       JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -266,7 +232,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   LSG(KC_5), XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                    LSG(KC_4),  OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                    LSG(KC_4), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                    LSG(KC_3),     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -277,7 +243,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, JP_GRV,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_CIRC, JP_COLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL,  JP_DLR,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX,    FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -288,7 +254,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       KC_CAPS, KC_LNG2, KC_LNG1, XXXXXXX, XXXXXXX,                       KC_INS, XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY, XXXXXXX,   KC_SCRL,   OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
+      KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY, XXXXXXX,   KC_SCRL,  KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      KC_PAUS,     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -299,7 +265,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,  KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,                     KC_SLEP,   OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
+      KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,                     KC_SLEP,  KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -310,7 +276,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL,DF(_DVORAK),                    KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, DF(_DVORAK),                    KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_QWERTY),                   XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -321,7 +287,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       QK_BOOT,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-       OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL, XXXXXXX,                      XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
+       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  XXXXXXX,                      XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        QK_RBT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
