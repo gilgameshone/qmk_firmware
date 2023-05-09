@@ -48,6 +48,7 @@ enum custom_keycodes {
     GOOGL = SAFE_RANGE,
     GTRNS,
     DFINE,
+    OS_FUN2,
 };
 
 // flow STUFF
@@ -76,59 +77,75 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
 // macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-  case GOOGL:
-    if (record->event.pressed) {
-      // when keycode GOOGL is pressed
-      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_C)SS_UP(X_LCMD)); // command C
-      SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X_SPC)SS_UP(X_LOPT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LCMD));   // open alfred
-      wait_ms(50);
-      SEND_STRING(SS_TAP(X_G)SS_TAP(X_SPC));  // tap G
-      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_V)SS_UP(X_LCMD)SS_TAP(X_ENT)); // command V + enter
-    } else {
-      // when keycode GOOGL is released
+    {
+        // flow
+        if (!update_flow(keycode, record->event.pressed, record->event.key))
+            return false;
+        return true;
     }
-    break;
-  case GTRNS:
-    if (record->event.pressed) {
-      // when keycode GTRNS is pressed
-      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_C)SS_UP(X_LCMD)); // command C
-  SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X_SPC)SS_UP(X_LOPT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LCMD)); // open alfred
-      wait_ms(50);
-      SEND_STRING(SS_TAP(X_T)SS_TAP(X_SPC));  // tap T
-      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_V)SS_UP(X_LCMD)SS_TAP(X_ENT));  // command V + enter
-    } else {
-      // when keycode GTRNS is released
+        // macro
+    switch (keycode) {
+        case GOOGL:
+            if (record->event.pressed) {
+                // when keycode GOOGL is pressed
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                                SS_UP(X_LCMD));  // command C
+                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                                        SS_UP(X_LCMD));  // open alfred
+                wait_ms(50);
+                SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                                SS_TAP(X_ENT));  // command V + enter
+            } else {
+                // when keycode GOOGL is released
+            }
+            break;
+        case GTRNS:
+            if (record->event.pressed) {
+                // when keycode GTRNS is pressed
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                                SS_UP(X_LCMD));  // command C
+                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                                        SS_UP(X_LCMD));  // open alfred
+                wait_ms(50);
+                SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                                SS_TAP(X_ENT));  // command V + enter
+            } else {
+                // when keycode GTRNS is released
+            }
+            break;
+        case DFINE:
+            if (record->event.pressed) {
+                // when keycode DFINE is pressed
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                                SS_UP(X_LCMD));  // command C
+                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                                        SS_UP(X_LCMD));  // open alfred
+                wait_ms(50);
+                SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
+                                SS_UP(X_LCMD));  // command V
+                wait_ms(90);                     // wait
+                SEND_STRING(SS_TAP(X_ENT));      // enter
+            } else {
+                // when keycode DFINE is released
+            }
+            break;
     }
-    break;
-  case DFINE:
-    if (record->event.pressed) {
-      // when keycode DFINE is pressed
-      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_C)SS_UP(X_LCMD));  // command C
-SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X_SPC)SS_UP(X_LOPT)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LCMD)); // open alfred
-      wait_ms(50);
-      SEND_STRING(SS_TAP(X_D)SS_TAP(X_SPC)); // tap D
-      SEND_STRING(SS_DOWN(X_LCMD)SS_TAP(X_V)SS_UP(X_LCMD)); // command V
-      wait_ms(90); // wait
-      SEND_STRING(SS_TAP(X_ENT)); // enter
-    } else {
-      // when keycode DFINE is released
-      }
-    break;
-  }
-
-// flow stuff
-
-{
-    if (!update_flow(keycode, record->event.pressed, record->event.key)) return false;
     return true;
 }
 
+// flow
 void matrix_scan_user(void) {
-    flow_matrix_scan();
-}
-    return true;
-};
+      flow_matrix_scan();
+    }
 
 
 // combos
