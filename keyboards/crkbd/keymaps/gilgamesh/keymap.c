@@ -51,7 +51,6 @@ enum custom_keycodes {
 };
 
 // flow STUFF
-
 // flow_config should correspond to following format:
 // * layer keycode
 // * modifier keycode
@@ -70,16 +69,9 @@ const uint16_t flow_config[FLOW_COUNT][2] = {
     {RSE, KC_MEH},
 };
 
-
-// for layers configuration follow this format:
-// * custom layer key
-// * layer name
-/* const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = { */
-/*     {OS_TMUX, _TMUX}, */
-/*     {OS_MISC, _MISC}, */
-/*     {OS_FUNC, _FUNC}, */
+const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
+    {OS_FUN2, _FUN2},
 };
-
 
 // macros
 
@@ -245,7 +237,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,    FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
+      XXXXXXX, OS_FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
