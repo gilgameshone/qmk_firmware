@@ -56,5 +56,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 175
 #define COMBO_ONLY_FROM_LAYER 0
 #define TAPPING_TOGGLE 2
-#define FLOW_COUNT 7
-#define FLOW_LAYERS_COUNT 3
+#define FLOW_COUNT 12
+#define FLOW_LAYERS_COUNT 1
