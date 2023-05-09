@@ -23,8 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "sendstring_japanese.h"
 #include "oneshot.h"
 
-
-
 enum crkbd_layers {
     _DVARF,
     _DVORAK,
@@ -60,7 +58,8 @@ enum custom_keycodes {
 
 // ONE SHOT STUFF
 
-// ONE SHOT STUFF
+#define OS_HYP (OS_CTL | OS_CMD | OS_OPT | OS_SFT)
+#define OS_MEH (OS_CTL | OS_OPT | OS_SFT)
 
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
@@ -84,8 +83,6 @@ bool is_oneshot_ignored_key(uint16_t keycode) {
     case OS_OPT:
     case OS_CMD:
     case OS_SFT:
-    case OS_HYP:
-    case OS_MEH:
       return true;
     default:
         return false;
@@ -98,8 +95,6 @@ bool is_oneshot_mod_key(uint16_t keycode) {
     case OS_OPT:
     case OS_CMD:
     case OS_SFT:
-    case OS_HYP:
-    case OS_MEH:
         return true;
     default:
         return false;
@@ -110,8 +105,6 @@ oneshot_state os_ctl_state = os_up_unqueued;
 oneshot_state os_opt_state = os_up_unqueued;
 oneshot_state os_cmd_state = os_up_unqueued;
 oneshot_state os_sft_state = os_up_unqueued;
-oneshot_state os_hyp_state = os_up_unqueued;
-oneshot_state os_meh_state = os_up_unqueued;
 
 // macros
 
@@ -153,7 +146,7 @@ SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X
       SEND_STRING(SS_TAP(X_ENT)); // enter
     } else {
       // when keycode DFINE is released
-    }
+      }
     break;
   }
 
@@ -173,14 +166,6 @@ SEND_STRING(SS_DOWN(X_LCMD)SS_DOWN(X_LCTL)SS_DOWN(X_LSFT)SS_DOWN(X_LOPT)SS_TAP(X
     );
     update_oneshot(
         &os_sft_state, KC_LSFT, OS_SFT,
-        keycode, record
-    );
-    update_oneshot(
-        &os_hyp_state, KC_HYPR, OS_HYP,
-        keycode, record
-    );
-    update_oneshot(
-        &os_meh_state, KC_MEH, OS_MEH,
         keycode, record
     );
     }
@@ -229,6 +214,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 };
 
 
+
 // keymap
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -267,7 +253,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_LWR] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  OS_MEH,  OS_HYP, XXXXXXX, XXXXXXX,                      KC_PPLS,    KC_7,    KC_8,    KC_9, KC_PAST,
+      XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,                      KC_PPLS,    KC_7,    KC_8,    KC_9, KC_PAST,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, KC_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -278,7 +264,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_RSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   LSG(KC_5), XXXXXXX,  OS_HYP,  OS_MEH, XXXXXXX,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   LSG(KC_5), XXXXXXX,  KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                    LSG(KC_4),  OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -289,18 +275,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_SYM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  OS_MEH,  OS_HYP, XXXXXXX, XXXXXXX,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_CIRC, JP_COLN,
+      XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_CIRC, JP_COLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL,  JP_DLR,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,    FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR, JP_HASH, JP_UNDS,
+      XXXXXXX,    FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_EXT] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      KC_CAPS, KC_LNG2, KC_LNG1, XXXXXXX, XXXXXXX,                       KC_INS, XXXXXXX,  OS_HYP,  OS_MEH, XXXXXXX,
+      KC_CAPS, KC_LNG2, KC_LNG1, XXXXXXX, XXXXXXX,                       KC_INS, XXXXXXX,  KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY, XXXXXXX,   KC_SCRL,   OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -311,7 +297,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_MSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,   OS_HYP,  OS_MEH, XXXXXXX,
+      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,   KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,                     KC_SLEP,   OS_CTL,  OS_CMD,  OS_OPT,  OS_SFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -322,7 +308,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_FUN1] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  OS_MEH,  OS_HYP, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL,DF(_DVORAK),                    KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -333,7 +319,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_FUN2] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      QK_BOOT,  OS_MEH,  OS_HYP, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
+      QK_BOOT,  KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        OS_SFT,  OS_OPT,  OS_CMD,  OS_CTL, XXXXXXX,                      XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
