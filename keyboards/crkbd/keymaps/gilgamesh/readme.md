@@ -119,3 +119,4 @@ Who needs function keys up to 24? Absolutely nobody. `QMK Bootloader` and `QMK R
  - [4] [Gilgamesh keymap image](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.drawio.png)
  - [x] Updated to One Shot modifier implementation by daliusd<sup>[4](https://blog.ffff.lt/posts/callum-layers/).
  - [x] Reversed Delete and Backspace
+ - [ ] TODO add Numword
