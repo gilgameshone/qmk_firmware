@@ -27,14 +27,14 @@ Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home
 
 ## LWR
 
-Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. `XXX` indicates key held to access layer. Thumb keys here change to forwards and backwards delete. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue.
+Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   |   |   | + | 7 | 8 | 9 | * |
+|   |Meh|Hyp|   | ~ |   | + | 7 | 8 | 9 | * |
 |Sft|Opt|Cmd|Ctl| % |   | - | 4 | 5 | 6 | / |
 | , | . |   |SYM| # |   | ¥ | 1 | 2 | 3 | 0 |
-|___|___|...|XXX|...|   |DEL|SYM|BkS|___|___|
+|___|___|...|XXX|...|   |BkS|SYM|DEL|___|___|
 
 ## SYM
 
@@ -42,7 +42,7 @@ The Symbol layer is accessed momentarily by holding left then right thumb layer 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   |   |   | ; | [ | ] | ^ | : |
+|   |Meh|Hyp|   | ` |   | ; | [ | ] | ^ | : |
 |Sft|Opt|Cmd|Ctl| $ |   | = | ( | ) | & | ? |
 |   |FN2|FN1|XXX| ! |   | \|| { | } | @ | _ |
 |___|___|...|XXX|...|   |...|XXX|...|___|___|
@@ -120,3 +120,4 @@ Who needs function keys up to 24? Absolutely nobody. `QMK Bootloader` and `QMK R
  - [*] Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.
  - [4] [Gilgamesh keymap image](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.drawio.png)
  - [x] Updated to One Shot modifier implementation by daliusd<sup>[4](https://blog.ffff.lt/posts/callum-layers/).
+ - [x] Reversed Delete and Backspace
