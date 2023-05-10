@@ -50,9 +50,7 @@ The Symbol layer is accessed momentarily by holding left then right thumb layer 
 
 ## RSE
 
-The Raise layer includes navigation and copy and paste keys.
-Here, we also have `Grave Escape` -- `ESC` on press, `tilde` when shifted, and `grave` mark with `Command` key held.
-The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options.
+The Raise layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
