@@ -59,9 +59,7 @@ The navigation keys are on the left side of the keyboard because the most freque
 |Undo|Cut |Copy|Pste|Redo||SSB|   |Hyp|Meh|   | 
 |←   |↑   |↓   |→   |   ||SSS|Ctl|Cmd|Opt|Sft| 
 |Home|PgDn|PgUp|End |   ||SSA|EXT|MSE|   |   |
-|___|___| ` |EXT|SPC|   |...|XXX|...|___|___|
-|   |   |ESC|   |   |   |   |   |   |   |   |
-|   |   |~  |   |   |   |   |   |   |   |   |
+|___|___|ESC|EXT|SPC|   |...|XXX|...|___|___|
 
 ## EXT
 
