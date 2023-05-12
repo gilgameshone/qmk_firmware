@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "keymap_japanese.h"
 #include "sendstring_japanese.h"
 #include "flow.h"
+#include "select_word.h"
+
 
 enum crkbd_layers {
     _DVARF,
@@ -49,6 +51,7 @@ enum custom_keycodes {
     GTRNS,
     DFINE,
     OS_FUN2,
+    SELWORD,
 };
 
 // flow STUFF
@@ -74,12 +77,16 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     {
-        // flow
+    // flow
         if (!update_flow(keycode, record->event.pressed, record->event.key))
             return false;
         return true;
     }
-        // macro
+    // select word
+    {
+      if (!process_select_word(keycode, record, SELWORD)) { return false;}
+    }
+    // macro
     switch (keycode) {
         case GOOGL:
             if (record->event.pressed) {
@@ -237,7 +244,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   LSG(KC_5), XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                    LSG(KC_4), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_4), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                    LSG(KC_3),     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
