@@ -60,14 +60,10 @@ const uint16_t flow_config[FLOW_COUNT][2] = {
     {LWR, KC_LOPT},
     {LWR, KC_LCMD},
     {LWR, KC_LCTL},
-    {LWR, KC_HYPR},
-    {LWR, KC_MEH},
     {RSE, KC_RSFT},
     {RSE, KC_ROPT},
     {RSE, KC_RCMD},
     {RSE, KC_RCTL},
-    {RSE, KC_HYPR},
-    {RSE, KC_MEH},
 };
 
 const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
