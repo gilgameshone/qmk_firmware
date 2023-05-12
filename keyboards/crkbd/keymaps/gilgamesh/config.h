@@ -58,3 +58,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TOGGLE 2
 #define FLOW_COUNT 8
 #define FLOW_LAYERS_COUNT 1
+#define LAYER_LOCK_IDLE_TIMEOUT 60000

@@ -9,3 +9,4 @@ TAP_DANCE_ENABLE = no
 KEY_OVERRIDE_ENABLE = yes
 SRC += flow.c
 SRC += select_word.c
+SRC += features/layer_lock.c
