@@ -34,7 +34,7 @@ Lower contains a number pad that uses the typical number row keys (not the actua
 |   |Meh|Hyp|   | ~ |   | + | 7 | 8 | 9 | * |
 |Sft|Opt|Cmd|Ctl| % |   | - | 4 | 5 | 6 | / |
 | , | . |   |SYM| # |   | ¥ | 1 | 2 | 3 | 0 |
-|___|___|...|XXX|...|   |BkS|SYM|DEL|___|___|
+|___|___|LLk|XXX|...|   |BkS|SYM|DEL|___|___|
 
 ## SYM
 
@@ -45,7 +45,7 @@ The Symbol layer is accessed momentarily by holding left then right thumb layer 
 |   |Meh|Hyp|   | ` |   | ; | [ | ] | ^ | : |
 |Sft|Opt|Cmd|Ctl| $ |   | = | ( | ) | & | ? |
 |   |FN2|FN1|XXX| ! |   | \|| { | } | @ | _ |
-|___|___|...|XXX|...|   |...|XXX|...|___|___|
+|___|___|LLk|XXX|...|   |...|XXX|...|___|___|
 
 
 ## RSE
@@ -55,9 +55,9 @@ The Raise layer includes navigation and copy and paste keys. The navigation keys
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |Undo|Cut |Copy|Pste|Redo||SSB|   |Hyp|Meh|   | 
-|←   |↑   |↓   |→   |   ||SSS|Ctl|Cmd|Opt|Sft| 
+|←   |↑   |↓   |→   |SlWd  ||SSS|Ctl|Cmd|Opt|Sft| 
 |Home|PgDn|PgUp|End |   ||SSA|EXT|MSE|   |   |
-|___|___|ESC|EXT|SPC|   |...|XXX|...|___|___|
+|___|___|ESC|EXT|SPC|   |...|XXX|LLk|___|___|
 
 ## EXT
 
@@ -72,7 +72,7 @@ The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `
 |Caps|L2en|L1jp||   |   |INS|   |Hyp|Meh|   | 
 |Mute|VolUp|VolDn|Play|| |SCL|Ctl|Cmd|Opt|Sft| 
 |    |Dfine|Gtrns|GooGL|||PSE|XXX|MSE|   |   |
-|___|___|...|XXX|...|   |...|XXX|...|___|___|
+|___|___|...|XXX|...|   |...|XXX|LLk|___|___|
 
 ## MSE
 
@@ -110,11 +110,9 @@ Who needs function keys up to 24? Absolutely nobody. `QMK Bootloader` and `QMK R
 ### Notes
 
  - [1] Dvarf is an alpha key layout created by o-x-e-y that is based on Dvorak.
- - [x] DONE Fix shift override
- - [*] This keymap takes inspiration from the great Miryoku<sup>[2](https://github.com/manna-harbour/miryoku)</sup>, the excellent Seniply<sup>[3](https://stevep99.github.io/seniply/)</sup>, and many others.
- - [x] DONE Remove duplicate keys to reduce redundancy.
- - [*] Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.
- - [4] [Gilgamesh keymap image](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.drawio.png)
- - [x] Updated to One Shot modifier implementation by daliusd<sup>[4](https://blog.ffff.lt/posts/callum-layers/).
- - [x] Reversed Delete and Backspace
- - [ ] TODO add Numword
+ - This keymap takes inspiration from the great [Miryoku](https://github.com/manna-harbour/miryoku), the excellent [Seniply](https://stevep99.github.io/seniply/), and many others.
+ - Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.
+ - [Gilgamesh keymap image with all layers separated](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.drawio.png)
+ - Updated to One Shot modifier implementation by daliusd<sup>[4](https://blog.ffff.lt/posts/callum-layers/).
+ - Reversed Delete and Backspace
+ - Added `layer lock` and `select word` from [Pascal Getreuer](https://getreuer.info/posts/keyboards/index.html).
