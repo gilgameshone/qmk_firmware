@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "sendstring_japanese.h"
 #include "flow.h"
 #include "select_word.h"
-
+#include "layer_lock.h"
 
 enum crkbd_layers {
     _DVARF,
@@ -52,6 +52,7 @@ enum custom_keycodes {
     DFINE,
     OS_FUN2,
     SELWORD,
+    LLOCK,
 };
 
 // flow STUFF
@@ -84,6 +85,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // select word
     {
       if (!process_select_word(keycode, record, SELWORD)) { return false;}
+    }
+    // layer lock
+    {
+      if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
     }
     // macro
     switch (keycode) {
@@ -147,6 +152,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // flow
 void matrix_scan_user(void) {
       flow_matrix_scan();
+      layer_lock_task();
     }
 
 
@@ -236,7 +242,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_TRNS, KC_TRNS, XXXXXXX,     SYM, JP_HASH,                       JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX,     LWR, XXXXXXX,    KC_BSPC,     SYM,  KC_DEL
+                                 LLOCK,     LWR, XXXXXXX,    KC_BSPC,     SYM,  KC_DEL
                              //`--------------------------'  `--------------------------'
   ),
   [_RSE] = LAYOUT_split_3x5_3(
@@ -247,7 +253,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                    LSG(KC_3),     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, XXXXXXX
+                                 KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, LLOCK
                              //`--------------------------'  `--------------------------'
   ),
   [_SYM] = LAYOUT_split_3x5_3(
@@ -258,7 +264,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, OS_FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                 LLOCK, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
   [_EXT] = LAYOUT_split_3x5_3(
@@ -269,7 +275,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      KC_PAUS,     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, LLOCK
                              //`--------------------------'  `--------------------------'
   ),
   [_MSE] = LAYOUT_split_3x5_3(
