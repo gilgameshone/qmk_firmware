@@ -204,10 +204,6 @@ bool caps_word_press_user(uint16_t keycode) {
 
 // key overides
 
-// Shift + esc = ~
-const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, S(KC_GRV));
-// CMD + esc = `
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_GUI, KC_ESC, KC_GRV);
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 // SHIFT + 7 = ^
@@ -223,8 +219,6 @@ const key_override_t asterisk_colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_
 
 
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &tilde_esc_override,
-    &grave_esc_override,
     &quots_quotd_override,
     &seven_circumflex_override,
     &two_at_override,
