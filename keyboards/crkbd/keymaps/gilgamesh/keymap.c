@@ -80,7 +80,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // flow
         if (!update_flow(keycode, record->event.pressed, record->event.key))
             return false;
-        return true;
     }
     // select word
     {
