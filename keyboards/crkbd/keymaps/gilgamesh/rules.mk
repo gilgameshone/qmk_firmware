@@ -8,3 +8,4 @@ COMBO_ENABLE = yes
 TAP_DANCE_ENABLE = no
 KEY_OVERRIDE_ENABLE = yes
 SRC += flow.c
+SRC += select_word.c
