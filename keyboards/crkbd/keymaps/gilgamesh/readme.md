@@ -6,10 +6,7 @@ The keys are laid out on a 3x5 grid + 3 thumb keys per hand. It is optimised to 
 
 ## BASE
 
-The base layer uses Dvarf<sup>[1](https://o-x-e-y.github.io/layouts/dvarf/index.html)</sup> for the alpha arrangement. This can be swapped on the fly via FN2 layer.
-The shifted characters are above, accessed by `One Shot Shift`. 
-Numbers, symbols and navigation keys are in the Lower and Raise layers respectively.
-There are no dual function keys, such as tap-hold keys.
+The base layer uses [Dvarf](https://o-x-e-y.github.io/layouts/dvarf/index.html)<sup>[1]</sup> for the alpha arrangement. This can be swapped on the fly via FN2 layer. The shifted characters are above, accessed by `One Shot Shift`, with some changes to shifted JIS to better suit English prose. Numbers, symbols and navigation keys are in the Lower and Raise layers respectively. There are no dual function keys, such as tap-hold keys.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -23,11 +20,11 @@ There are no dual function keys, such as tap-hold keys.
 
 ### Modifier keys and layer keys
 
-Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home row, on every layer below Base. This reduces finger contortion when chording the  modifiers with other keys. To reduce chording even more, /nearly/ all modifiers are `One Shot`, meaning they are sticky. To use modifiers with alpha keys, simply release the layer key. `Hyper` and `Meh` keys are not real modifiers but chords of normal modifiers -- `Hyper` is every modifier key, and `Meh` is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. `Hyper` is configured to call Alfred and `Meh` to call Rectangle, a window manager. Infrequent layer keys are also available on the bottom row. `Shift` has a low priority here as its duplicatie `One Shot Shift` on the base layer is used for prose. The extra layer keys are below the modifier keys and can be toggled on.
+Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home row, on every layer below Base. This reduces finger contortion when chording the  modifiers with other keys. To reduce chording even more, _nearly_ all modifiers are `One Shot`, meaning they are sticky. To use modifiers with alpha keys, simply release the layer key. `Hyper` and `Meh` keys are not real modifiers but chords of normal modifiers -- `Hyper` is every modifier key, and `Meh` is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. `Hyper` is configured to call Alfred and `Meh` to call Rectangle, a window manager. Unfortunately these are not yet one shot. Infrequent layer keys are also available on the bottom row. `Shift` has a low priority here as its duplicatie `One Shot Shift` on the base layer is used for prose. The extra layer keys are below the modifier keys and can be toggled on.
 
 ## LWR
 
-Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted versions are above. Some shifted keys have been modified from normal JIS to reduce redundancy. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue.
+Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted keys have been modified from normal JIS to reduce redundancy. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -50,7 +47,7 @@ The Symbol layer is accessed momentarily by holding left then right thumb layer 
 
 ## RSE
 
-The Raise layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options.
+The Raise layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|

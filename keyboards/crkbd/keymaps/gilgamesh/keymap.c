@@ -46,6 +46,11 @@ enum crkbd_layers {
 #define FUN1 MO(_FUN1)
 #define FUN2 MO(_FUN2)
 
+// super cmd tab
+bool is_cmd_tab_active = false; // ADD this near the beginning of keymap.c
+uint16_t cmd_tab_timer = 0;     // we will be using them soon.
+
+
 enum custom_keycodes {
     GOOGL = SAFE_RANGE,
     GTRNS,
@@ -53,6 +58,7 @@ enum custom_keycodes {
     OS_FUN2,
     SELWORD,
     LLOCK,
+    CMD_TAB,
 };
 
 // flow STUFF
@@ -89,6 +95,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // layer lock
     {
       if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
+    }
+    // super cmd tab
+    {
+      switch (keycode) { // This will do most of the grunt work with the keycodes.
+      case CMD_TAB:
+        if (record->event.pressed) {
+          if (!is_cmd_tab_active) {
+            is_cmd_tab_active = true;
+            register_code(KC_LCMD);
+          }
+          cmd_tab_timer = timer_read();
+          register_code(KC_TAB);
+        } else {
+          unregister_code(KC_TAB);
+        }
+        break;
+      }
     }
     // macro
     switch (keycode) {
@@ -149,11 +172,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-// flow
+
 void matrix_scan_user(void) {
-      flow_matrix_scan();
-      layer_lock_task();
+  // flow
+  flow_matrix_scan();
+  // layer lock
+  layer_lock_task();
+  // super cmd tab - The very important timer.
+  if (is_cmd_tab_active) {
+    if (timer_elapsed(cmd_tab_timer) > 1000) {
+      unregister_code(KC_LCMD);
+      is_cmd_tab_active = false;
     }
+  }
+}
 
 
 // combos
@@ -177,9 +209,10 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_1 ... KC_0:
         case KC_BSPC:
         case KC_DEL:
-        case KC_UNDS:
-        case KC_MINS:
-            return true;
+        case JP_UNDS:
+        case JP_MINS:
+        case JP_AMPR:
+          return true;
 
         default:
             return false;  // Deactivate Caps Word.
@@ -209,7 +242,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_COMM,  KC_DOT, KC_MINS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,     LWR,  KC_SPC,    KC_LSFT,     RSE,   KC_ENT
+                                  KC_TAB,     LWR,  KC_SPC,OSM(MOD_LSFT),   RSE,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_DVORAK] = LAYOUT_split_3x5_3(
@@ -247,7 +280,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_RSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   LSG(KC_5), XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   LSG(KC_5), CMD_TAB, KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_4), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
