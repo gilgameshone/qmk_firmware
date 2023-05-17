@@ -52,7 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
-#define COMBO_COUNT 1
+#define COMBO_COUNT 4
 #define TAPPING_TERM 175
 #define COMBO_ONLY_FROM_LAYER 0
 #define TAPPING_TOGGLE 2
