@@ -80,6 +80,9 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
     {OS_FUN2, _FUN2},
 };
 
+
+
+
 // macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -187,6 +190,60 @@ void matrix_scan_user(void) {
   }
 }
 
+// leader
+void leader_start_user(void) {
+  // Do something when the leader key is pressed
+}
+void leader_end_user(void) {
+  if (leader_sequence_two_keys(KC_M, KC_H)) {
+    // Leader, m, h => Window left screen (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_LEFT)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_Y)) {
+      // Leader, m, y => Window move right half (MEH)
+      SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                  SS_TAP(X_Y)
+                  SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_A)) {
+    // Leader, m, a => Window move left half (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_A)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_COMM)) {
+    // Leader, m, , => Window move top left corner (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_COMM)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_DOT)) {
+    // Leader, m, . => Window move bottom left corner (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_DOT)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_W)) {
+    // Leader, m, w => Window move right two thirds (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_W)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_O)) {
+    // Leader, m, o => Window move left first third (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_O)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_ENT)) {
+    // Leader, m, ret => Window maximise (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_ENT)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+}
 
 // combos
 const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
@@ -225,7 +282,6 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 // key overides
-
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 
@@ -233,7 +289,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &quots_quotd_override,
     NULL
 };
-
 
 
 // keymap
@@ -289,7 +344,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,                    LSG(KC_3),     EXT,     MSE, XXXXXXX, XXXXXXX,
+      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, QK_LEAD,                    LSG(KC_3),     EXT,     MSE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, LLOCK
                              //`--------------------------'  `--------------------------'

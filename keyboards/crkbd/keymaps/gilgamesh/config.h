@@ -59,3 +59,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define FLOW_COUNT 8
 #define FLOW_LAYERS_COUNT 1
 #define LAYER_LOCK_IDLE_TIMEOUT 60000
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT 1000
