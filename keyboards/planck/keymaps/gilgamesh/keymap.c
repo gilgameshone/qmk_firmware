@@ -1,0 +1,347 @@
+/* Copyright 2015-2021 Jack Humbert
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include QMK_KEYBOARD_H
+#include <stdio.h>
+#include "keymap_japanese.h"
+#include "sendstring_japanese.h"
+#include "features/flow.h"
+#include "features/select_word.h"
+#include "features/layer_lock.h"
+
+
+#ifdef AUDIO_ENABLE
+#    include "muse.h"
+#endif
+
+enum planck_layers {
+    _DVARF,
+    _LWR,
+    _RSE,
+    _SYM,
+    _EXT,
+    _MSE,
+    _FUN1,
+    _FUN2,
+};
+
+#define LWR MO(_LWR)
+#define RSE MO(_RSE)
+#define SYM MO(_SYM)
+#define EXT MO(_EXT)
+#define MSE MO(_MSE)
+#define FUN1 MO(_FUN1)
+#define FUN2 MO(_FUN2)
+
+
+// super cmd tab
+bool is_cmd_tab_active = false; // ADD this near the beginning of keymap.c
+uint16_t cmd_tab_timer = 0;     // we will be using them soon.
+
+
+enum custom_keycodes {
+    GOOGL = SAFE_RANGE,
+    GTRNS,
+    DFINE,
+    OS_FUN2,
+    SELWORD,
+    LLOCK,
+    CMD_TAB,
+};
+
+
+// flow STUFF
+// flow_config should correspond to following format:
+// * layer keycode
+// * modifier keycode
+const uint16_t flow_config[FLOW_COUNT][2] = {
+    {LWR, KC_LSFT},
+    {LWR, KC_LOPT},
+    {LWR, KC_LCMD},
+    {LWR, KC_LCTL},
+    {RSE, KC_RSFT},
+    {RSE, KC_ROPT},
+    {RSE, KC_RCMD},
+    {RSE, KC_RCTL},
+};
+
+const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
+    {OS_FUN2, _FUN2},
+};
+
+
+
+
+// macros
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    {
+    // flow
+        if (!update_flow(keycode, record->event.pressed, record->event.key))
+            return false;
+    }
+    // select word
+    {
+      if (!process_select_word(keycode, record, SELWORD)) { return false;}
+    }
+    // layer lock
+    {
+      if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
+    }
+    // super cmd tab
+    {
+      switch (keycode) { // This will do most of the grunt work with the keycodes.
+      case CMD_TAB:
+        if (record->event.pressed) {
+          if (!is_cmd_tab_active) {
+            is_cmd_tab_active = true;
+            register_code(KC_LCMD);
+          }
+          cmd_tab_timer = timer_read();
+          register_code(KC_TAB);
+        } else {
+          unregister_code(KC_TAB);
+        }
+        break;
+      }
+    }
+    // macro
+    switch (keycode) {
+        case GOOGL:
+            if (record->event.pressed) {
+                // when keycode GOOGL is pressed
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                                SS_UP(X_LCMD));  // command C
+                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                                        SS_UP(X_LCMD));  // open alfred
+                wait_ms(50);
+                SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                                SS_TAP(X_ENT));  // command V + enter
+            } else {
+                // when keycode GOOGL is released
+            }
+            break;
+        case GTRNS:
+            if (record->event.pressed) {
+                // when keycode GTRNS is pressed
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                                SS_UP(X_LCMD));  // command C
+                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                                        SS_UP(X_LCMD));  // open alfred
+                wait_ms(50);
+                SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                                SS_TAP(X_ENT));  // command V + enter
+            } else {
+                // when keycode GTRNS is released
+            }
+            break;
+        case DFINE:
+            if (record->event.pressed) {
+                // when keycode DFINE is pressed
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                                SS_UP(X_LCMD));  // command C
+                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                                        SS_UP(X_LCMD));  // open alfred
+                wait_ms(200);
+                SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
+                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
+                                SS_UP(X_LCMD));  // command V
+                wait_ms(200);                     // wait
+                SEND_STRING(SS_TAP(X_ENT));      // enter
+            } else {
+                // when keycode DFINE is released
+            }
+            break;
+    }
+    return true;
+}
+
+
+void matrix_scan_user(void) {
+  // flow
+  flow_matrix_scan();
+  // layer lock
+  layer_lock_task();
+  // super cmd tab - The very important timer.
+  if (is_cmd_tab_active) {
+    if (timer_elapsed(cmd_tab_timer) > 500) {
+      unregister_code(KC_LCMD);
+      is_cmd_tab_active = false;
+    }
+  }
+}
+
+// leader
+void leader_start_user(void) {
+  // Do something when the leader key is pressed
+}
+void leader_end_user(void) {
+  if (leader_sequence_two_keys(KC_M, KC_H)) {
+    // Leader, m, h => Window left screen (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_LEFT)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_Y)) {
+      // Leader, m, y => Window move right half (MEH)
+      SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                  SS_TAP(X_Y)
+                  SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_A)) {
+    // Leader, m, a => Window move left half (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_A)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_COMM)) {
+    // Leader, m, , => Window move top left corner (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_COMM)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_DOT)) {
+    // Leader, m, . => Window move bottom left corner (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_DOT)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_W)) {
+    // Leader, m, w => Window move right two thirds (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_W)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_O)) {
+    // Leader, m, o => Window move left first third (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_O)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+  else if (leader_sequence_two_keys(KC_M, KC_ENT)) {
+    // Leader, m, ret => Window maximise (MEH)
+    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
+                SS_TAP(X_ENT)
+                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
+  }
+}
+
+// combos
+const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
+const uint16_t PROGMEM combo_qkboot[] = {JP_QUOT, KC_A, JP_COMM, COMBO_END};
+const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_G, KC_J, COMBO_END};
+const uint16_t PROGMEM combo_qkeeprom[] = {KC_W, KC_Y, KC_C, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  COMBO(combo_capsword, CW_TOGG),
+  COMBO(combo_qkboot, QK_BOOT),
+  COMBO(combo_qkeeprom, EE_CLR),
+  COMBO(combo_qkreboot, QK_RBT),
+};
+
+// caps word
+
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case JP_UNDS:
+        case JP_MINS:
+        case JP_AMPR:
+          return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+
+// key overides
+// SHIFT + ' = "
+const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
+
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &quots_quotd_override,
+    NULL
+};
+
+// keymap
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+  [_DVARF] = LAYOUT_planck_grid(
+      JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P, XXXXXXX, XXXXXXX,    KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
+         KC_A,    KC_I,    KC_E,    KC_Y,    KC_G, XXXXXXX, XXXXXXX,    KC_L,    KC_H,    KC_T,    KC_N,    KC_S,
+      JP_COMM,  JP_DOT, JP_MINS,    KC_C,    KC_J, XXXXXXX, XXXXXXX,    KC_K,    KC_M,    KC_B,    KC_X,    KC_Z,
+      XXXXXXX, XXXXXXX,  KC_TAB,     LWR,  KC_SPC, XXXXXXX, XXXXXXX, OSM(MOD_LSFT),RSE, KC_ENT, XXXXXXX, XXXXXXX
+  ),
+  [_LWR] = LAYOUT_planck_grid(
+      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, JP_TILD, XXXXXXX, XXXXXXX, JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_PERC, XXXXXXX, XXXXXXX, JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
+      KC_TRNS, KC_TRNS, XXXXXXX,     SYM, JP_HASH, XXXXXXX, XXXXXXX,  JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
+      XXXXXXX, XXXXXXX,   LLOCK,     LWR, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,     SYM,  KC_DEL, XXXXXXX, XXXXXXX
+  ),
+  [_RSE] = LAYOUT_planck_grid(
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),XXXXXXX, XXXXXXX, CMD_TAB,G(KC_TAB),KC_HYPR, KC_MEH, XXXXXXX,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD, XXXXXXX, XXXXXXX,LSG(KC_5),KC_RCTL,KC_RCMD, KC_ROPT, KC_RSFT,
+      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, QK_LEAD, XXXXXXX, XXXXXXX,LSG(KC_3),    EXT,    MSE, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX,  KC_ESC,   EXT,   KC_SPC,  XXXXXXX, XXXXXXX,  XXXXXXX,    RSE,  LLOCK, XXXXXXX, XXXXXXX
+  ),
+  [_SYM] = LAYOUT_planck_grid(
+      XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, JP_GRV, XXXXXXX, XXXXXXX, JP_SCLN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR, XXXXXXX, XXXXXXX,  JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+      XXXXXXX, OS_FUN2,    FUN1, XXXXXXX, JP_EXLM, XXXXXXX, XXXXXXX, JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
+      XXXXXXX, XXXXXXX,   LLOCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  ),
+  [_EXT] = LAYOUT_planck_grid(
+      KC_CAPS, KC_LNG2, KC_LNG1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_INS, XXXXXXX, KC_HYPR, KC_MEH, XXXXXXX,
+      KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY,XXXXXXX,XXXXXXX,XXXXXXX,KC_SCRL,KC_RCTL,KC_RCMD,KC_ROPT,KC_RSFT,
+      XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX, XXXXXXX, XXXXXXX, KC_PAUS,     EXT,    MSE, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  LLOCK, XXXXXXX, XXXXXXX
+  ),
+  [_MSE] = LAYOUT_planck_grid(
+      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR,  XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
+      KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX, XXXXXXX, KC_SLEP, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
+      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX, XXXXXXX, KC_WAKE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  ),
+  [_FUN1] = LAYOUT_planck_grid(
+      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX,DF(_DVARF),XXXXXXX,XXXXXXX,KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,XXXXXXX, XXXXXXX, XXXXXXX, KC_NUM,    KC_F5,   KC_F6,   KC_F7,   KC_F8,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  ),
+  [_FUN2] = LAYOUT_planck_grid(
+      QK_BOOT,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
+       QK_RBT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  )
+};
