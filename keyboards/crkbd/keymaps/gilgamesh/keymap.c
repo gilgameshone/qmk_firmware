@@ -330,7 +330,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_LWR] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX, JP_TILD,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+     C(KC_F2),  KC_MEH, KC_HYPR, XXXXXXX, JP_TILD,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -341,11 +341,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_RSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     C(KC_F2),LCMD(KC_TAB),KC_HYPR,KC_MEH,    MSE,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     QK_LEAD,LCMD(KC_TAB),KC_HYPR,KC_MEH,    MSE,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, QK_LEAD,                    LSG(KC_3),CMD_TAB,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
+     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3),CMD_TAB,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, LLOCK
                              //`--------------------------'  `--------------------------'
