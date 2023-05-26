@@ -80,9 +80,6 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
     {OS_FUN2, _FUN2},
 };
 
-
-
-
 // macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -118,59 +115,60 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     // macro
     switch (keycode) {
-        case GOOGL:
-            if (record->event.pressed) {
-                // when keycode GOOGL is pressed
-                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
-                                SS_UP(X_LCMD));  // command C
-                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
-                                        SS_UP(X_LCMD));  // open alfred
-                wait_ms(50);
-                SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
-                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
-                                SS_TAP(X_ENT));  // command V + enter
-            } else {
-                // when keycode GOOGL is released
-            }
-            break;
-        case GTRNS:
-            if (record->event.pressed) {
-                // when keycode GTRNS is pressed
-                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
-                                SS_UP(X_LCMD));  // command C
-                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
-                                        SS_UP(X_LCMD));  // open alfred
-                wait_ms(50);
-                SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
-                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
-                                SS_TAP(X_ENT));  // command V + enter
-            } else {
-                // when keycode GTRNS is released
-            }
-            break;
-        case DFINE:
-            if (record->event.pressed) {
-                // when keycode DFINE is pressed
-                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
-                                SS_UP(X_LCMD));  // command C
-                SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                                SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                                    SS_UP(X_LSFT) SS_UP(X_LCTL)
-                                        SS_UP(X_LCMD));  // open alfred
-                wait_ms(200);
-                SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
-                SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
-                                SS_UP(X_LCMD));  // command V
-                wait_ms(200);                     // wait
-                SEND_STRING(SS_TAP(X_ENT));      // enter
-            } else {
-                // when keycode DFINE is released
-            }
-            break;
+    case GOOGL:
+      if (record->event.pressed) {
+        // when keycode GOOGL is pressed
+        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                    SS_UP(X_LCMD));  // command C
+        SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                    SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                    SS_UP(X_LCMD));  // open alfred
+        wait_ms(50);
+        SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
+        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                    SS_TAP(X_ENT));  // command V + enter
+      } else {
+        // when keycode GOOGL is released
+      }
+      break;
+    case GTRNS:
+      if (record->event.pressed) {
+        // when keycode GTRNS is pressed
+        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                    SS_UP(X_LCMD));  // command C
+        SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                    SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                    SS_UP(X_LCMD));  // open alfred
+        wait_ms(50);
+        SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
+        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                    SS_TAP(X_ENT));  // command V + enter
+      } else {
+        // when keycode GTRNS is released
+      }
+      break;
+    case DFINE:
+      if (record->event.pressed) {
+        // when keycode DFINE is pressed
+        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                    SS_UP(X_LCMD));  // command C
+        SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                    SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                    SS_UP(X_LSFT) SS_UP(X_LCTL)
+                    SS_UP(X_LCMD));  // open alfred
+        wait_ms(200);
+        SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
+        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
+                    SS_UP(X_LCMD));  // command V
+        wait_ms(200);                     // wait
+        SEND_STRING(SS_TAP(X_ENT));      // enter
+      } else {
+        // when keycode DFINE is released
+      }
+      break;
+
     }
     return true;
 }
@@ -183,7 +181,7 @@ void matrix_scan_user(void) {
   layer_lock_task();
   // super cmd tab - The very important timer.
   if (is_cmd_tab_active) {
-    if (timer_elapsed(cmd_tab_timer) > 500) {
+    if (timer_elapsed(cmd_tab_timer) > 300) {
       unregister_code(KC_LCMD);
       is_cmd_tab_active = false;
     }
@@ -243,6 +241,10 @@ void leader_end_user(void) {
                 SS_TAP(X_ENT)
                 SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
   }
+  else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
+    // Leader, d, d, s => Types the below string
+    SEND_STRING("https://start.duckduckgo.com\n");
+  }
 }
 
 // combos
@@ -291,7 +293,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     NULL
 };
 
-
 // keymap
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -334,18 +335,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_TRNS, KC_TRNS, XXXXXXX,     SYM, JP_HASH,                       JP_YEN,    KC_1,    KC_2,    KC_3,    KC_0,
+      KC_TRNS, KC_TRNS,HYPR(KC_B),KC_MPLY,JP_HASH,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  LLOCK,     LWR, XXXXXXX,    KC_BSPC,     SYM,  KC_DEL
                              //`--------------------------'  `--------------------------'
   ),
   [_RSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     CMD_TAB,G(KC_TAB),KC_HYPR,  KC_MEH, XXXXXXX,
+     G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     C(KC_F2),LCMD(KC_TAB),KC_HYPR,KC_MEH,    MSE,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, QK_LEAD,                    LSG(KC_3),     EXT,     MSE, XXXXXXX, XXXXXXX,
+      KC_HOME, KC_PGUP, KC_PGDN,  KC_END, QK_LEAD,                    LSG(KC_3),CMD_TAB,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, LLOCK
                              //`--------------------------'  `--------------------------'
@@ -354,7 +355,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, JP_GRV,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR,                       JP_EQL, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR,                       JP_YEN, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, OS_FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -363,14 +364,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_EXT] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      KC_CAPS, KC_LNG2, KC_LNG1, XXXXXXX, XXXXXXX,                       KC_INS, XXXXXXX, KC_HYPR,  KC_MEH, XXXXXXX,
+      KC_CAPS, KC_LNG2, KC_LNG1, KC_MPRV, KC_MNXT,                      KC_LPAD, KC_MCTL, KC_HYPR,  KC_MEH, KC_EJCT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_KB_MUTE,KC_KB_VOLUME_UP,KC_KB_VOLUME_DOWN,KC_MPLY, XXXXXXX,    KC_SCRL, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
+      KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),                    KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      KC_PAUS,     EXT,     MSE, XXXXXXX, XXXXXXX,
+      KC_MRWD,   DFINE,   GTRNS,   GOOGL, KC_MFFD,                      KC_SCRL,     EXT,     MSE, XXXXXXX, KC_PENT,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, LLOCK
                              //`--------------------------'  `--------------------------'
+      // afred macro - hyper-B is back 2 seconds in iina when used in emacs
   ),
   [_MSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.

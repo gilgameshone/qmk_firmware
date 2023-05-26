@@ -11,3 +11,4 @@ SRC += flow.c
 SRC += select_word.c
 SRC += layer_lock.c
 LEADER_ENABLE = yes
+EXTRAKEY_ENABLE = yes
