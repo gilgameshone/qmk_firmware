@@ -108,10 +108,9 @@ QMK Bootloader can also be accessed via triple vertical combo of outer pinky key
 
 ### Notes
 
- - [1] Dvarf is an alpha key layout created by o-x-e-y that is based on Dvorak.
+ - [1] Dvarf is an alpha key layout created by [o-x-e-y](https://o-x-e-y.github.io/) that is based on Dvorak.
  - This keymap takes inspiration from the great [Miryoku](https://github.com/manna-harbour/miryoku), the excellent [Seniply](https://stevep99.github.io/seniply/), and many others.
  - Tools that help me utilize this keymap are Emacs, Alfred, Rectangle, and Vimari.
  - [Gilgamesh keymap image with all layers separated](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.drawio.png)
- - Updated to One Shot modifier implementation by daliusd<sup>[4](https://blog.ffff.lt/posts/callum-layers/).
- - Reversed Delete and Backspace
+ - Updated to One Shot modifier implementation by [daliusd](https://blog.ffff.lt/posts/callum-layers/).
  - Added `layer lock` and `select word` from [Pascal Getreuer](https://getreuer.info/posts/keyboards/index.html).
