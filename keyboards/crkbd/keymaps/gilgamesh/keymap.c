@@ -352,9 +352,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_SYM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, JP_GRV,                      JP_SCLN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
+      XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, JP_GRV,                       JP_YEN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR,                       JP_YEN, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR,                      JP_SCLN, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, OS_FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|

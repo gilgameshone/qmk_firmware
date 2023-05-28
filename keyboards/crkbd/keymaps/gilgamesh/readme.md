@@ -24,51 +24,51 @@ Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home
 
 ## LWR
 
-Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The shifted keys have been modified from normal JIS to reduce redundancy. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys.
+Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The the `SYM` layer is prefered in favour of the shifted number keys. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys. `Mnu` send focus to the menu bar. There is also a `Pause` key and a macro to rewind audio and return to main window. 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   | ~ |   | + | 7 | 8 | 9 | * |
+|Mnu|Meh|Hyp|   | ~ |   | + | 7 | 8 | 9 | * |
 |Sft|Opt|Cmd|Ctl| % |   | - | 4 | 5 | 6 | / |
-| , | . |   |SYM| # |   | ¥ | 1 | 2 | 3 | 0 |
+| , | . |Rrw|Pau| # |   | = | 1 | 2 | 3 | 0 |
 |___|___|LLk|XXX|...|   |BkS|SYM|DEL|___|___|
 
 ## SYM
 
-The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession or by toggle with the left thumb layer key and an index finger key. Most characters are simply the shifted versions, more easily accessed from the thumbs rather than the pinky finger shift. This layer is vital for home row access to brackets. The remaining symbols are on the 'wrong' side of the layer.
+The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession. Characters here began as shifted versions of `LWR` but are slowly being optimised. This layer is vital for home row access to brackets. The remaining symbols are on the stuffed into the 'wrong' side of the layer.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   | ` |   | ; | [ | ] | ^ | : |
-|Sft|Opt|Cmd|Ctl| $ |   | = | ( | ) | & | ? |
+|   |Meh|Hyp|   | ` |   | ¥ | [ | ] | ^ | : |
+|Sft|Opt|Cmd|Ctl| $ |   | ; | ( | ) | & | ? |
 |   |FN2|FN1|XXX| ! |   | \|| { | } | @ | _ |
 |___|___|LLk|XXX|...|   |...|XXX|...|___|___|
 
 
 ## RSE
 
-The Raise layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line.
+The Raise layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line. `word forward` will move the cursor right without selecting. The `leader key` gives access to another type of modifier, but rarely used yet. `Super Command Tab` sends `Command` `Tab`, then holds `Command` and sends another `Tab` on repeat. There are also tab switching buttons, `Tab Forward` and `Tab Backward`.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Undo|Cut |Copy|Pste|Redo||SSB|   |Hyp|Meh|   | 
-|←   |↑   |↓   |→   |SlWd  ||SSS|Ctl|Cmd|Opt|Sft| 
-|Home|PgDn|PgUp|End |   ||SSA|EXT|MSE|   |   |
+|Undo|Cut |Copy|Pste|Redo||Lead|CTab|Hyp|Meh|Mse| 
+|←   |↑   |↓   |→   |SlWd||SSS|Ctl|Cmd|Opt|Sft| 
+|Home|PgDn|PgUp|End |WdFw||SSA|STab|TBw|Tfw|   |
 |___|___|ESC|EXT|SPC|   |...|XXX|LLk|___|___|
 
 ## EXT
 
 The Extend layer is to place miscellaneous keys on the home row, notably Play/Pause. It is accessed like `SYM` but mirrored. 
-It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition.
+It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition. This layer also has `Launch Pad`, `Scroll Lock`, and `Pause`. 
 
 ### Caps Word
-The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `Caps Word` that is enabled by pressing both home index finger keys on the Base layer (`Y` and `H`) and automatically turns off on space or other keypress. This layer also has `Insert`, `Scroll Lock`, and `Pause`.
+The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `Caps Word` that is enabled by pressing both home index finger keys on the Base layer (`Y` and `H`) and automatically turns off on space or other keypress. 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Caps|L2en|L1jp||   |   |INS|   |Hyp|Meh|   | 
+|Caps|L2en|L1jp|Prev|Next|   |Lpad|   |Hyp|Meh|Ejct| 
 |Mute|VolUp|VolDn|Play|| |SCL|Ctl|Cmd|Opt|Sft| 
-|    |Dfine|Gtrns|GooGL|||PSE|XXX|MSE|   |   |
+|Bkwd|Dfine|Gtrns|GooGL|Fwd||PSE|XXX|MSE|   |Ent|
 |___|___|...|XXX|...|   |...|XXX|LLk|___|___|
 
 ## MSE
@@ -103,6 +103,8 @@ Who needs function keys up to 24? Absolutely nobody. `QMK Bootloader` and `QMK R
 |Sft|Opt|Cmd|Ctl|   |   |   |F17|F18|F19|F20|
 |QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
 |___|___|...|XXX|...|   |...|...|...|___|___|
+
+QMK Bootloader can also be accessed via triple vertical combo of outer pinky keys, Reboot for QMK by triple vertical combo of the inner most index finger keys, and clear EEprom via triple vertical combo of index finger home positions. These make it easier to troubleshoot and flash each side.
 
 ### Notes
 
