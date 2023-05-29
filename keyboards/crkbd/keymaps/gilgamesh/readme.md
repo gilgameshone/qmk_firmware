@@ -6,7 +6,7 @@ The keys are laid out on a 3x5 grid + 3 thumb keys per hand. It is optimised to 
 
 ## BASE
 
-The base layer uses [Dvarf](https://o-x-e-y.github.io/layouts/dvarf/index.html)<sup>[1]</sup> for the alpha arrangement. This can be swapped on the fly via FN2 layer. The shifted characters are above, accessed by `One Shot Shift`, with some changes to shifted JIS to better suit English prose. Numbers, symbols and navigation keys are in the Lower and Raise layers respectively. There are no dual function keys, such as tap-hold keys.
+The base layer uses [Dvarf](https://o-x-e-y.github.io/layouts/dvarf/index.html)<sup>[1]</sup> for the alpha arrangement. This can be swapped on the fly via FN2 layer. The shifted characters are above, accessed by `One Shot Shift`, with some changes to shifted JIS to better suit English prose. Numbers, symbols and navigation keys are in the Lower and Raise layers respectively. There are no dual function keys, such as tap-hold keys. 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -24,26 +24,14 @@ Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home
 
 ## LWR
 
-Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The the `SYM` layer is prefered in favour of the shifted number keys. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys. `Mnu` send focus to the menu bar. There is also a `Pause` key and a macro to rewind audio and return to main window. 
+Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The `SYM` layer is prefered in favour of the shifted number keys. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys. `Mnu` send focus to the menu bar. There is also a `Pause` key and a macro to rewind audio and return to main window. 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
 |Mnu|Meh|Hyp|   | ~ |   | + | 7 | 8 | 9 | * |
 |Sft|Opt|Cmd|Ctl| % |   | - | 4 | 5 | 6 | / |
-| , | . |Rrw|Pau| # |   | = | 1 | 2 | 3 | 0 |
+| , | . |Rwd|Pau| # |   | = | 1 | 2 | 3 | 0 |
 |___|___|LLk|XXX|...|   |BkS|SYM|DEL|___|___|
-
-## SYM
-
-The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession. Characters here began as shifted versions of `LWR` but are slowly being optimised. This layer is vital for home row access to brackets. The remaining symbols are on the stuffed into the 'wrong' side of the layer.
-
-|   |   |   |   |   |   |   |   |   |   |   |
-|---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   | ` |   | ¥ | [ | ] | ^ | : |
-|Sft|Opt|Cmd|Ctl| $ |   | ; | ( | ) | & | ? |
-|   |FN2|FN1|XXX| ! |   | \|| { | } | @ | _ |
-|___|___|LLk|XXX|...|   |...|XXX|...|___|___|
-
 
 ## RSE
 
@@ -51,10 +39,21 @@ The Raise layer includes navigation and copy and paste keys. The navigation keys
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Undo|Cut |Copy|Pste|Redo||Lead|CTab|Hyp|Meh|Mse| 
-|←   |↑   |↓   |→   |SlWd||SSS|Ctl|Cmd|Opt|Sft| 
-|Home|PgDn|PgUp|End |WdFw||SSA|STab|TBw|Tfw|   |
+|Und|Cut|Cpy|Pst|Rdo|   |Led|CTb|Hyp|Meh|Mse| 
+|←  |↑  |↓  |→  |SWd|   |SSS|Ctl|Cmd|Opt|Sft| 
+|Hme|PgD|PgU|End|WdF|   |SSA|STb|TBw|Tfw|   |
 |___|___|ESC|EXT|SPC|   |...|XXX|LLk|___|___|
+
+## SYM
+
+The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession. Characters here began as shifted versions of `LWR` but are slowly being optimised. This layer is vital for home row access to brackets. The remaining symbols are on the stuffed into the 'wrong' side of the layer.
+
+|   |   |   |   |   |   |   |   |   |   |   |
+|---|---|---|---|---|---|---|---|---|---|---|
+|   |Meh|Hyp|   | ` |   | ¥ | [ | ] | : | ^ |
+|Sft|Opt|Cmd|Ctl| $ |   | ; | ( | ) | & | ? |
+|   |FN2|FN1|XXX| ! |   | \|| { | } | @ | _ |
+|___|___|LLk|XXX|...|   |...|XXX|...|___|___|
 
 ## EXT
 
@@ -66,9 +65,9 @@ The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Caps|L2en|L1jp|Prev|Next|   |Lpad|   |Hyp|Meh|Ejct| 
-|Mute|VolUp|VolDn|Play|| |SCL|Ctl|Cmd|Opt|Sft| 
-|Bkwd|Dfine|Gtrns|GooGL|Fwd||PSE|XXX|MSE|   |Ent|
+|Cps|Len|Ljp|Prv|Nxt|   |Lpd|   |Hyp|Meh|Ejt| 
+|Mut|VUp|VDn|Ply|   |   |SCL|Ctl|Cmd|Opt|Sft| 
+|Bkw|Dfe|Gtr|GoG|Fwd|   |PSE|XXX|MSE|   |Ent|
 |___|___|...|XXX|...|   |...|XXX|LLk|___|___|
 
 ## MSE
