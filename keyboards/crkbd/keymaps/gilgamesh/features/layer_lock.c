@@ -20,7 +20,7 @@
  * <https://getreuer.info/posts/keyboards/layer-lock>
  */
 
-#include "layer_lock.h"
+#include "features/layer_lock.h"
 
 // The current lock state. The kth bit is on if layer k is locked.
 static layer_state_t locked_layers = 0;

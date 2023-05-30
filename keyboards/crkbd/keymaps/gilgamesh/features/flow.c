@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "flow.h"
+#include "features/flow.h"
 
 extern const uint16_t flow_config[FLOW_COUNT][2];
 extern const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2];
