@@ -16,13 +16,13 @@ The base layer uses [Dvarf](https://o-x-e-y.github.io/layouts/dvarf/index.html)<
 | a | i | o | y | g |   | l | h | t | n | s |
 | < | > |   |   |   |   |   |   |   |   |   |
 | , | . | - | c | j |   | k | m | b | x | z |
-|___|___|TAB|LWR|SPC|   |OSS|RSE|RET|___|___|
+|___|___|TAB|NUM|SPC|   |OSS|NAV|RET|___|___|
 
 ### Modifier keys and layer keys
 
-Modifier keys are on the same side as the layer key (`RSE` or `LWR`) on the home row, on every layer below Base. This reduces finger contortion when chording the  modifiers with other keys. To reduce chording even more, _nearly_ all modifiers are `One Shot`, meaning they are sticky. To use modifiers with alpha keys, simply release the layer key. `Hyper` and `Meh` keys are not real modifiers but chords of normal modifiers -- `Hyper` is every modifier key, and `Meh` is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. `Hyper` is configured to call Alfred and `Meh` to call Rectangle, a window manager. Unfortunately these are not yet one shot. Infrequent layer keys are also available on the bottom row. `Shift` has a low priority here as its duplicatie `One Shot Shift` on the base layer is used for prose. The extra layer keys are below the modifier keys and can be toggled on.
+Modifier keys are on the same side as the layer key (`NAV` or `NUM`) on the home row, on every layer below Base. This reduces finger contortion when chording the  modifiers with other keys. To reduce chording even more, _nearly_ all modifiers are `One Shot`, meaning they are sticky. To use modifiers with alpha keys, simply release the layer key. `Hyper` and `Meh` keys are not real modifiers but chords of normal modifiers -- `Hyper` is every modifier key, and `Meh` is every key except shift. These are rarely used by existing keyboard shortcuts in any OS. `Hyper` is configured to call Alfred and `Meh` to call Rectangle, a window manager. Unfortunately these are not yet one shot. Infrequent layer keys are also available on the bottom row. `Shift` has a low priority here as its duplicatie `One Shot Shift` on the base layer is used for prose. The extra layer keys are below the modifier keys and can be toggled on.
 
-## LWR
+## NUM
 
 Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The `SYM` layer is prefered in favour of the shifted number keys. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys. `Mnu` send focus to the menu bar. There is also a `Pause` key and a macro to rewind audio and return to main window. 
 
@@ -33,9 +33,9 @@ Lower contains a number pad that uses the typical number row keys (not the actua
 | , | . |Rwd|Pau| # |   | = | 1 | 2 | 3 | 0 |
 |___|___|LLk|XXX|...|   |BkS|SYM|DEL|___|___|
 
-## RSE
+## NAV
 
-The Raise layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line. `word forward` will move the cursor right without selecting. The `leader key` gives access to another type of modifier, but rarely used yet. `Super Command Tab` sends `Command` `Tab`, then holds `Command` and sends another `Tab` on repeat. There are also tab switching buttons, `Tab Forward` and `Tab Backward`.
+The Navigation layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line. `word forward` will move the cursor right without selecting. The `leader key` gives access to another type of modifier, but rarely used yet. `Super Command Tab` sends `Command` `Tab`, then holds `Command` and sends another `Tab` on repeat. There are also tab switching buttons, `Tab Forward` and `Tab Backward`.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -46,7 +46,7 @@ The Raise layer includes navigation and copy and paste keys. The navigation keys
 
 ## SYM
 
-The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession. Characters here began as shifted versions of `LWR` but are slowly being optimised. This layer is vital for home row access to brackets. The remaining symbols are on the stuffed into the 'wrong' side of the layer.
+The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession. Characters here began as shifted versions of `NUM` but are slowly being optimised. This layer is vital for home row access to brackets. The remaining symbols are on the stuffed into the 'wrong' side of the layer.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
