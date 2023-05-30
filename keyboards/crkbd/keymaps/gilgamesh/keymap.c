@@ -21,9 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include "keymap_japanese.h"
 #include "sendstring_japanese.h"
-#include "flow.h"
-#include "select_word.h"
-#include "layer_lock.h"
+#include "features/flow.h"
+#include "features/select_word.h"
+#include "features/layer_lock.h"
 
 enum crkbd_layers {
     _DVARF,
@@ -342,11 +342,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NAV] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     QK_LEAD,CMD_TAB,KC_HYPR,KC_MEH,    ,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     QK_LEAD, CMD_TAB, KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3),,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
+     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3),XXXXXXX,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     NAV, LLOCK
                              //`--------------------------'  `--------------------------'

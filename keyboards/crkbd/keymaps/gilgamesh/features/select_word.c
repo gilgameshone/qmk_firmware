@@ -20,7 +20,7 @@
  * <https://getreuer.info/posts/keyboards/select-word>
  */
 
-#include "select_word.h"
+#include "features/select_word.h"
 
 // Mac users, uncomment this line:
 #define MAC_HOTKEYS
