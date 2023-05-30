@@ -29,8 +29,8 @@ enum crkbd_layers {
     _DVARF,
     _DVORAK,
     _QWERTY,
-    _LWR,
-    _RSE,
+    _NUM,
+    _NAV,
     _SYM,
     _EXT,
     _MSE,
@@ -38,8 +38,8 @@ enum crkbd_layers {
     _FUN2,
 };
 
-#define LWR MO(_LWR)
-#define RSE MO(_RSE)
+#define NUM MO(_NUM)
+#define NAV MO(_NAV)
 #define SYM MO(_SYM)
 #define EXT MO(_EXT)
 #define MSE MO(_MSE)
@@ -66,14 +66,14 @@ enum custom_keycodes {
 // * layer keycode
 // * modifier keycode
 const uint16_t flow_config[FLOW_COUNT][2] = {
-    {LWR, KC_LSFT},
-    {LWR, KC_LOPT},
-    {LWR, KC_LCMD},
-    {LWR, KC_LCTL},
-    {RSE, KC_RSFT},
-    {RSE, KC_ROPT},
-    {RSE, KC_RCMD},
-    {RSE, KC_RCTL},
+    {NUM, KC_LSFT},
+    {NUM, KC_LOPT},
+    {NUM, KC_LCMD},
+    {NUM, KC_LCTL},
+    {NAV, KC_RSFT},
+    {NAV, KC_ROPT},
+    {NAV, KC_RCMD},
+    {NAV, KC_RCTL},
 };
 
 const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
@@ -304,7 +304,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       JP_COMM,  JP_DOT, JP_MINS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,     LWR,  KC_SPC,OSM(MOD_LSFT),   RSE,  KC_ENT
+                                  KC_TAB,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_DVORAK] = LAYOUT_split_3x5_3(
@@ -315,7 +315,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MINS,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,   LWR,  KC_SPC,      KC_LSFT,     RSE,  KC_ENT
+                                  KC_TAB,   NUM,  KC_SPC,      KC_LSFT,     NAV,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
@@ -326,10 +326,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,   LWR,  KC_SPC,      KC_LSFT,     RSE,  KC_ENT
+                                  KC_TAB,   NUM,  KC_SPC,      KC_LSFT,     NAV,  KC_ENT
                              //`--------------------------'  `--------------------------'
   ),
-  [_LWR] = LAYOUT_split_3x5_3(
+  [_NUM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
      C(KC_F2),  KC_MEH, KC_HYPR, XXXXXXX, JP_TILD,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -337,18 +337,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_TRNS, KC_TRNS,HYPR(KC_B),KC_MPLY,JP_HASH,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 LLOCK,     LWR, XXXXXXX,    KC_BSPC,     SYM,  KC_DEL
+                                 LLOCK,     NUM, XXXXXXX,    KC_BSPC,     SYM,  KC_DEL
                              //`--------------------------'  `--------------------------'
   ),
-  [_RSE] = LAYOUT_split_3x5_3(
+  [_NAV] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     QK_LEAD,LCMD(KC_TAB),KC_HYPR,KC_MEH,    MSE,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     QK_LEAD,CMD_TAB,KC_HYPR,KC_MEH,    ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3),CMD_TAB,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
+     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3),,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     RSE, LLOCK
+                                 KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     NAV, LLOCK
                              //`--------------------------'  `--------------------------'
   ),
   [_SYM] = LAYOUT_split_3x5_3(
@@ -439,8 +439,8 @@ void oled_render_layer_state(void) {
   DISPLAY_LAYER_NAME(_MSE, "MSE");
   DISPLAY_LAYER_NAME(_EXT, "EXT");
   DISPLAY_LAYER_NAME(_SYM, "SYM");
-  DISPLAY_LAYER_NAME(_RSE, "RSE");
-  DISPLAY_LAYER_NAME(_LWR, "LWR");
+  DISPLAY_LAYER_NAME(_NAV, "NAV");
+  DISPLAY_LAYER_NAME(_NUM, "NUM");
   DISPLAY_LAYER_NAME(_DVARF, "DVARF");
   DISPLAY_LAYER_NAME(_DVORAK, "DVORAK");
   DISPLAY_LAYER_NAME(_QWERTY, "QWERTY");
