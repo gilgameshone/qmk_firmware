@@ -248,10 +248,7 @@ void leader_end_user(void) {
 }
 
 // combos
-<<<<<<< HEAD
-=======
 
->>>>>>> merge
 const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
 const uint16_t PROGMEM combo_qkboot[] = {JP_QUOT, KC_A, JP_COMM, COMBO_END};
 const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_G, KC_J, COMBO_END};
