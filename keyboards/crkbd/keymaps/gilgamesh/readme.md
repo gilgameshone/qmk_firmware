@@ -28,20 +28,20 @@ Lower contains a number pad that uses the typical number row keys (not the actua
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Mnu|Meh|Hyp|   | ~ |   | + | 7 | 8 | 9 | * |
+|Mnu|Meh|Hyp|Ldr| ~ |   | + | 7 | 8 | 9 | * |
 |Sft|Opt|Cmd|Ctl| % |   | - | 4 | 5 | 6 | / |
 | , | . |Rwd|Pau| # |   | = | 1 | 2 | 3 | 0 |
 |___|___|LLk|XXX|...|   |BkS|SYM|DEL|___|___|
 
 ## NAV
 
-The Navigation layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line. `word forward` will move the cursor right without selecting. The `leader key` gives access to another type of modifier, but rarely used yet. `Super Command Tab` sends `Command` `Tab`, then holds `Command` and sends another `Tab` on repeat. There are also tab switching buttons, `Tab Forward` and `Tab Backward`.
+The Navigation layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line. `word forward` will move the cursor right without selecting. The `leader key` gives access to another type of modifier, and is currently combined with homerow keys to give leader keys for Emacs: `C-x`, `C-c`, and `M-x`. `Super Command Tab` sends `Command` `Tab`, then holds `Command` and sends another `Tab` on repeat. There are also tab switching buttons, `Tab Forward` and `Tab Backward`.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Und|Cut|Cpy|Pst|Rdo|   |Led|CTb|Hyp|Meh|Mse| 
+|Und|Cut|Cpy|Pst|Rdo|   |CTb|Ldr|Hyp|Meh|   | 
 |←  |↑  |↓  |→  |SWd|   |SSS|Ctl|Cmd|Opt|Sft| 
-|Hme|PgD|PgU|End|WdF|   |SSA|STb|TBw|Tfw|   |
+|Hme|PgD|PgU|End|WdF|   |SSA|   |TBw|Tfw|   |
 |___|___|ESC|EXT|SPC|   |...|XXX|LLk|___|___|
 
 ## SYM

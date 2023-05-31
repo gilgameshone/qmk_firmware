@@ -193,57 +193,15 @@ void leader_start_user(void) {
   // Do something when the leader key is pressed
 }
 void leader_end_user(void) {
-  if (leader_sequence_two_keys(KC_M, KC_H)) {
-    // Leader, m, h => Window left screen (MEH)
-    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                SS_TAP(X_LEFT)
-                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_two_keys(KC_M, KC_Y)) {
-      // Leader, m, y => Window move right half (MEH)
-      SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                  SS_TAP(X_Y)
-                  SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_two_keys(KC_M, KC_A)) {
-    // Leader, m, a => Window move left half (MEH)
-    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                SS_TAP(X_A)
-                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_two_keys(KC_M, KC_COMM)) {
-    // Leader, m, , => Window move top left corner (MEH)
-    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                SS_TAP(X_COMM)
-                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_two_keys(KC_M, KC_DOT)) {
-    // Leader, m, . => Window move bottom left corner (MEH)
-    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                SS_TAP(X_DOT)
-                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_two_keys(KC_M, KC_W)) {
-    // Leader, m, w => Window move right two thirds (MEH)
-    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                SS_TAP(X_W)
-                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_two_keys(KC_M, KC_O)) {
-    // Leader, m, o => Window move left first third (MEH)
-    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                SS_TAP(X_O)
-                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_two_keys(KC_M, KC_ENT)) {
-    // Leader, m, ret => Window maximise (MEH)
-    SEND_STRING(SS_DOWN(X_LCTL) SS_DOWN(X_LOPT) SS_DOWN(X_LSFT)
-                SS_TAP(X_ENT)
-                SS_UP(X_LCTL) SS_UP(X_LOPT) SS_UP(X_LSFT));
-  }
-  else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
-    // Leader, d, d, s => Types the below string
-    SEND_STRING("https://start.duckduckgo.com\n");
+  if (leader_sequence_one_key(KC_H)) {
+    // Leader, h => emacs C-x
+    tap_code16(LCTL(KC_X));
+  } else if (leader_sequence_one_key(KC_T)) {
+    // Leader, t => emacs C-c
+    tap_code16(LCTL(KC_C));
+  } else if (leader_sequence_one_key(KC_N)) {
+    // Leader, n => emacs M-x
+    tap_code16(LALT(KC_X));
   }
 }
 
@@ -331,7 +289,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NUM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     C(KC_F2),  KC_MEH, KC_HYPR, XXXXXXX, JP_TILD,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+     C(KC_F2),  KC_MEH, KC_HYPR, QK_LEAD, JP_TILD,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -342,7 +300,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_NAV] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                     QK_LEAD, CMD_TAB, KC_HYPR,  KC_MEH, XXXXXXX,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                    CMD_TAB,  QK_LEAD, KC_HYPR,  KC_MEH, XXXXXXX,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
