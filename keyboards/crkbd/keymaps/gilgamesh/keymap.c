@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "features/flow.h"
 #include "features/select_word.h"
 #include "features/layer_lock.h"
+#include "features/achordion.h"
 
 enum crkbd_layers {
     _DVARF,
@@ -38,13 +39,32 @@ enum crkbd_layers {
     _FUN2,
 };
 
-#define NUM MO(_NUM)
-#define NAV MO(_NAV)
-#define SYM MO(_SYM)
-#define EXT MO(_EXT)
-#define MSE MO(_MSE)
-#define FUN1 MO(_FUN1)
-#define FUN2 MO(_FUN2)
+#define NUM TT(_NUM)
+#define NAV TT(_NAV)
+#define SYM TT(_SYM)
+#define EXT TT(_EXT)
+#define MSE TT(_MSE)
+#define FUN1 TT(_FUN1)
+#define FUN2 TT(_FUN2)
+
+// Left-hand home row mods
+#define HCTL_Y LCTL_T(KC_Y)
+#define HCMD_E LGUI_T(KC_E)
+#define HOPT_I LALT_T(KC_I)
+#define HSFT_A LSFT_T(KC_A)
+#define HHYP_O HYPR_T(KC_O)
+#define HMEH_U MEH_T(KC_U)
+
+
+// Right-hand home row mods
+#define HCTL_H RCTL_T(KC_H)
+#define HCMD_T RGUI_T(KC_T)
+#define HOPT_N RALT_T(KC_N)
+#define HSFT_S RSFT_T(KC_S)
+#define HHYP_D HYPR_T(KC_D)
+#define HMEH_R MEH_T(KC_R)
+
+
 
 // super cmd tab
 bool is_cmd_tab_active = false; // ADD this near the beginning of keymap.c
@@ -83,6 +103,10 @@ const uint16_t flow_layers_config[FLOW_LAYERS_COUNT][2] = {
 // macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    {
+    // achordion
+      if (!process_achordion(keycode, record)) { return false; }
+    }
     {
     // flow
         if (!update_flow(keycode, record->event.pressed, record->event.key))
@@ -175,6 +199,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 void matrix_scan_user(void) {
+  // achordion
+  achordion_task();
   // flow
   flow_matrix_scan();
   // layer lock
@@ -207,16 +233,26 @@ void leader_end_user(void) {
 
 // combos
 
-const uint16_t PROGMEM combo_capsword[] = {KC_Y, KC_H, COMBO_END};
-const uint16_t PROGMEM combo_qkboot[] = {JP_QUOT, KC_A, JP_COMM, COMBO_END};
+const uint16_t PROGMEM combo_capsword[] = {HCTL_Y, HCTL_H, COMBO_END};
+const uint16_t PROGMEM combo_qkboot[] = {JP_QUOT, HSFT_A, JP_COMM, COMBO_END};
 const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_G, KC_J, COMBO_END};
-const uint16_t PROGMEM combo_qkeeprom[] = {KC_W, KC_Y, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_qkeeprom[] = {KC_W, HCTL_Y, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_esc[] = {HMEH_U, HHYP_O, COMBO_END};
+const uint16_t PROGMEM combo_tab[] = {JP_DOT, JP_MINS, COMBO_END};
+const uint16_t PROGMEM combo_bksp[] = {HHYP_D, HMEH_R, COMBO_END};
+const uint16_t PROGMEM combo_bkspwd[] = {KC_Q, HHYP_D, COMBO_END};
+const uint16_t PROGMEM combo_ret[] = {KC_B, KC_X, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_capsword, CW_TOGG),
   COMBO(combo_qkboot, QK_BOOT),
   COMBO(combo_qkeeprom, EE_CLR),
   COMBO(combo_qkreboot, QK_RBT),
+  COMBO(combo_esc, KC_ESC),
+  COMBO(combo_tab, KC_TAB),
+  COMBO(combo_bksp, KC_BSPC),
+  COMBO(combo_ret, KC_ENT),
+  COMBO(combo_bkspwd, LOPT(KC_BSPC)),
 };
 
 // caps word
@@ -245,9 +281,11 @@ bool caps_word_press_user(uint16_t keycode) {
 // key overides
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
+const key_override_t ctl_del_bksp_override = ko_make_basic(MOD_MASK_CTRL, KC_BSPC, KC_DEL);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &quots_quotd_override,
+    &ctl_del_bksp_override,
     NULL
 };
 
@@ -256,13 +294,13 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVARF] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
+      JP_QUOT,  HMEH_U,  HHYP_O,    KC_W,    KC_P,                         KC_Q,    KC_V,  HHYP_D,  HMEH_R,    KC_F,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-         KC_A,    KC_I,    KC_E,    KC_Y,    KC_G,                         KC_L,    KC_H,    KC_T,    KC_N,    KC_S,
+       HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       JP_COMM,  JP_DOT, JP_MINS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                  KC_TAB,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  KC_ENT
+                                  SYM,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  EXT
                              //`--------------------------'  `--------------------------'
   ),
   [_DVORAK] = LAYOUT_split_3x5_3(
@@ -295,7 +333,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_TRNS, KC_TRNS,HYPR(KC_B),KC_MPLY,JP_HASH,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 LLOCK,     NUM, XXXXXXX,    KC_BSPC,     SYM,  KC_DEL
+                                 TO(_DVARF),  NUM, TO(_DVARF),    KC_BSPC,     SYM,  KC_DEL
                              //`--------------------------'  `--------------------------'
   ),
   [_NAV] = LAYOUT_split_3x5_3(
@@ -306,7 +344,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
      KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3),XXXXXXX,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_ESC,   EXT,   KC_SPC,      XXXXXXX,     NAV, LLOCK
+                                 KC_ESC,   TO(_DVARF),   TO(_DVARF),      TO(_DVARF),     NAV, TO(_DVARF)
                              //`--------------------------'  `--------------------------'
   ),
   [_SYM] = LAYOUT_split_3x5_3(
@@ -317,7 +355,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, OS_FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 LLOCK, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                 XXXXXXX, TO(_DVARF), TO(_DVARF),   TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
   ),
   [_EXT] = LAYOUT_split_3x5_3(
@@ -328,7 +366,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MRWD,   DFINE,   GTRNS,   GOOGL, KC_MFFD,                      KC_SCRL,     EXT,     MSE, XXXXXXX, KC_PENT,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, LLOCK
+                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), XXXXXXX
                              //`--------------------------'  `--------------------------'
       // afred macro - hyper-B is back 2 seconds in iina when used in emacs
   ),
@@ -340,7 +378,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
   ),
   [_FUN1] = LAYOUT_split_3x5_3(
@@ -351,7 +389,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_QWERTY),                   XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
   ),
   [_FUN2] = LAYOUT_split_3x5_3(
@@ -362,12 +400,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        QK_RBT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
   )
 };
 
-
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+  return achordion_opposite_hands(tap_hold_record, other_record);
+}
 
 // OLED STUFF
 

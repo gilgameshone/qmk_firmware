@@ -12,3 +12,4 @@ SRC += features/select_word.c
 SRC += features/layer_lock.c
 LEADER_ENABLE = yes
 EXTRAKEY_ENABLE = yes
+SRC += features/achordion.c

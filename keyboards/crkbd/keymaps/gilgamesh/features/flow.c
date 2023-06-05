@@ -30,7 +30,7 @@ typedef enum {
 #ifdef FLOW_ONESHOT_TERM
 const int g_flow_oneshot_term = FLOW_ONESHOT_TERM;
 #else
-const int g_flow_oneshot_term = 6000;
+const int g_flow_oneshot_term = 1000;
 #endif
 
 #ifdef FLOW_ONESHOT_WAIT_TERM
