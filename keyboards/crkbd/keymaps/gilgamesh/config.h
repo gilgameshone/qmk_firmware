@@ -52,15 +52,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
-#define COMBO_COUNT 9
+#define COMBO_COUNT 4
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
 #define COMBO_ONLY_FROM_LAYER 0
-#define TAPPING_TOGGLE 1
-#define FLOW_COUNT 8
-#define FLOW_LAYERS_COUNT 1
+#define TAPPING_TOGGLE 2
 #define LAYER_LOCK_IDLE_TIMEOUT 60000
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 1000
