@@ -51,6 +51,8 @@ enum crkbd_layers {
 #define HSFT_A LSFT_T(KC_A)
 #define HHYP_O KC_O
 #define HMEH_U KC_U
+#define HHYP_MINS HYPR_T(JP_MINS)
+#define HMEH_DOT MEH_T(JP_DOT)
 
 
 // Right-hand home row mods
@@ -60,6 +62,8 @@ enum crkbd_layers {
 #define HSFT_S RSFT_T(KC_S)
 #define HHYP_D KC_D
 #define HMEH_R KC_R
+#define HHYP_B HYPR_T(KC_B)
+#define HMEH_X MEH_T(KC_X)
 
 
 
@@ -243,10 +247,12 @@ bool caps_word_press_user(uint16_t keycode) {
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 const key_override_t ctl_del_bksp_override = ko_make_basic(MOD_MASK_CTRL, KC_BSPC, KC_DEL);
+const key_override_t ctl_quo_scln_override = ko_make_basic(MOD_MASK_CTRL, JP_QUOT, C(JP_SCLN));
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &quots_quotd_override,
     &ctl_del_bksp_override,
+    &ctl_quo_scln_override,
     NULL
 };
 
@@ -259,51 +265,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      JP_COMM,  JP_DOT, JP_MINS,    KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,   KC_X,    KC_Z,
+      JP_COMM,HMEH_DOT,HHYP_MINS,   KC_C,    KC_J,                         KC_K,    KC_M,  HHYP_B,  HMEH_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                   SYM,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  EXT
                              //`--------------------------'  `--------------------------'
   ),
   [_NUM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     C(KC_F2),  KC_MEH, KC_HYPR, QK_LEAD, JP_TILD,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+     C(KC_F2),  KC_MEH, KC_HYPR, QK_LEAD, _______,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_PERC,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, _______,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_TRNS, KC_TRNS,HYPR(KC_B),KC_MPLY,JP_HASH,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
+      _______, _______, _______, _______ ,_______,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 TO(_DVARF),  NUM, TO(_DVARF), TO(_DVARF),     SYM, TO(_DVARF)
+                                 TO(_DVARF),  NUM, TO(_DVARF), JP_HASH, JP_PERC, JP_TILD
                              //`--------------------------'  `--------------------------'
   ),
   [_NAV] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                    CMD_TAB,  QK_LEAD, KC_HYPR,  KC_MEH,   LLOCK,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                    XXXXXXX,  QK_LEAD, KC_HYPR,  KC_MEH,   LLOCK,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3),XXXXXXX,S(C(KC_TAB)),C(KC_TAB),XXXXXXX,
+     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3), KC_MPRV,S(C(KC_TAB)),C(KC_TAB),KC_MNXT,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_ESC,   TO(_DVARF), TO(_DVARF),      TO(_DVARF),     NAV, TO(_DVARF)
+                                 KC_ESC,   TO(_DVARF), TO(_DVARF), TO(_DVARF), NAV, TO(_DVARF)
                              //`--------------------------'  `--------------------------'
   ),
   [_SYM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH,  KC_HYPR, XXXXXXX, JP_GRV,                       JP_YEN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
+      JP_ZKHK, JP_MHEN, JP_HENK, JP_KANA, XXXXXXX,                       JP_YEN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,  JP_DLR,                      JP_SCLN, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_BSLS,                      JP_SCLN, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX,    FUN2,    FUN1, XXXXXXX, JP_EXLM,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
+      JP_EISU,    FUN2,    FUN1, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, TO(_DVARF), TO(_DVARF),   TO(_DVARF), TO(_DVARF), TO(_DVARF)
+                                 XXXXXXX, TO(_DVARF), TO(_DVARF),   JP_EXLM, JP_DLR, JP_GRV
                              //`--------------------------'  `--------------------------'
   ),
   [_EXT] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      KC_CAPS, KC_LNG2, KC_LNG1, KC_MPRV, KC_MNXT,                      KC_LPAD, KC_MCTL, KC_HYPR,  KC_MEH, KC_EJCT,
+      KC_CAPS, KC_LNG2, KC_LNG1, CMD_TAB, XXXXXXX,                      KC_LPAD, KC_MCTL, XXXXXXX, XXXXXXX, KC_EJCT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),                    KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_MRWD,   DFINE,   GTRNS,   GOOGL, KC_MFFD,                      KC_SCRL,     EXT,     MSE, XXXXXXX, KC_PENT,
+      JP_CAPS,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      KC_SCRL, XXXXXXX,     MSE, XXXXXXX, KC_PENT,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), XXXXXXX
                              //`--------------------------'  `--------------------------'
@@ -311,18 +317,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_MSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,  KC_HYPR,  KC_MEH, XXXXXXX,
+      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_APP,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,                     KC_SLEP,  KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE,  KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
   ),
   [_FUN1] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX,  KC_MEH, KC_HYPR, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX,                       KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -333,7 +339,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_FUN2] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      QK_BOOT,  KC_MEH, KC_HYPR, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
+      QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX,                      XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|

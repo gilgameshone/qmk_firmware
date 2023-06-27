@@ -24,73 +24,73 @@ Modifier keys are on the same side as the layer key (`NAV` or `NUM`) on the home
 
 ## NUM
 
-Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The `SYM` layer is prefered in favour of the shifted number keys. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys. `Mnu` send focus to the menu bar. There is also a `Pause` key and a macro to rewind audio and return to main window. 
+Lower contains a number pad that uses the typical number row keys (not the actual numpad keys). The `SYM` layer is prefered in favour of the shifted number keys. `XXX` indicates key held to access layer. Thumb keys here change to `Backspace` and `Delete`. Extra symbols for maths-type situations are added on 'wrong' hand, and `comma` and `dot` from `Base` are visible here too. The symbols can be shifted but the `SYM` layer should reduce little finger fatigue. `layer lock` keys are next to the main `MO` layer keys. `Mnu` sends focus to the menu bar. There is also a `Pause` key and a macro to rewind audio and return to main window. 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Mnu|Meh|Hyp|Ldr| ~ |   | + | 7 | 8 | 9 | * |
-|Sft|Opt|Cmd|Ctl| % |   | - | 4 | 5 | 6 | / |
-| , | . |Rwd|Pau| # |   | = | 1 | 2 | 3 | 0 |
-|___|___|LLk|XXX|...|   |BkS|SYM|DEL|___|___|
+|Mnu|   |   |Ldr|   |   | + | 7 | 8 | 9 | * |
+|Sft|Opt|Cmd|Ctl|   |   | - | 4 | 5 | 6 | / |
+| , | . |   |   |   |   | = | 1 | 2 | 3 | 0 |
+|___|___|   |NUM|   |   | # | % | ~ |___|___|
 
 ## NAV
 
-The Navigation layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line. `word forward` will move the cursor right without selecting. The `leader key` gives access to another type of modifier, and is currently combined with homerow keys to give leader keys for Emacs: `C-x`, `C-c`, and `M-x`. `Super Command Tab` sends `Command` `Tab`, then holds `Command` and sends another `Tab` on repeat. There are also tab switching buttons, `Tab Forward` and `Tab Backward`.
+The Navigation layer includes navigation and copy and paste keys. The navigation keys are on the left side of the keyboard because the most frequently used arrow keys are down and right (for navigating directories and documents that typically start top left), placing them under stronger fingers on the home row. Copy and paste are also under stronger fingers. This layer also includes Mac screen screen options. `select word` here will highlight the word under the cursor and select it. Press again to highlight the ajacent word too. Hold shift and press `select word` to select an entire line. `word forward` will move the cursor right without selecting. The `leader key` gives access to another type of modifier, and is currently combined with homerow keys to give leader keys for Emacs: `C-x`, `C-c`, and `M-x`.  There are also tab switching buttons, `Tab Forward` and `Tab Backward`, and `Previous` and `Next`.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Und|Cut|Cpy|Pst|Rdo|   |CTb|Ldr|Hyp|Meh|   | 
+|Und|Cut|Cpy|Pst|Rdo|   |   |Ldr|   |   |LLk| 
 |←  |↑  |↓  |→  |SWd|   |SSS|Ctl|Cmd|Opt|Sft| 
-|Hme|PgD|PgU|End|WdF|   |SSA|   |TBw|Tfw|   |
-|___|___|ESC|EXT|SPC|   |...|XXX|LLk|___|___|
+|Hme|PgD|PgU|End|WdF|   |SSA|Prv|TBw|Tfw|Nxt|
+|___|___|ESC|   |   |   |   |NAV|   |___|___|
 
 ## SYM
 
-The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession. Characters here began as shifted versions of `NUM` but are slowly being optimised. This layer is vital for home row access to brackets. The remaining symbols are on the stuffed into the 'wrong' side of the layer.
+The Symbol layer is accessed momentarily by holding left then right thumb layer keys in succession. Characters here began as shifted versions of `NUM` but are slowly being optimised. This layer is vital for home row access to brackets. The remaining symbols are on the stuffed into the 'wrong' side of the layer. For Windows, `Zenkaku/Hankaku`, `Muhenkan`, `Henkan`, `Kana` and `Eisu` keys are here. 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   | ` |   | ¥ | [ | ] | : | ^ |
-|Sft|Opt|Cmd|Ctl| $ |   | ; | ( | ) | & | ? |
-|   |FN2|FN1|XXX| ! |   | \|| { | } | @ | _ |
-|___|___|LLk|XXX|...|   |...|XXX|...|___|___|
+|ZHk|MHn|Hnk|Kan|   |   | ¥ | [ | ] | : | ^ |
+|Sft|Opt|Cmd|Ctl|   |   | ; | ( | ) | & | ? |
+|Eis|FN2|FN1|   |   |   | \|| { | } | @ | _ |
+|___|___|SYM|   |   |   | ! | $ | ` |___|___|
 
 ## EXT
 
-The Extend layer is to place miscellaneous keys on the home row, notably Play/Pause. It is accessed like `SYM` but mirrored. 
-It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition. This layer also has `Launch Pad`, `Scroll Lock`, and `Pause`. 
+The Extend layer is to place miscellaneous keys on the home row, notably Play/Pause. 
+It also features macro keys that use Alfred to either: Google a term, translate it, or search for the definition. There is also a macro to rewind the media player slightly. This layer also has `Launch Pad`, `Scroll Lock`, and `Pause`. `Super Command Tab` sends `Command` `Tab`, then holds `Command` and sends another `Tab` on repeat. `Exposé`, `Eject`, `Shifted Eisu` and `Enter` keys are here too. 
 
 ### Caps Word
 The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `Caps Word` that is enabled by pressing both home index finger keys on the Base layer (`Y` and `H`) and automatically turns off on space or other keypress. 
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Cps|Len|Ljp|Prv|Nxt|   |Lpd|   |Hyp|Meh|Ejt| 
-|Mut|VUp|VDn|Ply|   |   |SCL|Ctl|Cmd|Opt|Sft| 
-|Bkw|Dfe|Gtr|GoG|Fwd|   |PSE|XXX|MSE|   |Ent|
-|___|___|...|XXX|...|   |...|XXX|LLk|___|___|
+|Cps|Len|Ljp|CmT|   |   |Lpd|Exp|   |   |Ejt| 
+|Mut|VUp|VDn|Ply|RwB|   |SCL|Ctl|Cmd|Opt|Sft| 
+|SEi|Dfe|Gtr|GoG|   |   |PSE|   |MSE|   |Ent|
+|___|___|   |   |   |   |   |   |EXT|___|___|
 
 ## MSE
 
-The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys, and mouse buttons. The power, sleep, and wake keys are in a contorted position to avoid accidental press. 
+The rarely used Mouse layer has mouse direction keys, mouse wheel direction keys, and mouse buttons. The power, sleep, and wake keys are in a contorted position to avoid accidental press. `Rewind` and `Fast-forward` are in the same place as `Next` and `Previous` are in `EXT`.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |BT2|BT2|BT3|   |   |PWR|   |Hyp|Meh|   |
+|   |BT2|BT2|BT3|   |   |PWR|   |   |   |App|
 |MLT|MUP|MDN|MRT|   |   |SLP|Ctl|Cmd|Opt|Sft|
-|WLT|WUP|WDN|WRT|   |   |WKE|EXT|XXX|   |   |
-|___|___|...|...|...|   |...|XXX|...|___|___|
+|WLT|WUP|WDN|WRT|   |   |WKE|RWD|MSE|   |FFD|
+|___|___|   |   |   |   |   |   |   |___|___|
 
 ## FN1
 
-Function keys are rarely used on Mac but here for prosperity. Base layer switches and One Shot Toggle keys are in contorted positions to avoid accidental press. This layer also has `Print Screen` and `Num Lock`.
+Function keys are rarely used on Mac but here for prosperity. Base layer switch is in an contorted position to avoid accidental press. This layer also has `Print Screen` and `Num Lock`.
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|   |Meh|Hyp|   |Dvarf|    |PRS|F9 |F10|F11|F12|
-|Sft|Opt|Cmd|Ctl|Dvorak|   |NUM|F5 | F6| F7| F8|
-|OSTOGG|FN2|XXX|SYM|Qwerty||   |F1 | F2| F3| F4|
-|___|___|...|XXX|...|   |...|...|...|___|___|
+|   |   |   |   |Dvf|   |PRS|F9 |F10|F11|F12|
+|Sft|Opt|Cmd|Ctl|   |   |NUM|F5 | F6| F7| F8|
+|   |FN2|   |   |   |   |   |F1 | F2| F3| F4|
+|___|___|   |   |   |   |   |   |   |___|___|
 
 ## FN2
 
@@ -98,10 +98,10 @@ Who needs function keys up to 24? Absolutely nobody. `QMK Bootloader` and `QMK R
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|QBT|Meh|Hyp|   |   |   |   |F21|F22|F23|F24|
+|QBT|   |   |   |   |   |   |F21|F22|F23|F24|
 |Sft|Opt|Cmd|Ctl|   |   |   |F17|F18|F19|F20|
-|QRB|XXX|FN1|SYM|   |   |   |F13|F14|F15|F16|
-|___|___|...|XXX|...|   |...|...|...|___|___|
+|QRB|FN2|FN1|   |   |   |   |F13|F14|F15|F16|
+|___|___|   |   |   |   |   |   |   |___|___|
 
 QMK Bootloader can also be accessed via triple vertical combo of outer pinky keys, Reboot for QMK by triple vertical combo of the inner most index finger keys, and clear EEprom via triple vertical combo of index finger home positions. These make it easier to troubleshoot and flash each side.
 
