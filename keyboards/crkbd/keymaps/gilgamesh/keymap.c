@@ -34,6 +34,14 @@ enum crkbd_layers {
     _MSE,
     _FUN1,
     _FUN2,
+    _DVARF_WIN,
+    _NUM_WIN,
+    _NAV_WIN,
+    _SYM_WIN,
+    _EXT_WIN,
+    _MSE_WIN,
+    _FUN1_WIN,
+    _FUN2_WIN,
 };
 
 #define NUM LT(_NUM,KC_DEL)
@@ -53,6 +61,7 @@ enum crkbd_layers {
 #define HMEH_U KC_U
 #define HHYP_MINS HYPR_T(JP_MINS)
 #define HMEH_DOT MEH_T(JP_DOT)
+#define HSYM_C LT(_SYM,KC_C)
 
 
 // Right-hand home row mods
@@ -64,12 +73,18 @@ enum crkbd_layers {
 #define HMEH_R KC_R
 #define HHYP_B HYPR_T(KC_B)
 #define HMEH_X MEH_T(KC_X)
+#define HEXT_M LT(_EXT,KC_M)
 
 
 
 // super cmd tab
 bool is_cmd_tab_active = false; // ADD this near the beginning of keymap.c
 uint16_t cmd_tab_timer = 0;     // we will be using them soon.
+
+
+// super alt tab
+bool is_alt_tab_active = false; // ADD this near the beginning of keymap.c
+uint16_t alt_tab_timer = 0;     // we will be using them soon.
 
 
 enum custom_keycodes {
@@ -79,6 +94,7 @@ enum custom_keycodes {
     SELWORD,
     LLOCK,
     CMD_TAB,
+    ALT_TAB,
 };
 
 // macros
@@ -104,6 +120,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (!is_cmd_tab_active) {
             is_cmd_tab_active = true;
             register_code(KC_LCMD);
+          }
+          cmd_tab_timer = timer_read();
+          register_code(KC_TAB);
+        } else {
+          unregister_code(KC_TAB);
+        }
+        break;
+      }
+    }
+    // super alt tab
+    {
+      switch (keycode) { // This will do most of the grunt work with the keycodes.
+      case ALT_TAB:
+        if (record->event.pressed) {
+          if (!is_alt_tab_active) {
+            is_alt_tab_active = true;
+            register_code(KC_LALT);
           }
           cmd_tab_timer = timer_read();
           register_code(KC_TAB);
@@ -211,6 +244,11 @@ const uint16_t PROGMEM combo_capsword[] = {HCTL_Y, HCTL_H, COMBO_END};
 const uint16_t PROGMEM combo_qkboot[] = {JP_QUOT, HSFT_A, JP_COMM, COMBO_END};
 const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_G, KC_J, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_W, HCTL_Y, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_mac[] = {HHYP_MINS, HCMD_E, HHYP_O, COMBO_END};
+const uint16_t PROGMEM combo_win[] = {HMEH_DOT, HOPT_I, HMEH_U, COMBO_END};
+const uint16_t PROGMEM combo_ret[] = {HCMD_E, HCMD_T, COMBO_END};
+const uint16_t PROGMEM combo_tab[] = {HHYP_O, HHYP_D, COMBO_END};
+const uint16_t PROGMEM combo_esc[] = {HMEH_U, HHYP_O, COMBO_END};
 
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -218,6 +256,11 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_qkboot, QK_BOOT),
   COMBO(combo_qkeeprom, EE_CLR),
   COMBO(combo_qkreboot, QK_RBT),
+  COMBO(combo_ret, KC_ENT),
+  COMBO(combo_tab, KC_TAB),
+  COMBO(combo_esc, KC_ESC),
+  COMBO(combo_mac, DF(_DVARF)),
+  COMBO(combo_win, DF(_DVARF_WIN)),
 };
 
 // caps word
@@ -248,11 +291,31 @@ bool caps_word_press_user(uint16_t keycode) {
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 const key_override_t ctl_del_bksp_override = ko_make_basic(MOD_MASK_CTRL, KC_BSPC, KC_DEL);
 const key_override_t ctl_quo_scln_override = ko_make_basic(MOD_MASK_CTRL, JP_QUOT, C(JP_SCLN));
+const key_override_t one_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_1, KC_P1);
+const key_override_t two_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, KC_P2);
+const key_override_t three_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_3, KC_P3);
+const key_override_t four_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_4, KC_P4);
+const key_override_t five_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_5, KC_P5);
+const key_override_t six_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_6, KC_P6);
+const key_override_t seven_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, KC_P7);
+const key_override_t eight_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_8, KC_P8);
+const key_override_t nine_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_9, KC_P9);
+const key_override_t zero_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, KC_P0);
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &quots_quotd_override,
     &ctl_del_bksp_override,
     &ctl_quo_scln_override,
+    &one_numpad_override,
+    &two_numpad_override,
+    &three_numpad_override,
+    &four_numpad_override,
+    &five_numpad_override,
+    &six_numpad_override,
+    &seven_numpad_override,
+    &eight_numpad_override,
+    &nine_numpad_override,
+    &zero_numpad_override,
     NULL
 };
 
@@ -265,22 +328,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      JP_COMM,HMEH_DOT,HHYP_MINS,   KC_C,    KC_J,                         KC_K,    KC_M,  HHYP_B,  HMEH_X,    KC_Z,
+      JP_COMM,HMEH_DOT,HHYP_MINS, HSYM_C,    KC_J,                         KC_K,  HEXT_M,  HHYP_B,  HMEH_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                   SYM,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  EXT
                              //`--------------------------'  `--------------------------'
-  ),
+                                ),
+      [_DVARF_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      JP_QUOT,  HMEH_U,  HHYP_O,    KC_W,    KC_P,                         KC_Q,    KC_V,  HHYP_D,  HMEH_R,    KC_F,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+       HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      JP_COMM,HMEH_DOT,HHYP_MINS, LT(_SYM_WIN,KC_C),    KC_J,         KC_K,  LT(_EXT_WIN,KC_M),  HHYP_B,  HMEH_X,    KC_Z,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+   LT(_SYM_WIN,KC_TAB),     LT(_NUM_WIN,KC_DEL),  KC_SPC,OSM(MOD_LSFT),   LT(_NAV_WIN,KC_BSPC),  LT(_EXT_WIN,KC_ENT)
+                             //`--------------------------'  `--------------------------'
+                                ),
   [_NUM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
      C(KC_F2),  KC_MEH, KC_HYPR, QK_LEAD, _______,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, _______,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      _______, _______, _______, _______ ,_______,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
+     _______, _______, _______, _______ ,_______,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  TO(_DVARF),  NUM, TO(_DVARF), JP_HASH, JP_PERC, JP_TILD
                              //`--------------------------'  `--------------------------'
-  ),
+                              ),
+  [_NUM_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+     A(KC_F2),  KC_MEH, KC_HYPR, QK_LEAD, _______,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, _______,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      _______, _______, _______, _______ ,_______,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+                                 TO(_DVARF_WIN), XXXXXXX, TO(_DVARF_WIN), JP_HASH, JP_PERC, JP_TILD
+                             //`--------------------------'  `--------------------------'
+                              ),
   [_NAV] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                    XXXXXXX,  QK_LEAD, KC_HYPR,  KC_MEH,   LLOCK,
@@ -291,7 +376,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_ESC,   TO(_DVARF), TO(_DVARF), TO(_DVARF), NAV, TO(_DVARF)
                              //`--------------------------'  `--------------------------'
-  ),
+                              ),
+      [_NAV_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      C(KC_Z), C(KC_X), C(KC_C), C(KC_V), C(KC_Y),                    XXXXXXX,  QK_LEAD, KC_HYPR,  KC_MEH,   LLOCK,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_S), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   G(KC_PSCR), KC_MPRV,S(C(KC_TAB)),C(KC_TAB),KC_MNXT,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+                                 KC_ESC,   TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN), XXXXXXX, TO(_DVARF_WIN)
+                             //`--------------------------'  `--------------------------'
+                              ),
   [_SYM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       JP_ZKHK, JP_MHEN, JP_HENK, JP_KANA, XXXXXXX,                       JP_YEN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
@@ -302,7 +398,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  XXXXXXX, TO(_DVARF), TO(_DVARF),   JP_EXLM, JP_DLR, JP_GRV
                              //`--------------------------'  `--------------------------'
-  ),
+                              ),
+      [_SYM_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      JP_ZKHK, JP_MHEN, JP_HENK, JP_KANA, XXXXXXX,                       JP_YEN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_BSLS,                      JP_SCLN, JP_LPRN, JP_RPRN, JP_AMPR, JP_QUES,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      JP_EISU, MO(_FUN2_WIN), MO(_FUN1_WIN), XXXXXXX, XXXXXXX,          JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+                                 XXXXXXX, TO(_DVARF), TO(_DVARF),   JP_EXLM, JP_DLR, JP_GRV
+                             //`--------------------------'  `--------------------------'
+                              ),
   [_EXT] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       KC_CAPS, KC_LNG2, KC_LNG1, CMD_TAB, XXXXXXX,                      KC_LPAD, KC_MCTL, XXXXXXX, XXXXXXX, KC_EJCT,
@@ -314,7 +421,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), XXXXXXX
                              //`--------------------------'  `--------------------------'
       // afred macro - hyper-B is back 2 seconds in iina when used in emacs
-  ),
+                              ),
+      [_EXT_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      KC_CAPS, KC_LNG2, KC_LNG1, ALT_TAB, XXXXXXX,                      KC_ASST, KC_MCTL, XXXXXXX, XXXXXXX, KC_CPNL,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),                    KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      JP_CAPS,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      KC_SCRL, XXXXXXX, MO(_MSE_WIN), XXXXXXX, KC_PENT,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+            TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN),    TO(_DVARF_WIN), TO(_DVARF_WIN), XXXXXXX
+                             //`--------------------------'  `--------------------------'
+                              ),
   [_MSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_APP,
@@ -325,18 +443,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
-  ),
+                              ),
+      [_MSE_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_APP,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,                     KC_SLEP,  KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE,  KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+            TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN),    TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN)
+                             //`--------------------------'  `--------------------------'
+                              ),
   [_FUN1] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX,                       KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_DVARF_WIN),                 KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
-  ),
+                               ),
+      [_FUN1_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_DVARF_WIN),                 KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+             TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN),    TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN)
+                             //`--------------------------'  `--------------------------'
+                               ),
   [_FUN2] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
@@ -347,7 +487,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
                              //`--------------------------'  `--------------------------'
-  )
+                               ),
+      [_FUN2_WIN] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX,                      XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+       QK_RBT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+              TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN),    TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN)
+                             //`--------------------------'  `--------------------------'
+                               )
 };
 
 bool achordion_chord(uint16_t tap_hold_keycode,
@@ -380,14 +531,22 @@ void oled_render_layer_state(void) {
       oled_write_ln_P(PSTR("CAPS WORD"), false);
       return;
   }
-  DISPLAY_LAYER_NAME(_FUN2, "FUN 2");
-  DISPLAY_LAYER_NAME(_FUN1, "FUN 1");
-  DISPLAY_LAYER_NAME(_MSE, "MSE");
-  DISPLAY_LAYER_NAME(_EXT, "EXT");
-  DISPLAY_LAYER_NAME(_SYM, "SYM");
-  DISPLAY_LAYER_NAME(_NAV, "NAV");
-  DISPLAY_LAYER_NAME(_NUM, "NUM");
-  DISPLAY_LAYER_NAME(_DVARF, "DVARF");
+  DISPLAY_LAYER_NAME(_FUN2, "FUN 2 MAC");
+  DISPLAY_LAYER_NAME(_FUN1, "FUN 1 MAC");
+  DISPLAY_LAYER_NAME(_MSE, "MSE MAC");
+  DISPLAY_LAYER_NAME(_EXT, "EXT MAC");
+  DISPLAY_LAYER_NAME(_SYM, "SYM MAC");
+  DISPLAY_LAYER_NAME(_NAV, "NAV MAC");
+  DISPLAY_LAYER_NAME(_NUM, "NUM MAC");
+  DISPLAY_LAYER_NAME(_DVARF, "DVARF MAC");
+  DISPLAY_LAYER_NAME(_FUN2_WIN, "FUN 2 WIN");
+  DISPLAY_LAYER_NAME(_FUN1_WIN, "FUN 1 WIN");
+  DISPLAY_LAYER_NAME(_MSE_WIN, "MSE WIN");
+  DISPLAY_LAYER_NAME(_EXT_WIN, "EXT WIN");
+  DISPLAY_LAYER_NAME(_SYM_WIN, "SYM WIN");
+  DISPLAY_LAYER_NAME(_NAV_WIN, "NAV WIN");
+  DISPLAY_LAYER_NAME(_NUM_WIN, "NUM WIN");
+  DISPLAY_LAYER_NAME(_DVARF_WIN, "DVARF WIN");
 }
 
 
