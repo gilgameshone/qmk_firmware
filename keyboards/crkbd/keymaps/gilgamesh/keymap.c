@@ -26,14 +26,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "features/achordion.h"
 
 enum crkbd_layers {
-    _DVARF,
-    _NUM,
-    _NAV,
-    _SYM,
-    _EXT,
-    _MSE,
-    _FUN1,
-    _FUN2,
+    _DVARF_MAC,
+    _NUM_MAC,
+    _NAV_MAC,
+    _SYM_MAC,
+    _EXT_MAC,
+    _MSE_MAC,
+    _FUN1_MAC,
+    _FUN2_MAC,
     _DVARF_WIN,
     _NUM_WIN,
     _NAV_WIN,
@@ -42,15 +42,25 @@ enum crkbd_layers {
     _MSE_WIN,
     _FUN1_WIN,
     _FUN2_WIN,
+    _TRON_MAC_BASE,
+    _TRON_MAC_RED,
+    _TRON_MAC_BLUE,
+    _TRON_MAC_PURPLE,
 };
 
-#define NUM LT(_NUM,KC_DEL)
-#define NAV LT(_NAV,KC_BSPC)
-#define SYM LT(_SYM,KC_TAB)
-#define EXT LT(_EXT,KC_ENT)
-#define MSE MO(_MSE)
-#define FUN1 MO(_FUN1)
-#define FUN2 MO(_FUN2)
+#define NUM LT(_NUM_MAC,KC_DEL)
+#define NAV LT(_NAV_MAC,KC_BSPC)
+#define SYM LT(_SYM_MAC,KC_TAB)
+#define EXT LT(_EXT_MAC,KC_ENT)
+#define MSE MO(_MSE_MAC)
+#define FUN1 MO(_FUN1_MAC)
+#define FUN2 MO(_FUN2_MAC)
+
+// tron mod-tap
+#define TRONNAV LT(M_NAV,KC_BSPC)
+#define TRONNUM LT(M_NUM,KC_DEL)
+#define TRONSYM LT(M_SYM,KC_TAB)
+#define TRONEXT LT(M_EXT,KC_ENT)
 
 // Left-hand home row mods
 #define HCTL_Y LCTL_T(KC_Y)
@@ -61,7 +71,7 @@ enum crkbd_layers {
 #define HMEH_U KC_U
 #define HHYP_MINS HYPR_T(JP_MINS)
 #define HMEH_DOT MEH_T(JP_DOT)
-#define HSYM_C LT(_SYM,KC_C)
+#define HSYM_C LT(_SYM_MAC,KC_C)
 
 
 // Right-hand home row mods
@@ -73,8 +83,69 @@ enum crkbd_layers {
 #define HMEH_R KC_R
 #define HHYP_B HYPR_T(KC_B)
 #define HMEH_X MEH_T(KC_X)
-#define HEXT_M LT(_EXT,KC_M)
+#define HEXT_M LT(_EXT_MAC,KC_M)
 
+//tron japanese laid over JIS kana
+
+#define TJ_RA JP_O
+#define TJ_RU JP_DOT
+#define TJ_KO JP_B
+#define TJ_HA JP_F
+#define TJ_XYO S(JP_9)
+#define TJ_KI JP_G
+#define TJ_NO JP_K
+#define TJ_KU JP_H
+#define TJ_A JP_3
+#define TJ_RE JP_SCLN
+#define TJ_TA JP_Q
+#define TJ_TO JP_S
+#define TJ_KA JP_T
+#define TJ_TE JP_W
+#define TJ_MO JP_M
+#define TJ_WO S(JP_0)
+#define TJ_I JP_E
+#define TJ_U JP_4
+#define TJ_SHI JP_D
+#define TJ_NN JP_Y
+#define TJ_MA JP_J
+#define TJ_RI JP_L
+#define TJ_NI JP_I
+#define TJ_SA JP_X
+#define TJ_NA JP_U
+#define TJ_SU JP_R
+#define TJ_TSU JP_Z
+#define TJ_DOUTEN S(JP_COMM)
+#define TJ_KUTEN S(JP_DOT)
+#define TJ_XTSU S(JP_Z)
+#define TJ_HI JP_V
+#define TJ_SO JP_C
+#define TJ_NAKAGURO S(JP_SLSH)
+#define TJ_XYA S(JP_7)
+#define TJ_HO JP_MINS
+#define TJ_E JP_5
+#define TJ_KE JP_COLN
+#define TJ_ME JP_SLSH
+#define TJ_MU JP_RBRC
+#define TJ_RO JP_UNDS
+#define TJ_NU JP_1
+#define TJ_NE JP_COMM
+#define TJ_XYU S(JP_8)
+#define TJ_YO JP_9
+#define TJ_FU JP_2
+#define TJ_O JP_6
+#define TJ_CHI JP_A
+#define TJ_CHOUONNPU JP_YEN
+#define TJ_MI JP_N
+#define TJ_YA JP_7
+#define TJ_XE S(JP_5)
+#define TJ_XO S(JP_6)
+#define TJ_SE JP_P
+#define TJ_YU JP_8
+#define TJ_HE JP_CIRC
+#define TJ_WA JP_0
+#define TJ_XI S(JP_E)
+#define TJ_XA S(JP_3)
+#define TJ_XU S(JP_4)
 
 
 // super cmd tab
@@ -95,6 +166,40 @@ enum custom_keycodes {
     LLOCK,
     CMD_TAB,
     ALT_TAB,
+    M_TRON,
+    NOTTRONWIN,
+    M_DVARF_MAC,
+    M_NUM,
+    M_SYM,
+    M_NAV,
+    M_EXT,
+    TJ_GI,
+    TJ_GE,
+    TJ_GU,
+    TJ_DI,
+    TJ_DZI,
+    TJ_VU,
+    TJ_JI,
+    TJ_ZU,
+    TJ_DZU,
+    TJ_BI,
+    TJ_ZO,
+    TJ_GO,
+    TJ_BA,
+    TJ_BO,
+    TJ_DA,
+    TJ_DO,
+    TJ_GA,
+    TJ_DE,
+    TJ_BU,
+    TJ_ZE,
+    TJ_ZA,
+    TJ_BE,
+    TJ_PA,
+    TJ_PI,
+    TJ_PU,
+    TJ_PE,
+    TJ_PO,
 };
 
 // macros
@@ -142,6 +247,413 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           register_code(KC_TAB);
         } else {
           unregister_code(KC_TAB);
+        }
+        break;
+      }
+    }
+    // TRON macro
+    {
+      switch (keycode) {
+      case M_TRON:
+        if (record->event.pressed) {
+          // when keycode tron is pressed
+          tap_code(KC_LNG1);  // press capslock to swap lang
+          layer_invert(_TRON_MAC_BASE);  // layer toggle tron
+        } else {
+          // when keycode tron is released
+        }
+                wait_ms(100);
+        break;
+      }
+    }
+    // DVARF_MAC macro
+    {
+      switch (keycode) {
+      case M_DVARF_MAC:
+        if (record->event.pressed) {
+          tap_code(KC_LNG2);  // press capslock to swap lang
+          layer_invert(_DVARF_MAC);  // layer toggle NOTTRONMAC
+        } else {
+        }
+        break;
+      }
+    }
+        // NUM macro
+    {
+      switch (keycode) {
+      case M_NUM:
+        if (record->event.pressed) {
+          // when keycode M_NUM is pressed
+          tap_code(KC_LNG2);  // press capslock to swap lang
+          layer_move(_NUM_MAC);  // layer toggle M_NUM
+         } else {
+          layer_invert(_TRON_MAC_BASE); // when keycode M_NUM is released
+         }
+        break;
+      }
+    }
+        // SYM macro
+    {
+      switch (keycode) {
+      case M_SYM:
+        if (record->event.pressed) {
+          // when keycode NOTTRONSYM is pressed
+          tap_code(KC_LNG2);  // press capslock to swap lang
+          layer_on(_SYM_MAC);  // layer toggle NOTTRONSYM
+        } else {
+          // when keycode NOTTRONSYM is released
+         }
+        break;
+      }
+    }
+            // EXT macro
+    {
+      switch (keycode) {
+      case M_EXT:
+        if (record->event.pressed) {
+          tap_code(KC_LNG2);  // press capslock to swap lang
+          layer_on(_EXT_MAC);  // layer toggle NOTTRONSYM
+        } else {
+               }
+        break;
+      }
+    }
+
+    // TJ_GI,
+    {
+      switch (keycode) {
+      case TJ_GI:
+        if (record->event.pressed) {
+          // when keycode TJ_GI is pressed
+          SEND_STRING(SS_TAP(X_G));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_GE,
+          {
+      switch (keycode) {
+      case TJ_GE:
+        if (record->event.pressed) {
+          tap_code(KC_QUOT);
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_GU,
+               {
+      switch (keycode) {
+      case TJ_GU:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_H));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_DZI,
+                     {
+      switch (keycode) {
+      case TJ_DZI:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_A));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_VU,
+                     {
+      switch (keycode) {
+      case TJ_VU:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_4));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_JI,
+                     {
+      switch (keycode) {
+      case TJ_JI:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_D));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_ZU,
+                     {
+      switch (keycode) {
+      case TJ_ZU:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_R));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_DZU,
+                     {
+      switch (keycode) {
+      case TJ_DZU:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_Z));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_BI,
+                     {
+      switch (keycode) {
+      case TJ_BI:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_V));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_ZO,
+                     {
+      switch (keycode) {
+      case TJ_ZO:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_C));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_GO,
+                     {
+      switch (keycode) {
+      case TJ_GO:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_B));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_BA,
+                     {
+      switch (keycode) {
+      case TJ_BA:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_F));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_BO,
+                     {
+      switch (keycode) {
+      case TJ_BO:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_MINS));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_DA,
+                     {
+      switch (keycode) {
+      case TJ_DA:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_Q));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_DO,
+                     {
+      switch (keycode) {
+      case TJ_DO:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_S));
+       tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_GA,
+                     {
+      switch (keycode) {
+      case TJ_GA:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_T));
+     tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_DE,
+                     {
+      switch (keycode) {
+      case TJ_DE:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_W));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_BU,
+               {
+      switch (keycode) {
+      case TJ_BU:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_2));
+     tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_ZE,
+              {
+      switch (keycode) {
+      case TJ_ZE:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_P));
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_ZA,
+                {
+      switch (keycode) {
+      case TJ_ZA:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_X));
+     tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_BE,
+                {
+      switch (keycode) {
+      case TJ_BE:
+        if (record->event.pressed) {
+          tap_code(KC_EQL);
+          tap_code(KC_LBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_PA,
+                {
+      switch (keycode) {
+      case TJ_PA:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_F));
+       tap_code(KC_RBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_PI,
+                {
+      switch (keycode) {
+      case TJ_PI:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_V));
+        tap_code(KC_RBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_PU,
+                {
+      switch (keycode) {
+      case TJ_PU:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_2));
+        tap_code(KC_RBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_PE,
+                {
+      switch (keycode) {
+      case TJ_PE:
+        if (record->event.pressed) {
+          tap_code(KC_EQL);
+          tap_code(KC_RBRC);
+        } else {
+          //
+        }
+        break;
+      }
+    }
+      // TJ_PO,
+                {
+      switch (keycode) {
+      case TJ_PO:
+        if (record->event.pressed) {
+          SEND_STRING(SS_TAP(X_MINS));
+         tap_code(KC_RBRC);
+        } else {
+          //
         }
         break;
       }
@@ -221,22 +733,7 @@ void matrix_scan_user(void) {
   }
 }
 
-// leader
-void leader_start_user(void) {
-  // Do something when the leader key is pressed
-}
-void leader_end_user(void) {
-  if (leader_sequence_one_key(KC_H)) {
-    // Leader, h => emacs C-x
-    tap_code16(LCTL(KC_X));
-  } else if (leader_sequence_one_key(KC_T)) {
-    // Leader, t => emacs C-c
-    tap_code16(LCTL(KC_C));
-  } else if (leader_sequence_one_key(KC_N)) {
-    // Leader, n => emacs M-x
-    tap_code16(LALT(KC_X));
-  }
-}
+
 
 // combos
 
@@ -259,7 +756,7 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_ret, KC_ENT),
   COMBO(combo_tab, KC_TAB),
   COMBO(combo_esc, KC_ESC),
-  COMBO(combo_mac, DF(_DVARF)),
+  COMBO(combo_mac, DF(_DVARF_MAC)),
   COMBO(combo_win, DF(_DVARF_WIN)),
 };
 
@@ -322,7 +819,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 // keymap
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_DVARF] = LAYOUT_split_3x5_3(
+  [_DVARF_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       JP_QUOT,  HMEH_U,  HHYP_O,    KC_W,    KC_P,                         KC_Q,    KC_V,  HHYP_D,  HMEH_R,    KC_F,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -332,8 +829,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                   SYM,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  EXT
                              //`--------------------------'  `--------------------------'
-                                ),
-      [_DVARF_WIN] = LAYOUT_split_3x5_3(
+                                    ),
+  [_TRON_MAC_BASE] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      TJ_RA, TJ_RU, TJ_KO, TJ_HA, TJ_XYO,                               TJ_KI,TJ_NO,TJ_KU, TJ_A, TJ_RE,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      TJ_TA,TJ_TO,TJ_KA,TJ_TE,TJ_MO,                                    TJ_WO,TJ_I,TJ_U, TJ_SHI,TJ_NN ,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      TJ_MA,TJ_RI,TJ_NI,TJ_SA, TJ_NA,                                   TJ_SU,TJ_TSU, TJ_DOUTEN, TJ_KUTEN, TJ_XTSU,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+      TRONSYM,  M_NUM,  MO(_TRON_MAC_RED),MO(_TRON_MAC_BLUE), TRONNAV, TRONEXT
+                             //`--------------------------'  `--------------------------'
+                         ),
+  [_TRON_MAC_BLUE] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      TJ_BI,TJ_ZO, TJ_GO, TJ_BA,  TJ_BO,                               TJ_E,  TJ_KE, TJ_ME, TJ_MU, TJ_RO,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      TJ_DA, TJ_DO, TJ_GA, TJ_DE, TJ_BU,                               TJ_O,TJ_CHI,  TJ_CHOUONNPU, TJ_MI, TJ_YA,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      TJ_XE, TJ_XO, TJ_ZE, TJ_ZA, TJ_BE,                                TJ_WA, TJ_XI, TJ_XA,  _______,   TJ_XU,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+      TRONSYM,  TRONNUM,  MO(_TRON_MAC_PURPLE),MO(_TRON_MAC_BLUE), TRONNAV, TRONEXT
+                             //`--------------------------'  `--------------------------'
+                                    ),
+  [_TRON_MAC_RED] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      TJ_HI,TJ_SO, TJ_NAKAGURO, TJ_XYA,  TJ_HO,                         TJ_GI,  TJ_GE, TJ_GU,     _______,  _______,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      TJ_NU, TJ_NE, TJ_XYU, TJ_YO, TJ_FU,                               TJ_O,TJ_DZI,  TJ_VU, TJ_JI,         _______,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      TJ_XE, TJ_XO, TJ_SE, TJ_YU, TJ_HE,                                TJ_ZU, TJ_DZU, TJ_XA,     _______,  TJ_XU,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+      TRONSYM,  TRONNUM,  MO(_TRON_MAC_RED),MO(_TRON_MAC_PURPLE), TRONNAV, TRONEXT
+                             //`--------------------------'  `--------------------------'
+                                    ),
+  [_TRON_MAC_PURPLE] = LAYOUT_split_3x5_3(
+  //,--------------------------------------------.                    ,--------------------------------------------.
+      TJ_PI,   _______, _______, TJ_PA,  TJ_PO,                          _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      _______, _______, _______, _______, TJ_PU,                      _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+      _______, _______, _______, _______, TJ_PE,                      _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+      TRONSYM,  TRONNUM,  MO(_TRON_MAC_RED),MO(_TRON_MAC_BLUE), TRONNAV, TRONEXT
+                             //`--------------------------'  `--------------------------'
+                                    ),
+  [_DVARF_WIN] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       JP_QUOT,  HMEH_U,  HHYP_O,    KC_W,    KC_P,                         KC_Q,    KC_V,  HHYP_D,  HMEH_R,    KC_F,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -344,15 +885,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    LT(_SYM_WIN,KC_TAB),     LT(_NUM_WIN,KC_DEL),  KC_SPC,OSM(MOD_LSFT),   LT(_NAV_WIN,KC_BSPC),  LT(_EXT_WIN,KC_ENT)
                              //`--------------------------'  `--------------------------'
                                 ),
-  [_NUM] = LAYOUT_split_3x5_3(
+  [_NUM_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     C(KC_F2),  KC_MEH, KC_HYPR, QK_LEAD, _______,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+     C(KC_F2), M_DVARF_MAC, M_TRON, QK_LEAD, _______,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, _______,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
      _______, _______, _______, _______ ,_______,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 TO(_DVARF),  NUM, TO(_DVARF), JP_HASH, JP_PERC, JP_TILD
+                                 TO(_DVARF_MAC),  NUM, TO(_DVARF_MAC), JP_HASH, JP_PERC, JP_TILD
                              //`--------------------------'  `--------------------------'
                               ),
   [_NUM_WIN] = LAYOUT_split_3x5_3(
@@ -366,7 +907,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  TO(_DVARF_WIN), XXXXXXX, TO(_DVARF_WIN), JP_HASH, JP_PERC, JP_TILD
                              //`--------------------------'  `--------------------------'
                               ),
-  [_NAV] = LAYOUT_split_3x5_3(
+  [_NAV_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                    XXXXXXX,  QK_LEAD, KC_HYPR,  KC_MEH,   LLOCK,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -374,7 +915,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
      KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),                   LSG(KC_3), KC_MPRV,S(C(KC_TAB)),C(KC_TAB),KC_MNXT,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 KC_ESC,   TO(_DVARF), TO(_DVARF), TO(_DVARF), NAV, TO(_DVARF)
+                                 KC_ESC,   TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC), NAV, TO(_DVARF_MAC)
                              //`--------------------------'  `--------------------------'
                               ),
       [_NAV_WIN] = LAYOUT_split_3x5_3(
@@ -388,7 +929,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  KC_ESC,   TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN), XXXXXXX, TO(_DVARF_WIN)
                              //`--------------------------'  `--------------------------'
                               ),
-  [_SYM] = LAYOUT_split_3x5_3(
+  [_SYM_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       JP_ZKHK, JP_MHEN, JP_HENK, JP_KANA, XXXXXXX,                       JP_YEN, JP_LBRC, JP_RBRC, JP_COLN, JP_CIRC,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -396,7 +937,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       JP_EISU,    FUN2,    FUN1, XXXXXXX, XXXXXXX,                      JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, TO(_DVARF), TO(_DVARF),   JP_EXLM, JP_DLR, JP_GRV
+                                 XXXXXXX, TO(_DVARF_MAC), TO(_DVARF_MAC),   JP_EXLM, JP_DLR, JP_GRV
                              //`--------------------------'  `--------------------------'
                               ),
       [_SYM_WIN] = LAYOUT_split_3x5_3(
@@ -407,10 +948,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       JP_EISU, MO(_FUN2_WIN), MO(_FUN1_WIN), XXXXXXX, XXXXXXX,          JP_PIPE, JP_LCBR, JP_RCBR,   JP_AT, JP_UNDS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, TO(_DVARF), TO(_DVARF),   JP_EXLM, JP_DLR, JP_GRV
+                                 XXXXXXX, TO(_DVARF_MAC), TO(_DVARF_MAC),   JP_EXLM, JP_DLR, JP_GRV
                              //`--------------------------'  `--------------------------'
                               ),
-  [_EXT] = LAYOUT_split_3x5_3(
+  [_EXT_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       KC_CAPS, KC_LNG2, KC_LNG1, CMD_TAB, XXXXXXX,                      KC_LPAD, KC_MCTL, XXXXXXX, XXXXXXX, KC_EJCT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -418,7 +959,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       JP_CAPS,   DFINE,   GTRNS,   GOOGL, XXXXXXX,                      KC_SCRL, XXXXXXX,     MSE, XXXXXXX, KC_PENT,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), XXXXXXX
+                                 TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC),    TO(_DVARF_MAC), TO(_DVARF_MAC), XXXXXXX
                              //`--------------------------'  `--------------------------'
       // afred macro - hyper-B is back 2 seconds in iina when used in emacs
                               ),
@@ -433,7 +974,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN),    TO(_DVARF_WIN), TO(_DVARF_WIN), XXXXXXX
                              //`--------------------------'  `--------------------------'
                               ),
-  [_MSE] = LAYOUT_split_3x5_3(
+  [_MSE_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_APP,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -441,7 +982,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE,  KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
+                                 TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC),    TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC)
                              //`--------------------------'  `--------------------------'
                               ),
       [_MSE_WIN] = LAYOUT_split_3x5_3(
@@ -455,20 +996,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN),    TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN)
                              //`--------------------------'  `--------------------------'
                               ),
-  [_FUN1] = LAYOUT_split_3x5_3(
+  [_FUN1_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF_MAC),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_DVARF_WIN),                 KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
+                                 TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC),    TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC)
                              //`--------------------------'  `--------------------------'
                                ),
       [_FUN1_WIN] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF_MAC),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_DVARF_WIN),                 KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -477,7 +1018,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN),    TO(_DVARF_WIN), TO(_DVARF_WIN), TO(_DVARF_WIN)
                              //`--------------------------'  `--------------------------'
                                ),
-  [_FUN2] = LAYOUT_split_3x5_3(
+  [_FUN2_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -485,7 +1026,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        QK_RBT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
+                                 TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC),    TO(_DVARF_MAC), TO(_DVARF_MAC), TO(_DVARF_MAC)
                              //`--------------------------'  `--------------------------'
                                ),
       [_FUN2_WIN] = LAYOUT_split_3x5_3(
@@ -531,14 +1072,14 @@ void oled_render_layer_state(void) {
       oled_write_ln_P(PSTR("CAPS WORD"), false);
       return;
   }
-  DISPLAY_LAYER_NAME(_FUN2, "FUN 2 MAC");
-  DISPLAY_LAYER_NAME(_FUN1, "FUN 1 MAC");
-  DISPLAY_LAYER_NAME(_MSE, "MSE MAC");
-  DISPLAY_LAYER_NAME(_EXT, "EXT MAC");
-  DISPLAY_LAYER_NAME(_SYM, "SYM MAC");
-  DISPLAY_LAYER_NAME(_NAV, "NAV MAC");
-  DISPLAY_LAYER_NAME(_NUM, "NUM MAC");
-  DISPLAY_LAYER_NAME(_DVARF, "DVARF MAC");
+  DISPLAY_LAYER_NAME(_FUN2_MAC, "FUN 2 MAC");
+  DISPLAY_LAYER_NAME(_FUN1_MAC, "FUN 1 MAC");
+  DISPLAY_LAYER_NAME(_MSE_MAC, "MSE MAC");
+  DISPLAY_LAYER_NAME(_EXT_MAC, "EXT MAC");
+  DISPLAY_LAYER_NAME(_SYM_MAC, "SYM MAC");
+  DISPLAY_LAYER_NAME(_NAV_MAC, "NAV MAC");
+  DISPLAY_LAYER_NAME(_NUM_MAC, "NUM MAC");
+  DISPLAY_LAYER_NAME(_DVARF_MAC, "DVARF MAC");
   DISPLAY_LAYER_NAME(_FUN2_WIN, "FUN 2 WIN");
   DISPLAY_LAYER_NAME(_FUN1_WIN, "FUN 1 WIN");
   DISPLAY_LAYER_NAME(_MSE_WIN, "MSE WIN");
@@ -547,6 +1088,10 @@ void oled_render_layer_state(void) {
   DISPLAY_LAYER_NAME(_NAV_WIN, "NAV WIN");
   DISPLAY_LAYER_NAME(_NUM_WIN, "NUM WIN");
   DISPLAY_LAYER_NAME(_DVARF_WIN, "DVARF WIN");
+  DISPLAY_LAYER_NAME(_TRON_MAC_BASE, "TRON MAC BASE");
+  DISPLAY_LAYER_NAME(_TRON_MAC_BLUE, "TRON MAC BLUE");
+  DISPLAY_LAYER_NAME(_TRON_MAC_RED, "TRON MAC RED");
+  DISPLAY_LAYER_NAME(_TRON_MAC_PURPLE, "TRON MAC PURPLE");
 }
 
 
