@@ -201,506 +201,379 @@ enum custom_keycodes {
     TJ_PO,
     TJ_LKAGIKAKO,
     TJ_RKAGIKAKO,
+    _KANA,
+    _EISU,
 };
 
 // macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    {
+  {
     // achordion
-      if (!process_achordion(keycode, record)) { return false; }
-    }
-    // select word
-    {
-      if (!process_select_word(keycode, record, SELWORD)) { return false;}
-    }
-    // layer lock
-    {
-      if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
-    }
-    // super cmd tab
-    {
-      switch (keycode) { // This will do most of the grunt work with the keycodes.
-      case CMD_TAB:
-        if (record->event.pressed) {
-          if (!is_cmd_tab_active) {
-            is_cmd_tab_active = true;
-            register_code(KC_LCMD);
-          }
-          cmd_tab_timer = timer_read();
-          register_code(KC_TAB);
-        } else {
-          unregister_code(KC_TAB);
-        }
-        break;
+    if (!process_achordion(keycode, record)) { return false; }
+  }
+  // select word
+  {
+    if (!process_select_word(keycode, record, SELWORD)) { return false;}
+  }
+  // layer lock
+  {
+    if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
+  }
+  // super cmd tab
+  switch (keycode) { // This will do most of the grunt work with the keycodes.
+  case CMD_TAB:
+    if (record->event.pressed) {
+      if (!is_cmd_tab_active) {
+        is_cmd_tab_active = true;
+        register_code(KC_LCMD);
       }
+      cmd_tab_timer = timer_read();
+      register_code(KC_TAB);
+    } else {
+      unregister_code(KC_TAB);
     }
+    break;
     // super alt tab
-    {
-      switch (keycode) { // This will do most of the grunt work with the keycodes.
-      case ALT_TAB:
-        if (record->event.pressed) {
-          if (!is_alt_tab_active) {
-            is_alt_tab_active = true;
-            register_code(KC_LALT);
-          }
-          cmd_tab_timer = timer_read();
-          register_code(KC_TAB);
-        } else {
-          unregister_code(KC_TAB);
-        }
-        break;
+  case ALT_TAB:
+    if (record->event.pressed) {
+      if (!is_alt_tab_active) {
+        is_alt_tab_active = true;
+        register_code(KC_LALT);
       }
+      cmd_tab_timer = timer_read();
+      register_code(KC_TAB);
+    } else {
+      unregister_code(KC_TAB);
     }
-
+    break;
     // lang switching
-    {
-      switch (keycode)        {
-      case  TO(_DVARF_MAC):
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_LNG2));
-          layer_move(_DVARF_MAC);
-        }
-        else {
-        }
-        break;
-      }
+  case _EISU:
+    if (record->event.pressed) {
+      tap_code(KC_LNG2);
     }
-    {
-      switch (keycode) {
-      case TO(_TRON_MAC_BASE):
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_LNG1));
-          layer_move(_TRON_MAC_BASE);
-        }
-        else {
-        }
-        break;
-      }
+    else {
+       layer_move(_DVARF_MAC);
     }
-
+    break;
+  case _KANA:
+    if (record->event.pressed) {
+       tap_code(KC_LNG1);
+    }
+    else {
+       layer_move(_TRON_MAC_BASE);
+    }
+    break;
     // TJ_GI,
-    {
-      switch (keycode) {
-      case TJ_GI:
-        if (record->event.pressed) {
-          // when keycode TJ_GI is pressed
-          SEND_STRING(SS_TAP(X_G));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+  case TJ_GI:
+    if (record->event.pressed) {
+      // when keycode TJ_GI is pressed
+      SEND_STRING(SS_TAP(X_G));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_GE,
-          {
-      switch (keycode) {
-      case TJ_GE:
-        if (record->event.pressed) {
-          tap_code(KC_QUOT);
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_GE,
+  case TJ_GE:
+    if (record->event.pressed) {
+      tap_code(KC_QUOT);
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_GU,
-               {
-      switch (keycode) {
-      case TJ_GU:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_H));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_GU,
+  case TJ_GU:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_H));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_DZI,
-                     {
-      switch (keycode) {
-      case TJ_DZI:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_A));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_DZI,
+  case TJ_DZI:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_A));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_VU,
-                     {
-      switch (keycode) {
-      case TJ_VU:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_4));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_VU,
+  case TJ_VU:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_4));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_JI,
-                     {
-      switch (keycode) {
-      case TJ_JI:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_D));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_JI,
+  case TJ_JI:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_D));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_ZU,
-                     {
-      switch (keycode) {
-      case TJ_ZU:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_R));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_ZU,
+  case TJ_ZU:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_R));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_DZU,
-                     {
-      switch (keycode) {
-      case TJ_DZU:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_Z));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_DZU,
+  case TJ_DZU:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_Z));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_BI,
-                     {
-      switch (keycode) {
-      case TJ_BI:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_V));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_BI,
+  case TJ_BI:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_V));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_ZO,
-                     {
-      switch (keycode) {
-      case TJ_ZO:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_C));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_ZO,
+  case TJ_ZO:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_C));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_GO,
-                     {
-      switch (keycode) {
-      case TJ_GO:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_B));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_GO,
+  case TJ_GO:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_B));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_BA,
-                     {
-      switch (keycode) {
-      case TJ_BA:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_F));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_BA,
+  case TJ_BA:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_F));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_BO,
-                     {
-      switch (keycode) {
-      case TJ_BO:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_MINS));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_BO,
+  case TJ_BO:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_MINS));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_DA,
-                     {
-      switch (keycode) {
-      case TJ_DA:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_Q));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_DA,
+  case TJ_DA:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_Q));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_DO,
-                     {
-      switch (keycode) {
-      case TJ_DO:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_S));
-       tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_DO,
+  case TJ_DO:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_S));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_GA,
-                     {
-      switch (keycode) {
-      case TJ_GA:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_T));
-     tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_GA,
+  case TJ_GA:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_T));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_DE,
-                     {
-      switch (keycode) {
-      case TJ_DE:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_W));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_DE,
+  case TJ_DE:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_W));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_BU,
-               {
-      switch (keycode) {
-      case TJ_BU:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_2));
-     tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_BU,
+  case TJ_BU:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_2));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_ZE,
-              {
-      switch (keycode) {
-      case TJ_ZE:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_P));
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_ZE,
+  case TJ_ZE:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_P));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_ZA,
-                {
-      switch (keycode) {
-      case TJ_ZA:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_X));
-     tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
+    break;
+    // TJ_ZA,
+  case TJ_ZA:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_X));
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-      // TJ_BE,
-                {
-      switch (keycode) {
-      case TJ_BE:
-        if (record->event.pressed) {
-          tap_code(KC_EQL);
-          tap_code(KC_LBRC);
-        } else {
-          //
-        }
-        break;
-      }
-    }
-      // TJ_PA,
-                {
-      switch (keycode) {
-      case TJ_PA:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_F));
-       tap_code(KC_RBRC);
-        } else {
-          //
-        }
-        break;
-      }
-    }
-      // TJ_PI,
-                {
-      switch (keycode) {
-      case TJ_PI:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_V));
-        tap_code(KC_RBRC);
-        } else {
-          //
-        }
-        break;
-      }
-    }
-      // TJ_PU,
-                {
-      switch (keycode) {
-      case TJ_PU:
-        if (record->event.pressed) {
-          SEND_STRING(SS_TAP(X_2));
-        tap_code(KC_RBRC);
-        } else {
-          //
-        }
-        break;
-      }
-    }
-      // TJ_PE,
-                {
-      switch (keycode) {
-      case TJ_PE:
-        if (record->event.pressed) {
-          tap_code(KC_EQL);
-          tap_code(KC_RBRC);
-        } else {
-          //
-        }
-        break;
-      }
-    }
-                // TJ_PO,
-                {
-                  switch (keycode) {
-                  case TJ_PO:
-                    if (record->event.pressed) {
-                      SEND_STRING(SS_TAP(X_MINS));
-                      tap_code(KC_RBRC);
-                    } else {
-                      //
-                    }
-                    break;
-                  }
-                }
-                // TJ_LKAGIKAKO,
-                {
-                  switch (keycode) {
-                  case TJ_LKAGIKAKO:
-                    if (record->event.pressed) {
-                      SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_RBRC) SS_UP(X_LSFT));
-                    } else {
-                      //
-                    }
-                    break;
-                  }
-                }
-                // TJ_RKAGIKAKO,
-                {
-                  switch (keycode) {
-                  case  TJ_RKAGIKAKO:
-                    if (record->event.pressed) {
-                      SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_NUHS) SS_UP(X_LSFT));
-                    } else {
-                      //
-                    }
-                    break;
-                  }
-                }
-                // macro
-    switch (keycode) {
-    case GOOGL:
-      if (record->event.pressed) {
-        // when keycode GOOGL is pressed
-        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
-                    SS_UP(X_LCMD));  // command C
-        SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                    SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                    SS_UP(X_LSFT) SS_UP(X_LCTL)
-                    SS_UP(X_LCMD));  // open alfred
-        wait_ms(50);
-        SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
-        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
-                    SS_TAP(X_ENT));  // command V + enter
-      } else {
-        // when keycode GOOGL is released
-      }
-      break;
-    case GTRNS:
-      if (record->event.pressed) {
-        // when keycode GTRNS is pressed
-        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
-                    SS_UP(X_LCMD));  // command C
-        SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                    SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                    SS_UP(X_LSFT) SS_UP(X_LCTL)
-                    SS_UP(X_LCMD));  // open alfred
-        wait_ms(50);
-        SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
-        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
-                    SS_TAP(X_ENT));  // command V + enter
-      } else {
-        // when keycode GTRNS is released
-      }
-      break;
-    case DFINE:
-      if (record->event.pressed) {
-        // when keycode DFINE is pressed
-        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
-                    SS_UP(X_LCMD));  // command C
-        SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                    SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                    SS_UP(X_LSFT) SS_UP(X_LCTL)
-                    SS_UP(X_LCMD));  // open alfred
-        wait_ms(200);
-        SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
-        SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
-                    SS_UP(X_LCMD));  // command V
-        wait_ms(200);                     // wait
-        SEND_STRING(SS_TAP(X_ENT));      // enter
-      } else {
-        // when keycode DFINE is released
-      }
-      break;
+    break;
 
+    // TJ_BE,
+  case TJ_BE:
+    if (record->event.pressed) {
+      tap_code(KC_EQL);
+      tap_code(KC_LBRC);
+    } else {
+      //
     }
-    return true;
-}
+    break;
+
+    // TJ_PA,
+  case TJ_PA:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_F));
+      tap_code(KC_RBRC);
+    } else {
+      //
+    }
+    break;
+    // TJ_PI,
+  case TJ_PI:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_V));
+      tap_code(KC_RBRC);
+    } else {
+      //
+    }
+    break;
+    // TJ_PU,
+  case TJ_PU:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_2));
+      tap_code(KC_RBRC);
+    } else {
+      //
+    }
+    break;
+    // TJ_PE,
+  case TJ_PE:
+    if (record->event.pressed) {
+      tap_code(KC_EQL);
+      tap_code(KC_RBRC);
+    } else {
+      //
+    }
+    break;
+    // TJ_PO,
+  case TJ_PO:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_MINS));
+      tap_code(KC_RBRC);
+    } else {
+      //
+    }
+    break;
+    // TJ_LKAGIKAKO,
+  case TJ_LKAGIKAKO:
+    if (record->event.pressed) {
+      SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_RBRC) SS_UP(X_LSFT));
+    } else {
+      //
+    }
+    break;
+    // TJ_RKAGIKAKO,
+  case  TJ_RKAGIKAKO:
+    if (record->event.pressed) {
+      SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_NUHS) SS_UP(X_LSFT));
+    } else {
+      //
+    }
+    break;
+    // other macros
+  case GOOGL:
+    if (record->event.pressed) {
+      // when keycode GOOGL is pressed
+      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                  SS_UP(X_LCMD));  // command C
+      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                  SS_UP(X_LSFT) SS_UP(X_LCTL)
+                  SS_UP(X_LCMD));  // open alfred
+      wait_ms(50);
+      SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
+      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                  SS_TAP(X_ENT));  // command V + enter
+    } else {
+      // when keycode GOOGL is released
+    }
+    break;
+  case GTRNS:
+    if (record->event.pressed) {
+      // when keycode GTRNS is pressed
+      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                  SS_UP(X_LCMD));  // command C
+      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                  SS_UP(X_LSFT) SS_UP(X_LCTL)
+                  SS_UP(X_LCMD));  // open alfred
+      wait_ms(50);
+      SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
+      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
+                  SS_TAP(X_ENT));  // command V + enter
+    } else {
+      // when keycode GTRNS is released
+    }
+    break;
+  case DFINE:
+    if (record->event.pressed) {
+      // when keycode DFINE is pressed
+      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
+                  SS_UP(X_LCMD));  // command C
+      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                  SS_UP(X_LSFT) SS_UP(X_LCTL)
+                  SS_UP(X_LCMD));  // open alfred
+      wait_ms(200);
+      SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
+      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
+                  SS_UP(X_LCMD));  // command V
+      wait_ms(200);                     // wait
+      SEND_STRING(SS_TAP(X_ENT));      // enter
+    } else {
+      // when keycode DFINE is released
+    }
+    break;
+  }
+  return true;
+};
 
 
 void matrix_scan_user(void) {
@@ -848,24 +721,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          ),
   [_TRON_MAC_BLUE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      TJ_BI,TJ_ZO, TJ_GO, TJ_BA,  TJ_BO,                               TJ_E,  TJ_KE, TJ_ME, TJ_MU, TJ_RO,
+        TJ_BI,   TJ_ZO,   TJ_GO,  TJ_BA,    TJ_BO,                         TJ_E,   TJ_KE,   TJ_ME,   TJ_MU,  TJ_RO,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      TJ_DA, TJ_DO, TJ_GA, TJ_DE, TJ_BU,                               TJ_O,TJ_CHI,  TJ_CHOUONNPU, TJ_MI, TJ_YA,
+        TJ_DA,   TJ_DO,   TJ_GA,  TJ_DE,    TJ_BU,                         TJ_O,  TJ_CHI,TJ_CHOUONNPU,TJ_MI,  TJ_YA,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      TJ_XE, TJ_XO, TJ_ZE, TJ_ZA, TJ_BE,                                TJ_WA, TJ_XI, TJ_XA,  _______,   TJ_XU,
+        TJ_XE,   TJ_XO,    TJ_ZE,  TJ_ZA,   TJ_BE,                        TJ_WA,   TJ_XI,   TJ_XA, _______,   TJ_XU,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-      _______,  _______, MO(_TRON_MAC_PURPLE),_______, _______, _______
+                       _______,  _______, MO(_TRON_MAC_PURPLE),    _______, _______, _______
                              //`--------------------------'  `--------------------------'
                                     ),
   [_TRON_MAC_RED] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      TJ_HI,TJ_SO, TJ_NAKAGURO, TJ_XYA,  TJ_HO,                         TJ_GI,  TJ_GE, TJ_GU,     _______,  _______,
+        TJ_HI,   TJ_SO,TJ_NAKAGURO,TJ_XYA,  TJ_HO,                        TJ_GI,   TJ_GE,  TJ_GU,  _______, _______,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      TJ_NU, TJ_NE, TJ_XYU, TJ_YO, TJ_FU,                               TJ_O,TJ_DZI,  TJ_VU, TJ_JI,         _______,
+        TJ_NU,   TJ_NE,  TJ_XYU,   TJ_YO,   TJ_FU,                         TJ_O,  TJ_DZI,  TJ_VU,    TJ_JI, _______,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      TJ_XE, TJ_XO, TJ_SE, TJ_YU, TJ_HE,                                TJ_ZU, TJ_DZU, TJ_LKAGIKAKO, TJ_RKAGIKAKO,  TJ_XU,
+        TJ_XE,   TJ_XO,   TJ_SE,   TJ_YU,   TJ_HE,                        TJ_ZU,  TJ_DZU,TJ_LKAGIKAKO,TJ_RKAGIKAKO, TJ_XU,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-      _______,  _______, _______, MO(_TRON_MAC_PURPLE), _______, _______
+                               _______,  _______, _______,    MO(_TRON_MAC_PURPLE), _______, _______
                              //`--------------------------'  `--------------------------'
                                     ),
   [_TRON_MAC_PURPLE] = LAYOUT_split_3x5_3(
@@ -876,7 +749,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       _______, _______, _______, _______, TJ_PE,                        _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-      _______,  _______,  _______, _______, _______, _______
+                                  _______,  _______,  _______, _______, _______, _______
                              //`--------------------------'  `--------------------------'
                                     ),
   [_DVARF_WIN] = LAYOUT_split_3x5_3(
@@ -958,7 +831,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               ),
   [_EXT_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     KC_LNG2, TO(_DVARF_MAC), TO(_TRON_MAC_BASE),KC_LNG1 , XXXXXXX,    KC_LPAD, KC_MCTL, XXXXXXX, XXXXXXX, KC_EJCT,
+     KC_LNG2, _EISU, _KANA,KC_LNG1 , XXXXXXX,    KC_LPAD, KC_MCTL, XXXXXXX, XXXXXXX, KC_EJCT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),                    KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -1053,6 +926,8 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                      keyrecord_t* other_record) {
   return achordion_opposite_hands(tap_hold_record, other_record);
 }
+
+
 
 // OLED STUFF
 
