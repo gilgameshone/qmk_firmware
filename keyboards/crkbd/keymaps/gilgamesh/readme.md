@@ -14,9 +14,9 @@ The base layer uses [Dvarf](https://o-x-e-y.github.io/layouts/dvarf/index.html)<
 | ‘ | u | o | w | p |   | q | d | v | r | f |
 |   |   |   |   |   |   |   |   |   |   |   |
 | a | i | o | y | g |   | l | h | t | n | s |
-| < | > |   |   |   |   |   |   |   |   |   |
+| ; | : | ? |   |   |   |   |   |   |   |   |
 | , | . | - | c | j |   | k | m | b | x | z |
-|___|___|TAB|NUM|SPC|   |OSS|NAV|RET|___|___|
+|___|___|SYM|NUM|SPC|   |OSS|NAV|EXT|___|___|
 
 ### Modifier keys and layer keys
 
@@ -65,9 +65,9 @@ The mostly useless Caps Lock key is relegated here, in favour of the smart QMK `
 
 |   |   |   |   |   |   |   |   |   |   |   |
 |---|---|---|---|---|---|---|---|---|---|---|
-|Cps|Len|Ljp|CmT|   |   |Lpd|Exp|   |   |Ejt| 
+|L2 |Eis|Kan|L1 |   |   |Lpd|Exp|   |   |Ejt| 
 |Mut|VUp|VDn|Ply|RwB|   |SCL|Ctl|Cmd|Opt|Sft| 
-|SEi|Dfe|Gtr|GoG|   |   |PSE|   |MSE|   |Ent|
+|Clk|Dfe|Gtr|GoG|CmT|   |PSE|   |MSE|   |Ent|
 |___|___|   |   |   |   |   |   |EXT|___|___|
 
 ## MSE
@@ -113,3 +113,4 @@ QMK Bootloader can also be accessed via triple vertical combo of outer pinky key
  - [Gilgamesh keymap image with all layers separated](https://github.com/gilgameshone/gilgamesh-layout/blob/main/Gilgamesh-layers.drawio.png)
  - Updated to One Shot modifier implementation by [daliusd](https://blog.ffff.lt/posts/callum-layers/).
  - Added `layer lock` and `select word` from [Pascal Getreuer](https://getreuer.info/posts/keyboards/index.html).
+ - Added Tron Japanese layer. Update readme TODO []
