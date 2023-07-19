@@ -84,6 +84,20 @@ enum crkbd_layers {
 #define HMEH_X MEH_T(KC_X)
 #define HEXT_M LT(_EXT_MAC,KC_M)
 
+// TRON Left-hand home row mods
+#define HCTL_TJ_TE LCTL_T(TJ_TE)
+#define HCMD_TJ_KA LGUI_T(TJ_KA)
+#define HOPT_TJ_TO LALT_T(TJ_TO)
+#define HSFT_TJ_TA LSFT_T(TJ_TA)
+
+
+// TRON Right-hand home row mods
+#define HCTL_TJ_I RCTL_T(TJ_I)
+#define HCMD_TJ_U RGUI_T(TJ_U)
+#define HOPT_TJ_SHI RALT_T(TJ_SHI)
+#define HSFT_TJ_NN RSFT_T(TJ_NN)
+
+
 //tron japanese laid over JIS kana
 
 #define TJ_RA JP_O
@@ -604,9 +618,9 @@ const uint16_t PROGMEM combo_ret[] = {HOPT_I, HOPT_N, COMBO_END};
 const uint16_t PROGMEM combo_tab[] = {HHYP_O, HHYP_D, COMBO_END};
 const uint16_t PROGMEM combo_esc[] = {JP_QUOT, KC_F, COMBO_END};
 const uint16_t PROGMEM combo_pause[] = {HMEH_U, HMEH_R, COMBO_END};
-const uint16_t PROGMEM combo_lang1[] = {KC_F, HSFT_S, COMBO_END};
+const uint16_t PROGMEM combo_kana[] = {KC_F, HSFT_S, COMBO_END};
 const uint16_t PROGMEM combo_dvarf[] = {JP_MINS, JP_DOT, COMBO_END};
-const uint16_t PROGMEM combo_lang2[] = {JP_QUOT, HSFT_A, COMBO_END};
+const uint16_t PROGMEM combo_eisu[] = {JP_QUOT, HSFT_A, COMBO_END};
 const uint16_t PROGMEM combo_tron[] = {HHYP_B, HMEH_X, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -620,9 +634,9 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_mac, DF(_DVARF_MAC)),
   COMBO(combo_win, DF(_DVARF_WIN)),
   COMBO(combo_pause, KC_MPLY),
-  COMBO(combo_lang1, KC_LNG1),
+  COMBO(combo_kana, _KANA),
   COMBO(combo_dvarf, TO(_DVARF_MAC)),
-  COMBO(combo_lang2, KC_LNG2),
+  COMBO(combo_eisu, _EISU),
   COMBO(combo_tron, TO(_TRON_MAC_BASE)),
 };
 
@@ -712,7 +726,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
         TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,                        TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        TJ_TA,   TJ_TO,   TJ_KA,   TJ_TE,   TJ_MO,                        TJ_WO,    TJ_I,    TJ_U,  TJ_SHI,   TJ_NN,
+  HSFT_TJ_TA, HOPT_TJ_TO, HCMD_TJ_KA, HCTL_TJ_TE, TJ_MO,             TJ_WO, HCTL_TJ_I, HCMD_TJ_U, HOPT_TJ_SHI, HSFT_TJ_NN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         TJ_MA,   TJ_RI,   TJ_NI,   TJ_SA,   TJ_NA,                        TJ_SU,  TJ_TSU,TJ_DOUTEN,TJ_KUTEN,TJ_XTSU,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
