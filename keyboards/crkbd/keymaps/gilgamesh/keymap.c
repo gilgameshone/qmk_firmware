@@ -66,20 +66,14 @@ enum crkbd_layers {
 #define HCMD_E LGUI_T(KC_E)
 #define HOPT_I LALT_T(KC_I)
 #define HSFT_A LSFT_T(KC_A)
-#define HHYP_O KC_O
-#define HMEH_U KC_U
 #define HHYP_MINS HYPR_T(JP_MINS)
 #define HMEH_DOT MEH_T(JP_DOT)
-#define HSYM_C LT(_SYM_MAC,KC_C)
-
 
 // Right-hand home row mods
 #define HCTL_H RCTL_T(KC_H)
 #define HCMD_T RGUI_T(KC_T)
 #define HOPT_N RALT_T(KC_N)
 #define HSFT_S RSFT_T(KC_S)
-#define HHYP_D KC_D
-#define HMEH_R KC_R
 #define HHYP_B HYPR_T(KC_B)
 #define HMEH_X MEH_T(KC_X)
 #define HEXT_M LT(_EXT_MAC,KC_M)
@@ -612,16 +606,9 @@ const uint16_t PROGMEM combo_capsword[] = {HCTL_Y, HCTL_H, COMBO_END};
 const uint16_t PROGMEM combo_qkboot[] = {JP_QUOT, HSFT_A, JP_COMM, COMBO_END};
 const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_G, KC_J, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_W, HCTL_Y, KC_C, COMBO_END};
-const uint16_t PROGMEM combo_mac[] = {HHYP_MINS, HCMD_E, HHYP_O, COMBO_END};
-const uint16_t PROGMEM combo_win[] = {HMEH_DOT, HOPT_I, HMEH_U, COMBO_END};
-const uint16_t PROGMEM combo_ret[] = {HOPT_I, HOPT_N, COMBO_END};
-const uint16_t PROGMEM combo_tab[] = {HHYP_O, HHYP_D, COMBO_END};
-const uint16_t PROGMEM combo_esc[] = {JP_QUOT, KC_F, COMBO_END};
-const uint16_t PROGMEM combo_pause[] = {HMEH_U, HMEH_R, COMBO_END};
-const uint16_t PROGMEM combo_kana[] = {KC_F, HSFT_S, COMBO_END};
-const uint16_t PROGMEM combo_dvarf[] = {JP_MINS, JP_DOT, COMBO_END};
-const uint16_t PROGMEM combo_eisu[] = {JP_QUOT, HSFT_A, COMBO_END};
-const uint16_t PROGMEM combo_tron[] = {HHYP_B, HMEH_X, COMBO_END};
+const uint16_t PROGMEM combo_ret[] = {KC_C, KC_M, COMBO_END};
+const uint16_t PROGMEM combo_pause[] = {KC_W, KC_V, COMBO_END};
+
 
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_capsword, CW_TOGG),
@@ -629,15 +616,7 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_qkeeprom, EE_CLR),
   COMBO(combo_qkreboot, QK_RBT),
   COMBO(combo_ret, KC_ENT),
-  COMBO(combo_tab, KC_TAB),
-  COMBO(combo_esc, KC_ESC),
-  COMBO(combo_mac, DF(_DVARF_MAC)),
-  COMBO(combo_win, DF(_DVARF_WIN)),
   COMBO(combo_pause, KC_MPLY),
-  COMBO(combo_kana, _KANA),
-  COMBO(combo_dvarf, TO(_DVARF_MAC)),
-  COMBO(combo_eisu, _EISU),
-  COMBO(combo_tron, TO(_TRON_MAC_BASE)),
 };
 
 // caps word
@@ -668,16 +647,6 @@ bool caps_word_press_user(uint16_t keycode) {
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 const key_override_t ctl_del_bksp_override = ko_make_basic(MOD_MASK_CTRL, KC_BSPC, KC_DEL);
 const key_override_t ctl_quo_scln_override = ko_make_basic(MOD_MASK_CTRL, JP_QUOT, C(JP_SCLN));
-const key_override_t one_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_1, KC_P1);
-const key_override_t two_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_2, KC_P2);
-const key_override_t three_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_3, KC_P3);
-const key_override_t four_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_4, KC_P4);
-const key_override_t five_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_5, KC_P5);
-const key_override_t six_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_6, KC_P6);
-const key_override_t seven_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_7, KC_P7);
-const key_override_t eight_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_8, KC_P8);
-const key_override_t nine_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_9, KC_P9);
-const key_override_t zero_numpad_override = ko_make_basic(MOD_MASK_SHIFT, KC_0, KC_P0);
 const key_override_t comm_semi_override = ko_make_basic(MOD_MASK_SHIFT, JP_COMM, JP_SCLN);
 const key_override_t dot_coln_override = ko_make_basic(MOD_MASK_SHIFT, HMEH_DOT, JP_COLN);
 const key_override_t min_ques_override = ko_make_basic(MOD_MASK_SHIFT, HHYP_MINS, JP_QUES);
@@ -690,16 +659,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &quots_quotd_override,
     &ctl_del_bksp_override,
     &ctl_quo_scln_override,
-    &one_numpad_override,
-    &two_numpad_override,
-    &three_numpad_override,
-    &four_numpad_override,
-    &five_numpad_override,
-    &six_numpad_override,
-    &seven_numpad_override,
-    &eight_numpad_override,
-    &nine_numpad_override,
-    &zero_numpad_override,
     &comm_semi_override,
     &dot_coln_override,
     &lbrk_lsbk_override,
@@ -713,11 +672,11 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVARF_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      JP_QUOT,  HMEH_U,  HHYP_O,    KC_W,    KC_P,                         KC_Q,    KC_V,  HHYP_D,  HMEH_R,    KC_F,
+      JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      JP_COMM,HMEH_DOT,HHYP_MINS, HSYM_C,    KC_J,                         KC_K,  HEXT_M,  HHYP_B,  HMEH_X,    KC_Z,
+      JP_COMM,HMEH_DOT,HHYP_MINS,   KC_C,    KC_J,                         KC_K,    KC_M,  HHYP_B,  HMEH_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                   SYM,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  EXT
                              //`--------------------------'  `--------------------------'
@@ -759,27 +718,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       TJ_PI,   _______, _______, TJ_PA,  TJ_PO,                         _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      _______, _______, _______, _______, TJ_PU,                         KC_SPC, C(JP_J), C(JP_K), KC_ENT, _______,
+      _______, _______, _______, _______, TJ_PU,                         KC_SPC, C(JP_J), C(JP_K), _______, _______,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      _______, _______, _______, _______, TJ_PE,                        _______, _______, _______, _______, _______,
+      _______, _______, _______, _______, TJ_PE,                        _______, KC_ENT, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                   _______,  _______,  _______, _______, _______, _______
                              //`--------------------------'  `--------------------------'
                                     ),
   [_DVARF_WIN] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      JP_QUOT,  HMEH_U,  HHYP_O,    KC_W,    KC_P,                         KC_Q,    KC_V,  HHYP_D,  HMEH_R,    KC_F,
+      JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
        HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      JP_COMM,HMEH_DOT,HHYP_MINS, LT(_SYM_WIN,KC_C),    KC_J,         KC_K,  LT(_EXT_WIN,KC_M),  HHYP_B,  HMEH_X,    KC_Z,
+      JP_COMM,HMEH_DOT,HHYP_MINS,   KC_C,    KC_J,                         KC_K,    KC_M,  HHYP_B,  HMEH_X,    KC_Z,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
    LT(_SYM_WIN,KC_TAB),     LT(_NUM_WIN,KC_DEL),  KC_SPC,OSM(MOD_LSFT),   LT(_NAV_WIN,KC_BSPC),  LT(_EXT_WIN,KC_ENT)
                              //`--------------------------'  `--------------------------'
                                 ),
   [_NUM_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-    C(KC_F2), KC_LNG2, KC_LNG1, TO(_TRON_MAC_BASE), _______,            JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+    C(KC_F2), _______, _______, _______, _______,                       JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, _______,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -790,7 +749,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               ),
   [_NUM_WIN] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     A(KC_F2),  KC_MEH, KC_HYPR, QK_LEAD, _______,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
+     A(KC_F2),  _______, _______, _______, _______,                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, _______,                      JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -801,7 +760,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               ),
   [_NAV_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                    XXXXXXX,  QK_LEAD, KC_HYPR,  KC_MEH,   LLOCK,
+      G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),                   _______,  QK_LEAD, CMD_TAB, _______,   LLOCK,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -812,7 +771,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               ),
       [_NAV_WIN] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      C(KC_Z), C(KC_X), C(KC_C), C(KC_V), C(KC_Y),                    XXXXXXX,  QK_LEAD, KC_HYPR,  KC_MEH,   LLOCK,
+      C(KC_Z), C(KC_X), C(KC_C), C(KC_V), C(KC_Y),                    XXXXXXX,  QK_LEAD, ALT_TAB, XXXXXXX,   LLOCK,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, SELWORD,                    LSG(KC_S), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -845,7 +804,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               ),
   [_EXT_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     KC_LNG2, _EISU, _KANA,KC_LNG1 , XXXXXXX,    KC_LPAD, KC_MCTL, XXXXXXX, XXXXXXX, KC_EJCT,
+    XXXXXXX, _EISU, _KANA,  S(A(G(KC_V))), XXXXXXX,                     KC_LPAD, KC_MCTL, KC_LNG2, KC_LNG1, KC_EJCT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),                    KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -890,7 +849,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               ),
   [_FUN1_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF_MAC),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF_MAC),                KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_DVARF_WIN),                 KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -901,7 +860,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                ),
       [_FUN1_WIN] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF_MAC),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF_MAC),                KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_DVARF_WIN),                 KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
