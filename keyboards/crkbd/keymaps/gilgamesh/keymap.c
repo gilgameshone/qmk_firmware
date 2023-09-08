@@ -804,7 +804,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               ),
   [_EXT_MAC] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-    XXXXXXX, _EISU, _KANA,  S(A(G(KC_V))), XXXXXXX,                     KC_LPAD, KC_MCTL, KC_LNG2, KC_LNG1, KC_EJCT,
+      XXXXXXX,   _EISU,   _KANA, S(A(G(KC_V))), XXXXXXX,                KC_LPAD, KC_MCTL, KC_LNG2, KC_LNG1, KC_EJCT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),                    KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|

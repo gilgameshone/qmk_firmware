@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SOLENOID_PIN A2
 
+<<<<<<< HEAD
 #define RGBLIGHT_EFFECT_BREATHING
 #define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -30,6 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_EFFECT_TWINKLE
 <<<<<<< HEAD
 #define RGBLED_NUM 9
+=======
+>>>>>>> upstream/master
 #define WS2812_SPI SPID2
 #define WS2812_SPI_MOSI_PAL_MODE 5
 =======

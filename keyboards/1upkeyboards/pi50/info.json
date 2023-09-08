@@ -39,8 +39,12 @@
         ]
     },
     "rgb_matrix": {
+<<<<<<< HEAD
 
         "driver": "WS2812",
+=======
+        "driver": "ws2812",
+>>>>>>> upstream/master
         "max_brightness": 150,
         "animations": {
             "solid_color": true,
