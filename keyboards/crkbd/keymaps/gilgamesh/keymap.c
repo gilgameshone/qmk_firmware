@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "sendstring_japanese.h"
 #include "features/select_word.h"
 #include "features/layer_lock.h"
-#include "features/achordion.h"
+
 
 enum crkbd_layers {
     _DVARF,
@@ -212,10 +212,6 @@ enum custom_keycodes {
 // macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  {
-    // achordion
-    if (!process_achordion(keycode, record)) { return false; }
-  }
   // select word
   {
     if (!process_select_word(keycode, record, SELWORD)) { return false;}
@@ -605,8 +601,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 void matrix_scan_user(void) {
-  // achordion
-  achordion_task();
   // layer lock
   layer_lock_task();
   // super cmd tab - The very important timer.
@@ -853,22 +847,6 @@ LSFT_T(JP_DLR), LALT_T(JP_LPRN), LGUI_T(JP_RPRN), MT(MOD_LCTL,JP_SCLN), JP_AMPR,
                                )
 };
 
-bool achordion_chord(uint16_t tap_hold_keycode,
-                     keyrecord_t* tap_hold_record,
-                     uint16_t other_keycode,
-                     keyrecord_t* other_record) {
-
-  return achordion_opposite_hands(tap_hold_record, other_record);
-}
-
-bool achordion_eager_mod(uint8_t mod) {
-  switch (mod) {
-       return true;  // Eagerly apply Shift and Ctrl mods.
-
-    default:
-      return false;
-  }
-}
 
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
