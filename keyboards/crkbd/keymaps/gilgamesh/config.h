@@ -51,8 +51,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 
 #define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
-#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
-#define COMBO_COUNT 14
+#define ONESHOT_TIMEOUT 2000  /* Time (in ms) before the one shot key is released */
+#define COMBO_COUNT 8
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
@@ -63,3 +63,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 1000
 #define LAYER_STATE_32BIT
+#define PERMISSIVE_HOLD_PER_KEY
