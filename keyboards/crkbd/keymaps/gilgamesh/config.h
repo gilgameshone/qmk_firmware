@@ -28,9 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
-//#define TAPPING_FORCE_HOLD
-//#define TAPPING_TERM 100
-
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING
     #define RGBLIGHT_EFFECT_RAINBOW_MOOD
@@ -54,7 +51,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ONESHOT_TIMEOUT 2000  /* Time (in ms) before the one shot key is released */
 #define COMBO_COUNT 8
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM 200
+#define TAPPING_TERM 260
+#define TAPPING_TERM_PER_KEY
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
 #define COMBO_ONLY_FROM_LAYER 0

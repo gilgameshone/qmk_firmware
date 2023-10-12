@@ -17,16 +17,21 @@
 #pragma once
 
 #ifdef AUDIO_ENABLE
-#    define STARTUP_SONG SONG(PLANCK_SOUND)
-// #define STARTUP_SONG SONG(NO_SOUND)
+    #define STARTUP_SONG SONG(PLANCK_SOUND)
+    // #define STARTUP_SONG SONG(NO_SOUND)
 
-#    define DEFAULT_LAYER_SONGS \
-        { SONG(QWERTY_SOUND), SONG(COLEMAK_SOUND), SONG(DVORAK_SOUND) }
+    #define DEFAULT_LAYER_SONGS { SONG(QWERTY_SOUND), \
+                                  SONG(COLEMAK_SOUND), \
+                                  SONG(DVORAK_SOUND) \
+                                }
 #endif
 
 /*
  * MIDI options
  */
+
+/* Prevent use of disabled MIDI features in the keymap */
+//#define MIDI_ENABLE_STRICT 1
 
 /* enable basic MIDI features:
    - MIDI notes can be sent when in Music mode is on
@@ -49,12 +54,14 @@
 //#define ENCODER_RESOLUTION 4
 
 #define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
-#define ONESHOT_TIMEOUT 5000  /* Time (in ms) before the one shot key is released */
-#define COMBO_COUNT 4
-#define TAPPING_TERM 175
+#define ONESHOT_TIMEOUT 2000  /* Time (in ms) before the one shot key is released */
+#define COMBO_COUNT 8
+// Configure the global tapping term (default: 200ms)
+#define TAPPING_TERM 200
+// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
+#define QUICK_TAP_TERM 0
 #define COMBO_ONLY_FROM_LAYER 0
-#define FLOW_COUNT 8
-#define FLOW_LAYERS_COUNT 1
-#define LAYER_LOCK_IDLE_TIMEOUT 60000
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 1000
+#define LAYER_STATE_32BIT
+#define PERMISSIVE_HOLD_PER_KEY
