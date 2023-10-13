@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include "keymap_japanese.h"
 #include "sendstring_japanese.h"
-#include "keymap_uk.h"
+
 
 enum crkbd_layers {
     _DVARF,
@@ -35,9 +35,7 @@ enum crkbd_layers {
     _TRON_ROMAJI_RED,
     _TRON_ROMAJI_BLUE,
     _TRON_ROMAJI_PURPLE,
-    _NUM,
     _SYM_NUM,
-    _NAV,
     _NAV_EXT,
     _SYM,
     _EXT,
@@ -341,23 +339,6 @@ TRJ_WA,
 TRJ_XI,
 TRJ_XA,
 TRJ_XU,
-  C_MAG_2,
-  C_MAG_3,
-  MK_DUND,
-  MG_ENT,
-  MG_MENT,
-  MG_ER,
-  MG_ES,
-  MG_UST,
-  MG_ON,
-  MG_ION,
-  MG_OA,
-  MG_SP_BUT,
-  MG_THE,
-  MG_EFORE,
-  MG_HICH,
-  MG_MLATIV,
-  MG_QUOT_S,
 };
 
 // macros
@@ -1447,9 +1428,10 @@ const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_G, KC_J, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_W, HCTL_Y, KC_C, COMBO_END};
 const uint16_t PROGMEM combo_ret[] = {KC_C, KC_M, COMBO_END};
 const uint16_t PROGMEM combo_pause[] = {KC_W, KC_V, COMBO_END};
-const uint16_t PROGMEM combo_sym[] = {NUM, KC_SPC, COMBO_END};
-const uint16_t PROGMEM combo_ext[] = {NAV, OSM(MOD_LSFT), COMBO_END};
-
+const uint16_t PROGMEM combo_bksp[] = {KC_M, HHYP_B, COMBO_END};
+const uint16_t PROGMEM combo_bkspw[] = {HHYP_B, HMEH_X, COMBO_END};
+const uint16_t PROGMEM combo_del[] = {HHYP_MINS, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_delw[] = {HMEH_DOT, HHYP_MINS, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_capsword, CW_TOGG),
@@ -1458,8 +1440,10 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_qkreboot, QK_RBT),
   COMBO(combo_ret, KC_ENT),
   COMBO(combo_pause, KC_MPLY),
-  COMBO(combo_sym, SYM),
-  COMBO(combo_ext, EXT),
+  COMBO(combo_bksp, KC_BSPC),
+  COMBO(combo_bkspw, A(KC_BSPC)),
+  COMBO(combo_del, KC_DEL),
+  COMBO(combo_delw, A(KC_DEL)),
 };
 
 // caps word
@@ -1519,7 +1503,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
        HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
       JP_COMM,HMEH_DOT,HHYP_MINS,   KC_C,    KC_J,                         KC_K,    KC_M,  HHYP_B,  HMEH_X,    KC_Z,
-      SYM,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  EXT
+      QK_REP,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  QK_AREP
                                     ),
   [_NONDVARF] = LAYOUT_split_3x5_3(
       JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
@@ -1626,52 +1610,16 @@ LSFT_T(JP_AMPR), LALT_T(JP_LPRN), LGUI_T(JP_RPRN), MT(MOD_LCTL,JP_SCLN),JP_AT,JP
 };
 
 
-bool get_repeat_key_eligible_user(uint16_t keycode, keyrecord_t* record, uint8_t* remembered_mods) {
-    switch (keycode) {
-        // Ignore Custom Magic Keys
-        case C_MAG_2:
-        case C_MAG_3:
-            return false;
-        case KC_A ... KC_Z:
-            if ((*remembered_mods & ~(MOD_MASK_SHIFT)) == 0) {
-                *remembered_mods &= ~MOD_MASK_SHIFT;
-            }
-            break;
-    }
-
-    return true;
-}
-
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     switch (keycode) {
-        case KC_C:
-        case KC_P:
-        case KC_D:
-        case KC_G:
-        case KC_Z: return KC_Y;
-        case KC_Y: return KC_P;
-        case KC_R: return KC_L;
-        case KC_K: return KC_S;
-        case KC_L:
-        case KC_S: return KC_K;
-        case KC_U: return KC_E;
-        case KC_E: return KC_U;
-        case KC_O: return KC_A;
-        case KC_A: return KC_O;
-        case KC_Q: return MG_MLATIV;
-        case KC_H: return MG_OA;
-        case KC_I: return MG_ON;
-        case KC_N: return MG_ION;
-        case KC_V: return MG_ER;
-        case KC_X: return MG_ES;
-        case KC_M: return MG_ENT;
-        case KC_T: return MG_MENT;
-        case KC_J: return MG_UST;
-        case KC_B: return MG_EFORE;
-        case KC_W: return MG_HICH;
+        case KC_C: return KC_O;
+        case KC_P: return KC_E;
+        case KC_G: return KC_Y;
     }
-    return true;
+
+    return KC_TRNS;
 }
+
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -1726,8 +1674,6 @@ void oled_render_layer_state(void) {
   DISPLAY_LAYER_NAME(_MSE, "MSE");
   DISPLAY_LAYER_NAME(_EXT, "EXT");
   DISPLAY_LAYER_NAME(_SYM, "SYM");
-  DISPLAY_LAYER_NAME(_NAV, "NAV");
-  DISPLAY_LAYER_NAME(_NUM, "NUM");
   DISPLAY_LAYER_NAME(_NAV_EXT, "NAV EXT");
   DISPLAY_LAYER_NAME(_SYM_NUM, "SYM NUM");
   DISPLAY_LAYER_NAME(_DVARF, "DVARF");
