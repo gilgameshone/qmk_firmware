@@ -26,7 +26,10 @@
 
 enum planck_layers {
     _DVARF,
-    _NONDVARF,
+    _QWERTY,
+    _RAISE,
+    _LOWER,
+    _ADJUST,
     _TRON_BASE,
     _TRON_RED,
     _TRON_BLUE,
@@ -35,13 +38,9 @@ enum planck_layers {
     _TRON_ROMAJI_RED,
     _TRON_ROMAJI_BLUE,
     _TRON_ROMAJI_PURPLE,
-    _NUM,
     _SYM_NUM,
-    _NAV,
     _NAV_EXT,
     _SYM,
-    _EXT,
-    _MSE,
     _FUN1,
     _FUN2,
 };
@@ -50,8 +49,7 @@ enum planck_layers {
 #define NUM LT(_SYM_NUM,KC_DEL)
 #define NAV LT(_NAV_EXT,KC_BSPC)
 #define SYM LT(_SYM,KC_TAB)
-#define EXT LT(_EXT,KC_ENT)
-#define MSE MO(_MSE)
+#define EXT KC_ENT
 #define FUN1 MO(_FUN1)
 #define FUN2 MO(_FUN2)
 
@@ -60,7 +58,7 @@ enum planck_layers {
 #define TRON_NUM LT(_SYM_NUM,KC_DEL)
 #define TRON_NAV LT(_NAV_EXT,KC_BSPC)
 #define TRON_SYM LT(_SYM,KC_TAB)
-#define TRON_EXT LT(_EXT,KC_ENT)
+#define TRON_EXT KC_ENT
 
 // Left-hand home row mods
 #define HCTL_Y LCTL_T(KC_Y)
@@ -1423,28 +1421,28 @@ bool caps_word_press_user(uint16_t keycode) {
 // SHIFT + ' = "
 const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
 const key_override_t ctl_del_bksp_override = ko_make_basic(MOD_MASK_CTRL, KC_BSPC, KC_DEL);
-const key_override_t paste_override = ko_make_basic(MOD_MASK_SHIFT, PASTE, (S(A(G(KC_V)))));
-const key_override_t comm_semi_override = ko_make_basic(MOD_MASK_SHIFT, JP_COMM, JP_SCLN);
-const key_override_t dot_coln_override = ko_make_basic(MOD_MASK_SHIFT, HMEH_DOT, JP_COLN);
-const key_override_t min_ques_override = ko_make_basic(MOD_MASK_SHIFT, HHYP_MINS, JP_QUES);
-const key_override_t lbrk_lsbk_override = ko_make_basic(MOD_MASK_SHIFT, JP_LPRN, JP_LABK);
-const key_override_t rbrk_rsbk_override = ko_make_basic(MOD_MASK_SHIFT, JP_RPRN, JP_RABK);
-const key_override_t hidden_files_mac_override = ko_make_basic(MOD_MASK_SG, HMEH_DOT, JP_RABK);
-const key_override_t kana_romaji_override = ko_make_basic(MOD_MASK_SHIFT, _KANA, _ROMAJI);
+//const key_override_t paste_override = ko_make_basic(MOD_MASK_SHIFT, PASTE, (S(A(G(KC_V)))));
+//const key_override_t comm_semi_override = ko_make_basic(MOD_MASK_SHIFT, JP_COMM, JP_SCLN);
+//const key_override_t dot_coln_override = ko_make_basic(MOD_MASK_SHIFT, HMEH_DOT, JP_COLN);
+//const key_override_t min_ques_override = ko_make_basic(MOD_MASK_SHIFT, HHYP_MINS, JP_QUES);
+//const key_override_t lbrk_lsbk_override = ko_make_basic(MOD_MASK_SHIFT, JP_LPRN, JP_LABK);
+//const key_override_t rbrk_rsbk_override = ko_make_basic(MOD_MASK_SHIFT, JP_RPRN, JP_RABK);
+//const key_override_t hidden_files_mac_override = ko_make_basic(MOD_MASK_SG, HMEH_DOT, JP_RABK);
+//const key_override_t kana_romaji_override = ko_make_basic(MOD_MASK_SHIFT, _KANA, _ROMAJI);
 
 
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &quots_quotd_override,
     &ctl_del_bksp_override,
-    &paste_override,
-    &comm_semi_override,
-    &dot_coln_override,
-    &lbrk_lsbk_override,
-    &rbrk_rsbk_override,
-    &min_ques_override,
-    &hidden_files_mac_override,
-    &kana_romaji_override,
+    //  &paste_override,
+    // &comm_semi_override,
+    // &dot_coln_override,
+    // &lbrk_lsbk_override,
+    // &rbrk_rsbk_override,
+    // &min_ques_override,
+    // &hidden_files_mac_override,
+    // &kana_romaji_override,
     NULL
 };
 
@@ -1458,12 +1456,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 JP_COMM,HMEH_DOT,HHYP_MINS,   KC_C,    KC_J, RGB_HUI, RGB_SPI,   KC_K,    KC_M,  HHYP_B,  HMEH_X,    KC_Z,
                                 XXXXXXX, XXXXXXX,    SYM,     NUM,  KC_SPC,XXXXXXX, XXXXXXX,OSM(MOD_LSFT),   NAV,  EXT,  XXXXXXX, XXXXXXX
                                 ),
-  [_NONDVARF] = LAYOUT_planck_grid(
-                                   JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,  XXXXXXX,XXXXXXX,                       KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
-                                   KC_A,    KC_I,    KC_E,    KC_Y,    KC_G,  XXXXXXX,XXXXXXX,                       KC_L,    KC_H,    KC_T,    KC_N,    KC_S,
-                                   JP_COMM,   JP_DOT, JP_MINS,   KC_C,    KC_J,  XXXXXXX,XXXXXXX,                       KC_K,    KC_M,    KC_B,    KC_X,    KC_Z,
-                                   XXXXXXX,XXXXXXX,                          SYM,     NUM,  KC_SPC,XXXXXXX,XXXXXXX,OSM(MOD_LSFT),   NAV,  EXT,XXXXXXX,XXXXXXX
+  [_QWERTY] = LAYOUT_planck_grid(
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    JP_SCLN, JP_QUOT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    JP_COMM, JP_DOT,  JP_SLSH, KC_ENT ,
+    MO(_ADJUST), KC_LCTL, KC_LALT, KC_LGUI, MO(_LOWER),   KC_SPC,  KC_SPC,  MO(_RAISE),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
                                    ),
+  [_RAISE] = LAYOUT_planck_grid(
+    JP_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   JP_MINS, JP_EQL,  JP_LBRC, JP_RBRC, JP_BSLS,
+    KC_INT4, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, KC_INT6,
+    KC_INT5, KC_INT1, KC_INT2, KC_INT3, KC_LNG1, _______, _______, KC_LNG2, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+),
+  [_LOWER] = LAYOUT_planck_grid(
+    JP_TILD, JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC, JP_CIRC, JP_AMPR,    JP_ASTR,    JP_LPRN, JP_RPRN, KC_BSPC,
+    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   JP_UNDS,    JP_PLUS,    JP_LCBR, JP_RCBR, JP_PIPE,
+    KC_INT4, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  S(KC_NUHS), S(KC_NUBS), KC_HOME, KC_END,  KC_INT6,
+    KC_INT5, KC_INT1, KC_INT2, KC_INT3, KC_LNG1, _______, _______, KC_LNG2,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY
+),
+  [_ADJUST] = LAYOUT_planck_grid(
+    _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
+    _______, _______, MU_NEXT, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, DF(_QWERTY),DF(_DVARF), _______,_______,  _______,
+    _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+                                 ),
   [_TRON_BASE] = LAYOUT_planck_grid(
                                     TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,    XXXXXXX,XXXXXXX,                    TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
                                     HSFT_TJ_TA, HOPT_TJ_TO, HCMD_TJ_KA, HCTL_TJ_TE, TJ_MO,   XXXXXXX,XXXXXXX,          TJ_WO, HCTL_TJ_I, HCMD_TJ_U, HOPT_TJ_SHI, HSFT_TJ_NN,
@@ -1512,24 +1528,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       _______, _______, _______, _______, TRJ_PE,     XXXXXXX,XXXXXXX,                   _______, KC_ENT, _______, _______, _______,
                                       XXXXXXX,XXXXXXX,                       _______,  _______,  _______,XXXXXXX,XXXXXXX, _______, _______, _______,XXXXXXX,XXXXXXX
                                       ),
-  [_NUM] = LAYOUT_planck_grid(
-                              C(KC_F2), _______, _______, _______, _______,     XXXXXXX,XXXXXXX,                  JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
-                              KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, _______,    XXXXXXX,XXXXXXX,                  JP_MINS,    KC_4,    KC_5,    KC_6, JP_SLSH,
-                              _______, _______, _______, _______ ,_______,     XXXXXXX,XXXXXXX,                  JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
-                              XXXXXXX,XXXXXXX,                      TO(_DVARF),  NUM, TO(_DVARF),XXXXXXX,XXXXXXX, JP_HASH, JP_PERC, JP_TILD,XXXXXXX,XXXXXXX
-                              ),
+
   [_SYM_NUM] = LAYOUT_planck_grid(
                                   JP_AT, JP_LBRC, JP_RBRC, JP_COLN, _______,     XXXXXXX,XXXXXXX,                 JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
                                   LSFT_T(JP_AMPR), LALT_T(JP_LPRN), LGUI_T(JP_RPRN), MT(MOD_LCTL,JP_SCLN), _______,XXXXXXX,XXXXXXX,JP_MINS,KC_4,KC_5,    KC_6, JP_SLSH,
                                   _______, _______, JP_UNDS, JP_EXLM , JP_PIPE,    XXXXXXX,XXXXXXX,                   JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
                                   XXXXXXX,XXXXXXX,                  _______,  NUM,  _______, XXXXXXX,XXXXXXX,    KC_ENT,  OSL(_SYM), _______,XXXXXXX,XXXXXXX
                                   ),
-  [_NAV] = LAYOUT_planck_grid(
-                              G(KC_Z), G(KC_X), G(KC_C), G(KC_V),LSG(KC_Z),   XXXXXXX,XXXXXXX,                 _______,  QK_LEAD, CMD_TAB, _______,  _______,
-                              KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, _______,    XXXXXXX,XXXXXXX,                LSG(KC_5), KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
-                              KC_HOME, KC_PGUP, KC_PGDN,  KC_END,A(KC_RGHT),   XXXXXXX,XXXXXXX,                LSG(KC_3), KC_MPRV,S(C(KC_TAB)),C(KC_TAB),KC_MNXT,
-                              XXXXXXX,XXXXXXX,                      KC_ESC,   TO(_DVARF), TO(_DVARF), XXXXXXX,XXXXXXX,TO(_DVARF), NAV, TO(_DVARF),XXXXXXX,XXXXXXX
-                              ),
+
   [_NAV_EXT] = LAYOUT_planck_grid(
                                   G(KC_Z), G(KC_X), G(KC_C), PASTE,LSG(KC_Z),       XXXXXXX,XXXXXXX,            LSG(KC_5),  CMD_TAB,  _EISU, _KANA,   _______,
                                   KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, KC_TAB, XXXXXXX,XXXXXXX,HYPR(KC_B), MT(MOD_RCTL,KC_MPLY), MT(MOD_RGUI,KC_VOLD), MT(MOD_RALT,KC_VOLU), MT(MOD_RSFT,KC_MUTE),
@@ -1542,21 +1548,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               JP_EISU,    FUN2,    FUN1, XXXXXXX, XXXXXXX,      XXXXXXX,XXXXXXX,                _______,  JP_YEN,  JP_DLR, _______, _______,
                               XXXXXXX,XXXXXXX,             XXXXXXX, TO(_DVARF), TO(_DVARF), XXXXXXX,XXXXXXX,  _______, _______, _______,XXXXXXX,XXXXXXX
                               ),
-  [_EXT] = LAYOUT_planck_grid(
-                              XXXXXXX,   _EISU,   _KANA, S(A(G(KC_V))), XXXXXXX,   XXXXXXX,XXXXXXX,             KC_LPAD, KC_MCTL, KC_LNG2, KC_LNG1, _ROMAJI,
-                              KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),        XXXXXXX,XXXXXXX,            KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
-                              JP_CAPS,   DFINE,   GTRNS,   GOOGL, CMD_TAB,          XXXXXXX,XXXXXXX,            KC_SCRL, XXXXXXX,     MSE, XXXXXXX, KC_PENT,
-                              XXXXXXX,XXXXXXX,               TO(_DVARF), TO(_DVARF), TO(_DVARF), XXXXXXX,XXXXXXX,   TO(_DVARF), TO(_DVARF), XXXXXXX,XXXXXXX,XXXXXXX
-                              ),
-  [_MSE] = LAYOUT_planck_grid(
-                              XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,     XXXXXXX,XXXXXXX,                 KC_PWR, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_APP,
-                              KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,      XXXXXXX,XXXXXXX,               KC_SLEP,  KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
-                              KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,     XXXXXXX,XXXXXXX,                KC_WAKE,  KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD,
-                              XXXXXXX,XXXXXXX,         TO(_DVARF), TO(_DVARF), TO(_DVARF),  XXXXXXX,XXXXXXX,  TO(_DVARF), TO(_DVARF), TO(_DVARF),XXXXXXX,XXXXXXX
-                              ),
+
   [_FUN1] = LAYOUT_planck_grid(
                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF),   XXXXXXX,XXXXXXX,                 KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-                               KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_NONDVARF),   XXXXXXX,XXXXXXX,               KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+                               KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_QWERTY),   XXXXXXX,XXXXXXX,               KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX,XXXXXXX,                XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
                                XXXXXXX,XXXXXXX,                TO(_DVARF), TO(_DVARF), TO(_DVARF), XXXXXXX,XXXXXXX,   TO(_DVARF), TO(_DVARF), TO(_DVARF),XXXXXXX,XXXXXXX
                                ),

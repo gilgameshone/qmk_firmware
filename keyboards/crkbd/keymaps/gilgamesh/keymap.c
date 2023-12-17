@@ -24,8 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 enum crkbd_layers {
-    _DVARF,
-    _NONDVARF,
     _MAGICSTURDY,
     _TRON_BASE,
     _TRON_RED,
@@ -37,75 +35,58 @@ enum crkbd_layers {
     _TRON_ROMAJI_PURPLE,
     _SYM_NUM,
     _NAV_EXT,
-    _SYM,
     _EXT,
-    _MSE,
+    _SYM,
     _FUN1,
     _FUN2,
 };
 
-#define NUM LT(_SYM_NUM,KC_DEL)
-#define NAV LT(_NAV_EXT,KC_BSPC)
-#define SYM LT(_SYM,KC_TAB)
-#define EXT LT(_EXT,KC_ENT)
+#define NUM LT(_SYM_NUM,KC_BSPC)
+#define NAV LT(_NAV_EXT,KC_ENT)
 #define MSE MO(_MSE)
 #define FUN1 MO(_FUN1)
 #define FUN2 MO(_FUN2)
 
+#define REP_NUM LT(_SYM_NUM,QK_REP)
+#define AREP_NAV LT(_NAV_EXT,QK_AREP)
+
+
 #define PASTE G(KC_V)
 
-#define TRON_NUM LT(_SYM_NUM,KC_DEL)
-#define TRON_NAV LT(_NAV_EXT,KC_BSPC)
-#define TRON_SYM LT(_SYM,KC_TAB)
-#define TRON_EXT LT(_EXT,KC_ENT)
-
-// Left-hand home row mods
-#define HCTL_Y LCTL_T(KC_Y)
-#define HCMD_E LGUI_T(KC_E)
-#define HOPT_I LALT_T(KC_I)
-#define HSFT_A LSFT_T(KC_A)
-#define HHYP_MINS HYPR_T(JP_MINS)
-#define HMEH_DOT MEH_T(JP_DOT)
-
-// Right-hand home row mods
-#define HCTL_H RCTL_T(KC_H)
-#define HCMD_T RGUI_T(KC_T)
-#define HOPT_N RALT_T(KC_N)
-#define HSFT_S RSFT_T(KC_S)
-#define HHYP_B HYPR_T(KC_B)
-#define HMEH_X MEH_T(KC_X)
+#define TRON_NUM LT(_SYM_NUM,KC_BSPC)
+#define TRON_NAV MO(_NAV_EXT)
 
 
-// TRON Left-hand home row mods
+// magic sturdy Left-hand home row mods
+#define HSCTL_D LCTL_T(KC_D)
+#define HSCMD_R LGUI_T(KC_R)
+#define HSOPT_T LALT_T(KC_T)
+#define HSSFT_S LSFT_T(KC_S)
+
+
+// magic sturdy Right-hand home row mods
+#define HSCTL_N RCTL_T(KC_N)
+#define HSCMD_E RGUI_T(KC_E)
+#define HSOPT_A RALT_T(KC_A)
+#define HSSFT_I RSFT_T(KC_I)
+
+
+
+
+// TRON Left-hand home row mods // defunct
 #define HCTL_TJ_TE TJ_TE
 #define HCMD_TJ_KA TJ_KA
 #define HOPT_TJ_TO TJ_TO
 #define HSFT_TJ_TA TJ_TA
 
 
-// TRON Right-hand home row mods
-#define HCTL_TJ_I RCTL_T(TJ_I)
-#define HCMD_TJ_U RGUI_T(TJ_U)
-#define HOPT_TJ_SHI RALT_T(TJ_SHI)
-#define HSFT_TJ_NN RSFT_T(TJ_NN)
+// TRON Right-hand home row mods // defunct
+#define HCTL_TJ_I TJ_I
+#define HCMD_TJ_U TJ_U
+#define HOPT_TJ_SHI TJ_SHI
+#define HSFT_TJ_NN TJ_NN
 
 
-// Magic Sturdy home row mods
-// Left-hand home row mods
-#define HSCTL_D LCTL_T(KC_D)
-#define HSCMD_R LGUI_T(KC_R)
-#define HSOPT_T LALT_T(KC_T)
-#define HSSFT_S LSFT_T(KC_S)
-#define HSHYP_J HYPR_T(KC_J)
-#define HSMEH_K MEH_T(KC_K)
-
-// Right-hand home row mods
-#define HSCTL_N RCTL_T(KC_N)
-#define HSCMD_E RGUI_T(KC_E)
-#define HSOPT_A RALT_T(KC_A)
-#define HSSFT_I RSFT_T(KC_I)
-#define HSHYP_COMM HYPR_T(JP_COMM)
-#define HSMEH_DOT MEH_T(JP_DOT)
 
 // This keymap uses Ikcelaks' Magic Sturdy layout for the base layer (see
 // https://github.com/Ikcelaks/keyboard_layouts). I've also made some twists of
@@ -223,13 +204,6 @@ enum custom_keycodes {
     GOOGL = SAFE_RANGE,
     GTRNS,
     DFINE,
-    CMD_TAB,
-    M_TRON,
-    M_DVARF,
-    M_NUM,
-    M_SYM,
-    M_NAV,
-    M_EXT,
     TJ_GI,
     TJ_GE,
     TJ_GU,
@@ -262,7 +236,7 @@ enum custom_keycodes {
     _KANA,
     _EISU,
     _ROMAJI,
-        TRJ_GI,
+    TRJ_GI,
     TRJ_GE,
     TRJ_GU,
     TRJ_DI,
@@ -341,57 +315,11 @@ TRJ_XA,
 TRJ_XU,
 };
 
+
+
 // macros
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // rolling home row modifier cancellation
-  switch (keycode) {
-  case HCTL_H:
-    /*
-      This piece of code nullifies the effect of Right Shift when tapping
-      the RCTL_T(KC_H) key.
-      This helps rolling over RCTL_T(KC_H) and RCMD_T(KC_T)
-      to obtain the intended "h" instead of "cmd+h" hide.
-      Consequently, cmd+h can only be obtained by tapping LCMD_E(KC_H)
-      and holding LSFT_T(KC_S) (which is the left Shift mod tap).
-    */
-
-    /*
-      Detect the tap.
-      We're only interested in overriding the tap behavior
-      z in a certain cicumstance. The hold behavior can stay the same.
-    */
-    if (record->event.pressed && record->tap.count > 0) {
-      // Detect right Command
-      if (get_mods() & MOD_BIT(KC_RGUI)) {
-        // temporarily disable right Command
-        // so that we can send KC_T and KC_H
-        // without Command on.
-        unregister_mods(MOD_BIT(KC_RGUI));
-        tap_code(KC_T);
-        tap_code(KC_H);
-        // restore the mod state
-        add_mods(MOD_BIT(KC_RGUI));
-        // to prevent QMK from processing RCTL_T(KC_N) as usual in our special case
-        return false;
-      }
-    }
-    /*else process RCTL_T(KC_H) as usual.*/
-    return true;
-  }
-  switch (keycode) {
-  case HCTL_Y:
-    if (record->event.pressed && record->tap.count > 0) {
-      if (get_mods() & MOD_BIT(KC_LGUI)) {
-        unregister_mods(MOD_BIT(KC_LGUI));
-        tap_code(KC_E);
-        tap_code(KC_Y);
-        add_mods(MOD_BIT(KC_LGUI));
-        return false;
-      }
-    }
-    return true;
-  }
   switch (keycode) {
   case LALT_T(JP_LPRN):
     if (record->tap.count && record->event.pressed) {
@@ -399,19 +327,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     }
     break;
-  }
-  // disable rolling on mute key with OPT
-  switch (keycode) {
-  case MT(MOD_RSFT,KC_MUTE):
-    if (record->event.pressed && record->tap.count > 0) {
-      if (get_mods() & MOD_BIT(KC_RALT)) {
-        unregister_mods(MOD_BIT(KC_RALT));
-        tap_code(KC_MUTE);
-        add_mods(MOD_BIT(KC_RALT));
-        return false;
-      }
-    }
-    return true;
   }
   switch (keycode) {
   case LALT_T(JP_LPRN):
@@ -434,7 +349,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->tap.count && record->event.pressed) {
       tap_code16(JP_AMPR);
       return false;
-    }
+   } 
     break;
   }
   // super cmd tab
@@ -457,7 +372,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code(KC_LNG2);
     }
     else {
-      layer_move(_DVARF);
+      layer_move(_MAGICSTURDY);
     }
     break;
   case _ROMAJI:
@@ -1408,42 +1323,28 @@ case TRJ_XA:
 };
 
 
-void matrix_scan_user(void) {
-  // super cmd tab - The very important timer.
-  if (is_cmd_tab_active) {
-    if (timer_elapsed(cmd_tab_timer) > 300) {
-      unregister_code(KC_LCMD);
-      is_cmd_tab_active = false;
-    }
-  }
-}
+
+
 
 
 
 // combos
 
-const uint16_t PROGMEM combo_capsword[] = {HCTL_Y, HCTL_H, COMBO_END};
-const uint16_t PROGMEM combo_qkboot[] = {JP_QUOT, HSFT_A, JP_COMM, COMBO_END};
-const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_G, KC_J, COMBO_END};
-const uint16_t PROGMEM combo_qkeeprom[] = {KC_W, HCTL_Y, KC_C, COMBO_END};
-const uint16_t PROGMEM combo_ret[] = {KC_C, KC_M, COMBO_END};
-const uint16_t PROGMEM combo_pause[] = {KC_W, KC_V, COMBO_END};
-const uint16_t PROGMEM combo_bksp[] = {KC_M, HHYP_B, COMBO_END};
-const uint16_t PROGMEM combo_bkspw[] = {HHYP_B, HMEH_X, COMBO_END};
-const uint16_t PROGMEM combo_del[] = {HHYP_MINS, KC_C, COMBO_END};
-const uint16_t PROGMEM combo_delw[] = {HMEH_DOT, HHYP_MINS, COMBO_END};
+const uint16_t PROGMEM combo_capsword[] = {KC_SPC, OSM(MOD_LSFT), COMBO_END};
+const uint16_t PROGMEM combo_qkboot[] = {KC_X, HSSFT_S, KC_V, COMBO_END};
+const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_Y, KC_W, COMBO_END};
+const uint16_t PROGMEM combo_qkeeprom[] = {KC_C, HSCTL_D, KC_G, COMBO_END};
+const uint16_t PROGMEM combo_fun1[] = {KC_SPC, NUM, COMBO_END};
+const uint16_t PROGMEM combo_del[] = {OSM(MOD_LSFT), NAV, COMBO_END};
+
 
 combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_capsword, CW_TOGG),
   COMBO(combo_qkboot, QK_BOOT),
   COMBO(combo_qkeeprom, EE_CLR),
   COMBO(combo_qkreboot, QK_RBT),
-  COMBO(combo_ret, KC_ENT),
-  COMBO(combo_pause, KC_MPLY),
-  COMBO(combo_bksp, KC_BSPC),
-  COMBO(combo_bkspw, A(KC_BSPC)),
+  COMBO(combo_fun1, MO(_FUN1)),
   COMBO(combo_del, KC_DEL),
-  COMBO(combo_delw, A(KC_DEL)),
 };
 
 // caps word
@@ -1471,141 +1372,110 @@ bool caps_word_press_user(uint16_t keycode) {
 
 // key overides
 // SHIFT + ' = "
-const key_override_t quots_quotd_override = ko_make_basic(MOD_MASK_SHIFT, JP_QUOT, JP_DQUO);
-const key_override_t ctl_del_bksp_override = ko_make_basic(MOD_MASK_CTRL, KC_BSPC, KC_DEL);
-const key_override_t paste_override = ko_make_basic(MOD_MASK_SHIFT, PASTE, (S(A(G(KC_V)))));
-const key_override_t comm_semi_override = ko_make_basic(MOD_MASK_SHIFT, JP_COMM, JP_SCLN);
-const key_override_t dot_coln_override = ko_make_basic(MOD_MASK_SHIFT, HMEH_DOT, JP_COLN);
-const key_override_t min_ques_override = ko_make_basic(MOD_MASK_SHIFT, HHYP_MINS, JP_QUES);
-const key_override_t lbrk_lsbk_override = ko_make_basic(MOD_MASK_SHIFT, JP_LPRN, JP_LABK);
-const key_override_t rbrk_rsbk_override = ko_make_basic(MOD_MASK_SHIFT, JP_RPRN, JP_RABK);
-const key_override_t hidden_files_mac_override = ko_make_basic(MOD_MASK_SG, HMEH_DOT, JP_RABK);
-
+const key_override_t comm_quo_override = ko_make_basic(MOD_MASK_SHIFT, HSHYP_COMM, JP_QUOT);
+const key_override_t dot_dquo_override = ko_make_basic(MOD_MASK_SHIFT, HSMEH_DOT, JP_DQUO);
+const key_override_t min_ques_override = ko_make_basic(MOD_MASK_SHIFT, JP_MINS, JP_QUES);
 
 
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &quots_quotd_override,
-    &ctl_del_bksp_override,
-    &paste_override,
-    &comm_semi_override,
-    &dot_coln_override,
-    &lbrk_lsbk_override,
-    &rbrk_rsbk_override,
+    &comm_quo_override,
+    &dot_dquo_override,
     &min_ques_override,
-    &hidden_files_mac_override,
     NULL
 };
 
 // keymap
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_DVARF] = LAYOUT_split_3x5_3(
-      JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
-       HSFT_A,  HOPT_I,  HCMD_E,  HCTL_Y,    KC_G,                         KC_L,  HCTL_H,  HCMD_T,  HOPT_N,  HSFT_S,
-      JP_COMM,HMEH_DOT,HHYP_MINS,   KC_C,    KC_J,                         KC_K,    KC_M,  HHYP_B,  HMEH_X,    KC_Z,
-      QK_REP,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  QK_AREP
-                                    ),
-  [_NONDVARF] = LAYOUT_split_3x5_3(
-      JP_QUOT,    KC_U,    KC_O,    KC_W,    KC_P,                         KC_Q,    KC_V,    KC_D,    KC_R,    KC_F,
-         KC_A,    KC_I,    KC_E,    KC_Y,    KC_G,                         KC_L,    KC_H,    KC_T,    KC_N,    KC_S,
-      JP_COMM,   JP_DOT, JP_MINS,   KC_C,    KC_J,                         KC_K,    KC_M,    KC_B,    KC_X,    KC_Z,
-      SYM,     NUM,  KC_SPC,OSM(MOD_LSFT),   NAV,  EXT
-                                   ),
   [_MAGICSTURDY] = LAYOUT_split_3x5_3(
-        KC_X,       KC_M,    KC_L,    KC_C,    KC_P,                        KC_B,  C_MAGIC,    KC_U,    KC_O,    KC_Q,
-        KC_S, KC_T, KC_R, KC_D,    KC_Y,                        KC_F,  KC_N, KC_E, KC_A, KC_I,
-        KC_V,    HSMEH_K, HSHYP_J,    KC_G,    KC_W,                        KC_Z,     KC_H,HSHYP_COMM,HSMEH_DOT,JP_MINS,
-        QK_REP, _______,_______,_______,_______,_______
+        KC_X,     KC_M,    KC_L,    KC_C,    KC_P,                        KC_B,  KC_NUBS,    KC_U,    KC_O,    KC_Q,
+        HSSFT_S,  HSOPT_T, HSCMD_R, HSCTL_D, KC_Y,                        KC_F,  HSCTL_N, HSCMD_E, HSOPT_A, HSSFT_I,
+        KC_V,     KC_K,    KC_J,    KC_G,    KC_W,                        KC_Z,     KC_H, JP_COMM, KP_DOT,  JP_MINS,
+                                 QK_REP,     NUM,  KC_SPC, OSM(MOD_LSFT),   NAV,  QK_AREP
   ),
   [_TRON_BASE] = LAYOUT_split_3x5_3(
         TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,                        TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
         TJ_TA,   TJ_TO,   TJ_KA,   TJ_TE,   TJ_MO,                        TJ_WO,    TJ_I,    TJ_U,  TJ_SHI,   TJ_NN,
         TJ_MA,   TJ_RI,   TJ_NI,   TJ_SA,   TJ_NA,                        TJ_SU,  TJ_TSU,TJ_DOUTEN,TJ_KUTEN,TJ_XTSU,
-        TRON_SYM,  TRON_NUM,  MO(_TRON_RED), MO(_TRON_BLUE),TRON_NAV, TRON_EXT
+                            _______,  TRON_NUM,  MO(_TRON_RED), MO(_TRON_BLUE),TRON_NAV,  _______
                          ),
   [_TRON_BLUE] = LAYOUT_split_3x5_3(
         TJ_BI,   TJ_ZO,   TJ_GO,  TJ_BA,    TJ_BO,                         TJ_E,   TJ_KE,   TJ_ME,   TJ_MU,  TJ_RO,
         TJ_DA,   TJ_DO,   TJ_GA,  TJ_DE,    TJ_BU,                         TJ_O,  TJ_CHI,TJ_CHOUONNPU,TJ_MI,  TJ_YA,
         TJ_XE,   TJ_XO,    TJ_ZE,  TJ_ZA,   TJ_BE,                        TJ_WA,   TJ_XI,   TJ_XA, _______,   TJ_XU,
-                       _______,  _______, MO(_TRON_PURPLE),    _______, _______, _______
+                            _______,  _______, MO(_TRON_PURPLE),    _______, _______, _______
                                     ),
   [_TRON_RED] = LAYOUT_split_3x5_3(
         TJ_HI,   TJ_SO,TJ_NAKAGURO,TJ_XYA,  TJ_HO,                        TJ_GI,   TJ_GE,  TJ_GU,  _______, _______,
         TJ_NU,   TJ_NE,  TJ_XYU,   TJ_YO,   TJ_FU,                         TJ_O,  TJ_DZI,  TJ_VU,    TJ_JI, _______,
         TJ_XE,   TJ_XO,   TJ_SE,   TJ_YU,   TJ_HE,                        TJ_ZU,  TJ_DZU,TJ_LKAGIKAKO,TJ_RKAGIKAKO, TJ_XU,
-                               _______,  _______, _______,    MO(_TRON_PURPLE), _______, _______
+                            _______,  _______, _______,    MO(_TRON_PURPLE), _______, _______
                                     ),
   [_TRON_PURPLE] = LAYOUT_split_3x5_3(
       TJ_PI,   _______, _______, TJ_PA,  TJ_PO,                         _______, _______, _______, _______, _______,
       _______, _______, _______, _______, TJ_PU,                         KC_SPC, C(JP_J), C(JP_K), C(JP_L), C(JP_SCLN),
       _______, _______, _______, _______, TJ_PE,                        _______, KC_ENT, _______, _______, _______,
-                                  _______,  _______,  _______, _______, _______, _______
+                            _______,  _______,  _______,            _______, _______, _______
                                     ),
   [_TRON_ROMAJI_BASE] = LAYOUT_split_3x5_3(
-         TRJ_RA,   TRJ_RU,   TRJ_KO,   TRJ_HA,  TRJ_XYO,                     TRJ_KI,   TRJ_NO,   TRJ_KU,    TRJ_A,   TRJ_RE,
-         TRJ_TA, TRJ_TO, TRJ_KA, TRJ_TE, TRJ_MO,       TRJ_WO, TRJ_I, TRJ_U, TRJ_SHI, TRJ_NN,
-         TRJ_MA,   TRJ_RI,   TRJ_NI,   TRJ_SA,   TRJ_NA,                      TRJ_SU,  TRJ_TSU,TRJ_DOUTEN,TRJ_KUTEN,TRJ_XTSU,
-         TRON_SYM,  TRON_NUM,  MO(_TRON_ROMAJI_RED), MO(_TRON_ROMAJI_BLUE),TRON_NAV, TRON_EXT
+        TRJ_RA, TRJ_RU, TRJ_KO, TRJ_HA, TRJ_XYO,                     TRJ_KI,  TRJ_NO,  TRJ_KU,  TRJ_A,  TRJ_RE,
+        TRJ_TA, TRJ_TO, TRJ_KA, TRJ_TE,  TRJ_MO,                     TRJ_WO,   TRJ_I,  TRJ_U, TRJ_SHI,  TRJ_NN,
+        TRJ_MA,   TRJ_RI,   TRJ_NI,   TRJ_SA,   TRJ_NA,              TRJ_SU, TRJ_TSU,TRJ_DOUTEN,TRJ_KUTEN,TRJ_XTSU,
+                   _______,  TRON_NUM,  MO(_TRON_ROMAJI_RED), MO(_TRON_ROMAJI_BLUE),TRON_NAV,  _______
                                            ),
   [_TRON_ROMAJI_BLUE] = LAYOUT_split_3x5_3(
-       TRJ_BI,   TRJ_ZO,   TRJ_GO,  TRJ_BA,    TRJ_BO,                       TRJ_E,   TRJ_KE,   TRJ_ME,   TRJ_MU,  TRJ_RO,
-       TRJ_DA,   TRJ_DO,   TRJ_GA,  TRJ_DE,    TRJ_BU,                   TRJ_O,  TRJ_CHI,TRJ_CHOUONNPU,TRJ_MI,  TRJ_YA,
-       TRJ_XE,   TRJ_XO,    TRJ_ZE,  TRJ_ZA,   TRJ_BE,                     TRJ_WA,   TRJ_XI,   TRJ_XA, _______,   TRJ_XU,
-            _______,  _______, MO(_TRON_ROMAJI_PURPLE),    _______, _______, _______
+        TRJ_BI, TRJ_ZO, TRJ_GO, TRJ_BA, TRJ_BO,                      TRJ_E,   TRJ_KE,   TRJ_ME,  TRJ_MU,   TRJ_RO,
+        TRJ_DA, TRJ_DO, TRJ_GA, TRJ_DE, TRJ_BU,                      TRJ_O,  TRJ_CHI,TRJ_CHOUONNPU,TRJ_MI, TRJ_YA,
+        TRJ_XE, TRJ_XO, TRJ_ZE, TRJ_ZA, TRJ_BE,                     TRJ_WA,   TRJ_XI,   TRJ_XA, _______,   TRJ_XU,
+                   _______,  _______, MO(_TRON_ROMAJI_PURPLE),    _______, _______, _______
                                            ),
   [_TRON_ROMAJI_RED] = LAYOUT_split_3x5_3(
-        TRJ_HI,   TRJ_SO,TRJ_NAKAGURO,TRJ_XYA,  TRJ_HO,                     TRJ_GI,   TRJ_GE,  TRJ_GU,  _______, _______,
-       TRJ_NU,   TRJ_NE,  TRJ_XYU,   TRJ_YO,   TRJ_FU,                      TRJ_O,  TRJ_DZI,  TRJ_VU,    TRJ_JI, _______,
-        TRJ_XE,   TRJ_XO,   TRJ_SE,   TRJ_YU,   TRJ_HE,                      TRJ_ZU,  TRJ_DZU,TRJ_LKAGIKAKO,TRJ_RKAGIKAKO, TRJ_XU,
-         _______,  _______, _______,   MO(_TRON_ROMAJI_PURPLE), _______, _______
-                                          ),
+       TRJ_HI, TRJ_SO,TRJ_NAKAGURO,TRJ_XYA, TRJ_HO,                 TRJ_GI,   TRJ_GE,  TRJ_GU,  _______, _______,
+       TRJ_NU, TRJ_NE, TRJ_XYU, TRJ_YO,  TRJ_FU,                     TRJ_O,  TRJ_DZI,  TRJ_VU,   TRJ_JI, _______,
+       TRJ_XE, TRJ_XO,  TRJ_SE, TRJ_YU,  TRJ_HE,                    TRJ_ZU,  TRJ_DZU,TRJ_LKAGIKAKO,TRJ_RKAGIKAKO, TRJ_XU,
+                         _______,  _______, _______,   MO(_TRON_ROMAJI_PURPLE), _______, _______
+                                           ),
   [_TRON_ROMAJI_PURPLE] = LAYOUT_split_3x5_3(
-          TRJ_PI,   _______, _______, TRJ_PA,  TRJ_PO,                    _______, _______, _______, _______, _______,
-         _______, _______, _______, _______, TRJ_PU,                       KC_SPC, C(JP_J), C(JP_K), C(JP_L), C(JP_SCLN),
-         _______, _______, _______, _______, TRJ_PE,                    _______, KC_ENT, _______, _______, _______,
-       _______,  _______,  _______, _______, _______, _______
+        TRJ_PI,  _______, _______, TRJ_PA,  TRJ_PO,                    _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, TRJ_PU,                     KC_SPC, C(JP_J), C(JP_K), C(JP_L), C(JP_SCLN),
+        _______, _______, _______, _______, TRJ_PE,                    _______, KC_ENT, _______, _______, _______,
+                               _______,  _______,  _______, _______, _______, _______
    ),
   [_SYM_NUM] = LAYOUT_split_3x5_3(
-       _______ , JP_LBRC, JP_RBRC, JP_COLN, C(KC_F2),                      JP_PLUS,    KC_7,    KC_8,    KC_9, JP_ASTR,
-LSFT_T(JP_AMPR), LALT_T(JP_LPRN), LGUI_T(JP_RPRN), MT(MOD_LCTL,JP_SCLN),JP_AT,JP_MINS,KC_4,KC_5,    KC_6, JP_SLSH,
-     _______, _______, JP_UNDS, JP_EXLM , JP_PIPE,                       JP_EQL,    KC_1,    KC_2,    KC_3,    KC_0,
+      JP_QUES, JP_LBRC, JP_RBRC, JP_COLN, C(KC_F2),              JP_PLUS,  KC_7, KC_8, KC_9, JP_ASTR,
+      JP_AMPR, JP_LPRN, JP_RPRN, JP_SCLN, JP_AT,                 JP_MINS,  KC_4, KC_5, KC_6, JP_SLSH,
+      JP_DQUO, JP_QUOT, JP_UNDS, JP_EXLM, JP_PIPE,                JP_EQL,  KC_1, KC_2, KC_3,    KC_0,
                                   _______,  NUM,  _______,     KC_ENT,  OSL(_SYM), _______
                               ),
-    [_NAV_EXT] = LAYOUT_split_3x5_3(
-      G(KC_Z), G(KC_X), G(KC_C), PASTE,LSG(KC_Z),                   LSG(KC_5),  CMD_TAB,  _EISU, _KANA,   _ROMAJI,
-      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, KC_TAB, HYPR(KC_B), MT(MOD_RCTL,KC_MPLY), MT(MOD_RGUI,KC_VOLD), MT(MOD_RALT,KC_VOLU), MT(MOD_RSFT,KC_MUTE),
-     KC_HOME, KC_PGUP, KC_PGDN,  KC_END,   KC_ESC,                     C(KC_F2),   GOOGL,   GTRNS,   DFINE, JP_CAPS,
-                                  _______,     KC_ESC, KC_TAB,  _______, NAV,  _______
-                              ),
-  [_SYM] = LAYOUT_split_3x5_3(
-      JP_ZKHK, JP_MHEN, JP_HENK, JP_KANA, XXXXXXX,                      _______, JP_HASH, JP_LABK, JP_RABK, JP_CIRC,
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_BSLS,                      JP_TILD, JP_PERC, JP_LCBR, JP_RCBR,  JP_GRV,
-      JP_EISU,    FUN2,    FUN1, XXXXXXX, XXXXXXX,                      _______,  JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
-                                XXXXXXX, TO(_DVARF), TO(_DVARF),   _______, _______, _______
+  [_NAV_EXT] = LAYOUT_split_3x5_3(
+      G(KC_Z), G(KC_X), G(KC_C), PASTE,   LSG(KC_Z),              _______,    _______,   _EISU,   _KANA, _ROMAJI,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, KC_TAB,                 KC_DEL,     KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
+      KC_HOME, KC_PGUP, KC_PGDN, KC_END,  KC_INS,                 HYPR(KC_B), KC_MPLY, KC_VOLD, KC_VOLU, KC_MUTE,
+      _______,     KC_ESC, OSL(EXT),  _______, NAV,  _______
                               ),
   [_EXT] = LAYOUT_split_3x5_3(
-      XXXXXXX,   _EISU,   _KANA, S(A(G(KC_V))), XXXXXXX,                KC_LPAD, KC_MCTL, KC_LNG2, KC_LNG1, KC_EJCT,
-      KC_MUTE, KC_VOLU, KC_VOLD, KC_MPLY,HYPR(KC_B),                    KC_PAUS, KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
-      JP_CAPS,   DFINE,   GTRNS,   GOOGL, CMD_TAB,                      KC_SCRL, XXXXXXX,     MSE, XXXXXXX, KC_PENT,
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), XXXXXXX
+      MEH(X),  MEH(M),  MEH(L),  LSAG(V), MEH(P),                  LSG(KC_5), _______, _______, _______, _______,
+      MEH(S),  MEH(T),  MEH(R),   MEH(D), HYPR(Y),                   _______, _______, _______, _______, _______,
+      MEH(V),  MEH(K),  MEH(J),   MEH(G), MEH(W),                    _______,   GOOGL,   GTRNS,   DFINE, JP_CAPS,
+                                  _______,     _______, _______,  MEH(SPC), _______,  _______
                               ),
-  [_MSE] = LAYOUT_split_3x5_3(
-      XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3, XXXXXXX,                      KC_PWR, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_APP,
-      KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R, XXXXXXX,                     KC_SLEP,  KC_RCTL, KC_RCMD, KC_ROPT, KC_RSFT,
-      KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX,                     KC_WAKE,  KC_MRWD, XXXXXXX, XXXXXXX, KC_MFFD,
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
-                                  ),
+  [_SYM] = LAYOUT_split_3x5_3(
+      JP_ZKHK, JP_MHEN, JP_HENK, JP_KANA, _______,                      LSA(JP_8), JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_BSLS,                      JP_TILD,   JP_PERC, JP_LCBR, JP_RCBR,    JP_GRV,
+      JP_EISU,    FUN2,    FUN1,  KC_LPAD, KC_SCRL,                     KC_NUHS,    JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
+                                XXXXXXX, XXXXXXX, XXXXXXX,   _______, _______, _______
+                              ),
   [_FUN1] = LAYOUT_split_3x5_3(
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,DF(_DVARF),                    KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL,DF(_NONDVARF),                  KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(_MAGICSTURDY),                      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX,                    KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(_MAGICSTURDY),          KC_PAUS,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
+                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                                ),
   [_FUN2] = LAYOUT_split_3x5_3(
-      QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX,                      XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
-       QK_RBT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
-                                 TO(_DVARF), TO(_DVARF), TO(_DVARF),    TO(_DVARF), TO(_DVARF), TO(_DVARF)
+     S(KC_F21), S(KC_F22), S(KC_F23), S(KC_F24), S(KC_F10),          XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
+     S(KC_F17), S(KC_F18), S(KC_F19), S(KC_F20), S(KC_F11),          XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
+     S(KC_F13), S(KC_F14), S(KC_F15), S(KC_F16), S(KC_F12),          XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
+                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                                )
 };
 
@@ -1645,6 +1515,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+
+
 // OLED STUFF
 
 #ifdef OLED_ENABLE
@@ -1671,13 +1543,10 @@ void oled_render_layer_state(void) {
   }
   DISPLAY_LAYER_NAME(_FUN2, "FUN 2");
   DISPLAY_LAYER_NAME(_FUN1, "FUN 1");
-  DISPLAY_LAYER_NAME(_MSE, "MSE");
-  DISPLAY_LAYER_NAME(_EXT, "EXT");
   DISPLAY_LAYER_NAME(_SYM, "SYM");
+  DISPLAY_LAYER_NAME(_EXT, "EXT");
   DISPLAY_LAYER_NAME(_NAV_EXT, "NAV EXT");
   DISPLAY_LAYER_NAME(_SYM_NUM, "SYM NUM");
-  DISPLAY_LAYER_NAME(_DVARF, "DVARF");
-  DISPLAY_LAYER_NAME(_NONDVARF, "NON-HRM DVARF");
   DISPLAY_LAYER_NAME(_MAGICSTURDY, "MAGIC STURDY");
   DISPLAY_LAYER_NAME(_TRON_BASE, "TRON BASE");
   DISPLAY_LAYER_NAME(_TRON_BLUE, "TRON BLUE");
