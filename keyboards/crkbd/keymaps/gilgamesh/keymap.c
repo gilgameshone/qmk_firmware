@@ -29,29 +29,21 @@ enum crkbd_layers {
     _TRON_RED,
     _TRON_BLUE,
     _TRON_PURPLE,
-    _TRON_ROMAJI_BASE,
-    _TRON_ROMAJI_RED,
-    _TRON_ROMAJI_BLUE,
-    _TRON_ROMAJI_PURPLE,
-    _SYM_NUM,
-    _NAV_EXT,
-    _EXT,
+    _NUM,
+    _NAV,
     _SYM,
-    _FUN1,
-    _FUN2,
+    _FUN,
 };
 
-#define NUM LT(_SYM_NUM,KC_BSPC)
-#define NAV LT(_NAV_EXT,KC_ENT)
-#define MSE MO(_MSE)
-#define FUN1 MO(_FUN1)
-#define FUN2 MO(_FUN2)
-
+#define NUM LT(_NUM,KC_BSPC)
+#define NAV LT(_NAV,KC_ENT)
+#define EXT LT(_EXT,KC_SPC)
+#define FUN MO(_FUN)
 
 #define PASTE G(KC_V)
 
-#define TRON_NUM LT(_SYM_NUM,KC_BSPC)
-#define TRON_NAV MO(_NAV_EXT)
+#define TRON_NUM LT(_NUM,KC_BSPC)
+#define TRON_NAV MO(_NAV)
 
 
 // magic sturdy Left-hand home row mods
@@ -66,7 +58,6 @@ enum crkbd_layers {
 #define HSCMD_E RGUI_T(KC_E)
 #define HSOPT_A RALT_T(KC_A)
 #define HSSFT_I RSFT_T(KC_I)
-
 
 
 
@@ -232,118 +223,8 @@ enum custom_keycodes {
     TJ_RKAGIKAKO,
     _KANA,
     _EISU,
-    _ROMAJI,
-    TRJ_GI,
-    TRJ_GE,
-    TRJ_GU,
-    TRJ_DI,
-    TRJ_DZI,
-    TRJ_VU,
-    TRJ_JI,
-    TRJ_ZU,
-    TRJ_DZU,
-    TRJ_BI,
-    TRJ_ZO,
-    TRJ_GO,
-    TRJ_BA,
-    TRJ_BO,
-    TRJ_DA,
-    TRJ_DO,
-    TRJ_GA,
-    TRJ_DE,
-    TRJ_BU,
-    TRJ_ZE,
-    TRJ_ZA,
-    TRJ_BE,
-    TRJ_PA,
-    TRJ_PI,
-    TRJ_PU,
-    TRJ_PE,
-    TRJ_PO,
-TRJ_RA,
-TRJ_RU,
-TRJ_KO,
-TRJ_HA,
-TRJ_XYO,
-TRJ_KI,
-TRJ_NO,
-TRJ_KU,
-TRJ_RE,
-TRJ_TA,
-TRJ_TO,
-TRJ_KA,
-TRJ_TE,
-TRJ_MO,
-TRJ_WO,
-TRJ_SHI,
-TRJ_NN,
-TRJ_MA,
-TRJ_RI,
-TRJ_NI,
-TRJ_SA,
-TRJ_NA,
-TRJ_SU,
-TRJ_TSU,
-TRJ_XTSU,
-TRJ_HI,
-TRJ_SO,
-TRJ_XYA,
-TRJ_HO,
-TRJ_KE,
-TRJ_ME,
-TRJ_MU,
-TRJ_RO,
-TRJ_NU,
-TRJ_NE,
-TRJ_XYU,
-TRJ_YO,
-TRJ_FU,
-TRJ_CHI,
-TRJ_MI,
-TRJ_YA,
-TRJ_XE,
-TRJ_XO,
-TRJ_SE,
-TRJ_YU,
-TRJ_HE,
-TRJ_WA,
-TRJ_XI,
-TRJ_XA,
-TRJ_XU,
 };
 
-
-// Tap Dance keycodes
-
-
-
-
-// Define a type containing as many tapdance states as you need
-typedef enum {
-    TD_NONE,
-    TD_UNKNOWN,
-    TD_SINGLE_TAP,
-    TD_SINGLE_HOLD,
-    TD_DOUBLE_SINGLE_TAP
-} td_state_t;
-
-typedef struct {
-    bool is_press_action;
-    td_state_t state;
-} td_tap_t;
-
-enum  {
-  NAV_REP, // Our example key: `NAV` when held, `QK_REP` when tapped. Add additional keycodes for each tapdance.
-};
-
-// Declare the functions to be used with your tap dance key(s)
-
-// Function associated with all tap dances
-td_state_t cur_dance(tap_dance_state_t *state);
-
-// Functions associated with individual tap dances
-void nav_rep_finished(tap_dance_state_t *state, void *user_data);
-void nav_rep_reset(tap_dance_state_t *state, void *user_data);
 
 
 
@@ -358,14 +239,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     else {
       layer_move(_MAGICSTURDY);
-    }
-    return false;
-  case _ROMAJI:
-    if (record->event.pressed) {
-      tap_code(KC_LNG1);
-    }
-    else {
-      layer_move(_TRON_ROMAJI_BASE);
     }
     return false;
   case _KANA:
@@ -629,625 +502,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //
     }
     return false;
-        // tron romaji
-
-  case TRJ_GI:
-    if (record->event.pressed) {
-      tap_code(KC_G);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-return false;
-      case TRJ_GE:
-    if (record->event.pressed) {
-      tap_code(KC_G);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-return false;
-      case TRJ_GU:
-    if (record->event.pressed) {
-      tap_code(KC_G);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-return false;
-  case TRJ_DI:
-    if (record->event.pressed) {
-      tap_code(KC_D);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-return false;
-      case TRJ_DZI:
-    if (record->event.pressed) {
-      tap_code(KC_D);
-      tap_code(KC_Z);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-return false;
-      case TRJ_VU:
-    if (record->event.pressed) {
-      tap_code(KC_V);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-return false;
-      case TRJ_JI:
-    if (record->event.pressed) {
-      tap_code(KC_J);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-return false;
-      case TRJ_ZU:
-    if (record->event.pressed) {
-      tap_code(KC_Z);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-return false;
-    case TRJ_DZU:
-    if (record->event.pressed) {
-      tap_code(KC_D);
-      tap_code(KC_Z);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-return false;
-      case TRJ_BI:
-    if (record->event.pressed) {
-      tap_code(KC_B);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-return false;
-      case TRJ_ZO:
-    if (record->event.pressed) {
-      tap_code(KC_Z);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-return false;
-      case TRJ_GO:
-    if (record->event.pressed) {
-      tap_code(KC_G);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_BA:
-    if (record->event.pressed) {
-      tap_code(KC_B);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_BO:
-    if (record->event.pressed) {
-      tap_code(KC_B);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_DA:
-    if (record->event.pressed) {
-      tap_code(KC_D);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_DO:
-    if (record->event.pressed) {
-      tap_code(KC_D);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-return false;
-      case TRJ_GA:
-    if (record->event.pressed) {
-      tap_code(KC_G);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_DE:
-    if (record->event.pressed) {
-      tap_code(KC_D);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_BU:
-    if (record->event.pressed) {
-      tap_code(KC_B);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_ZE:
-    if (record->event.pressed) {
-      tap_code(KC_Z);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-return false;
-      case TRJ_ZA:
-    if (record->event.pressed) {
-      tap_code(KC_Z);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_BE:
-    if (record->event.pressed) {
-      tap_code(KC_B);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_PA:
-    if (record->event.pressed) {
-      tap_code(KC_P);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_PI:
-    if (record->event.pressed) {
-      tap_code(KC_P);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_PU:
-    if (record->event.pressed) {
-      tap_code(KC_P);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_PE:
-    if (record->event.pressed) {
-      tap_code(KC_P);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_PO:
-    if (record->event.pressed) {
-      tap_code(KC_P);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_RA:
-    if (record->event.pressed) {
-      tap_code(KC_R);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_RU:
-    if (record->event.pressed) {
-      tap_code(KC_R);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-return false;
-          case TRJ_KO:
-    if (record->event.pressed) {
-      tap_code(KC_K);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_HA:
-    if (record->event.pressed) {
-      tap_code(KC_H);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_XYO:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_Y);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_KI:
-    if (record->event.pressed) {
-      tap_code(KC_K);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-      case TRJ_NO:
-    if (record->event.pressed) {
-      tap_code(KC_N);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_KU:
-    if (record->event.pressed) {
-      tap_code(KC_K);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_RE:
-    if (record->event.pressed) {
-      tap_code(KC_R);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_TA:
-    if (record->event.pressed) {
-      tap_code(KC_T);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_TO:
-    if (record->event.pressed) {
-      tap_code(KC_T);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_KA:
-    if (record->event.pressed) {
-      tap_code(KC_K);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_TE:
-    if (record->event.pressed) {
-      tap_code(KC_T);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_MO:
-    if (record->event.pressed) {
-      tap_code(KC_M);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_WO:
-    if (record->event.pressed) {
-      tap_code(KC_W);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_SHI:
-    if (record->event.pressed) {
-      tap_code(KC_S);
-      tap_code(KC_H);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_NN:
-    if (record->event.pressed) {
-      tap_code(KC_N);
-      tap_code(KC_N);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_MA:
-    if (record->event.pressed) {
-      tap_code(KC_M);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_RI:
-    if (record->event.pressed) {
-      tap_code(KC_R);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_NI:
-    if (record->event.pressed) {
-      tap_code(KC_N);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_SA:
-    if (record->event.pressed) {
-      tap_code(KC_S);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_SU:
-    if (record->event.pressed) {
-      tap_code(KC_S);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_TSU:
-    if (record->event.pressed) {
-      tap_code(KC_T);
-      tap_code(KC_S);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-     case TRJ_XTSU:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_T);
-      tap_code(KC_S);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_HI:
-    if (record->event.pressed) {
-      tap_code(KC_H);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-              case TRJ_SO:
-    if (record->event.pressed) {
-      tap_code(KC_S);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-              case TRJ_XYA:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_Y);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_HO:
-    if (record->event.pressed) {
-      tap_code(KC_H);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_KE:
-    if (record->event.pressed) {
-      tap_code(KC_K);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-          case TRJ_ME:
-    if (record->event.pressed) {
-      tap_code(KC_M);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-case TRJ_MU:
-    if (record->event.pressed) {
-      tap_code(KC_M);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-case TRJ_RO:
-    if (record->event.pressed) {
-      tap_code(KC_R);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-case TRJ_NU:
-    if (record->event.pressed) {
-      tap_code(KC_N);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-case TRJ_NE:
-    if (record->event.pressed) {
-      tap_code(KC_N);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-case TRJ_XYU:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_Y);
-            tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-case TRJ_YO:
-    if (record->event.pressed) {
-      tap_code(KC_Y);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-case TRJ_FU:
-    if (record->event.pressed) {
-      tap_code(KC_F);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-case TRJ_CHI:
-    if (record->event.pressed) {
-      tap_code(KC_C);
-      tap_code(KC_H);
-            tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-case TRJ_MI:
-    if (record->event.pressed) {
-      tap_code(KC_M);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-    case TRJ_YA:
-    if (record->event.pressed) {
-      tap_code(KC_Y);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-case TRJ_XE:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-case TRJ_XO:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_O);
-    } else {
-      //
-    }
-    return false;
-    case TRJ_SE:
-    if (record->event.pressed) {
-      tap_code(KC_S);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-case TRJ_YU:
-    if (record->event.pressed) {
-      tap_code(KC_Y);
-      tap_code(KC_U);
-    } else {
-      //
-    }
-    return false;
-    case TRJ_HE:
-    if (record->event.pressed) {
-      tap_code(KC_H);
-      tap_code(KC_E);
-    } else {
-      //
-    }
-    return false;
-    case TRJ_WA:
-    if (record->event.pressed) {
-      tap_code(KC_W);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-case TRJ_XI:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_I);
-    } else {
-      //
-    }
-    return false;
-case TRJ_XA:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_A);
-    } else {
-      //
-    }
-    return false;
-    case TRJ_XU:
-    if (record->event.pressed) {
-      tap_code(KC_X);
-      tap_code(KC_U);
-    } else {
-      //
-    }
 
     // other macros
   case GOOGL:
@@ -1315,12 +569,12 @@ case TRJ_XA:
 
 // combos
 
-const uint16_t PROGMEM combo_capsword[] = {KC_SPC, OSM(MOD_LSFT), COMBO_END};
+const uint16_t PROGMEM combo_capsword[] = {EXT, OSM(MOD_LSFT), COMBO_END};
 const uint16_t PROGMEM combo_qkboot[] = {KC_X, HSSFT_S, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_Y, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_C, HSCTL_D, KC_G, COMBO_END};
-const uint16_t PROGMEM combo_fun1[] = {KC_SPC, NUM, COMBO_END};
-const uint16_t PROGMEM combo_del[] = {OSM(MOD_LSFT), NAV, COMBO_END};
+const uint16_t PROGMEM combo_fun[] = {EXT, NUM, COMBO_END};
+const uint16_t PROGMEM combo_win[] = {OSM(MOD_LSFT), NAV, COMBO_END};
 
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -1328,8 +582,8 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_qkboot, QK_BOOT),
   COMBO(combo_qkeeprom, EE_CLR),
   COMBO(combo_qkreboot, QK_RBT),
-  COMBO(combo_fun1, MO(_FUN1)),
-  COMBO(combo_del, KC_DEL),
+  COMBO(combo_fun, MO(_FUN)),
+  COMBO(combo_win, MO(_WIN)),
 };
 
 // caps word
@@ -1344,7 +598,6 @@ bool caps_word_press_user(uint16_t keycode) {
         // Keycodes that continue Caps Word, without shifting.
         case KC_1 ... KC_0:
         case KC_BSPC:
-        case KC_DEL:
         case JP_UNDS:
         case JP_MINS:
         case JP_AMPR:
@@ -1378,7 +631,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_X,     KC_M,    KC_L,    KC_C,    KC_P,                        KC_B,  KC_NUBS,    KC_U,    KC_O,    KC_Q,
         HSSFT_S,  HSOPT_T, HSCMD_R, HSCTL_D, KC_Y,                        KC_F,  HSCTL_N, HSCMD_E, HSOPT_A, HSSFT_I,
         KC_V,     KC_K,    KC_J,    KC_G,    KC_W,                        KC_Z,     KC_H, JP_COMM, JP_DOT,  JP_MINS,
-        QK_REP,     NUM,  KC_SPC, OSM(MOD_LSFT),   NAV,  TD(NAV_REP)
+        _______,   NUM,  EXT, OSM(MOD_LSFT),   NAV,  QK_REP,
   ),
   [_TRON_BASE] = LAYOUT_split_3x5_3(
         TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,                        TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
@@ -1404,66 +657,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, TJ_PE,                        _______, KC_ENT, _______, _______, _______,
                             _______,  _______,  _______,            _______, _______, _______
                                     ),
-  [_TRON_ROMAJI_BASE] = LAYOUT_split_3x5_3(
-        TRJ_RA, TRJ_RU, TRJ_KO, TRJ_HA, TRJ_XYO,                     TRJ_KI,  TRJ_NO,  TRJ_KU,  TRJ_A,  TRJ_RE,
-        TRJ_TA, TRJ_TO, TRJ_KA, TRJ_TE,  TRJ_MO,                     TRJ_WO,   TRJ_I,  TRJ_U, TRJ_SHI,  TRJ_NN,
-        TRJ_MA,   TRJ_RI,   TRJ_NI,   TRJ_SA,   TRJ_NA,              TRJ_SU, TRJ_TSU,TRJ_DOUTEN,TRJ_KUTEN,TRJ_XTSU,
-                   _______,  TRON_NUM,  MO(_TRON_ROMAJI_RED), MO(_TRON_ROMAJI_BLUE),TRON_NAV,  _______
-                                           ),
-  [_TRON_ROMAJI_BLUE] = LAYOUT_split_3x5_3(
-        TRJ_BI, TRJ_ZO, TRJ_GO, TRJ_BA, TRJ_BO,                      TRJ_E,   TRJ_KE,   TRJ_ME,  TRJ_MU,   TRJ_RO,
-        TRJ_DA, TRJ_DO, TRJ_GA, TRJ_DE, TRJ_BU,                      TRJ_O,  TRJ_CHI,TRJ_CHOUONNPU,TRJ_MI, TRJ_YA,
-        TRJ_XE, TRJ_XO, TRJ_ZE, TRJ_ZA, TRJ_BE,                     TRJ_WA,   TRJ_XI,   TRJ_XA, _______,   TRJ_XU,
-                   _______,  _______, MO(_TRON_ROMAJI_PURPLE),    _______, _______, _______
-                                           ),
-  [_TRON_ROMAJI_RED] = LAYOUT_split_3x5_3(
-       TRJ_HI, TRJ_SO,TRJ_NAKAGURO,TRJ_XYA, TRJ_HO,                 TRJ_GI,   TRJ_GE,  TRJ_GU,  _______, _______,
-       TRJ_NU, TRJ_NE, TRJ_XYU, TRJ_YO,  TRJ_FU,                     TRJ_O,  TRJ_DZI,  TRJ_VU,   TRJ_JI, _______,
-       TRJ_XE, TRJ_XO,  TRJ_SE, TRJ_YU,  TRJ_HE,                    TRJ_ZU,  TRJ_DZU,TRJ_LKAGIKAKO,TRJ_RKAGIKAKO, TRJ_XU,
-                         _______,  _______, _______,   MO(_TRON_ROMAJI_PURPLE), _______, _______
-                                           ),
-  [_TRON_ROMAJI_PURPLE] = LAYOUT_split_3x5_3(
-        TRJ_PI,  _______, _______, TRJ_PA,  TRJ_PO,                    _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, TRJ_PU,                     KC_SPC, C(JP_J), C(JP_K), C(JP_L), C(JP_SCLN),
-        _______, _______, _______, _______, TRJ_PE,                    _______, KC_ENT, _______, _______, _______,
-                               _______,  _______,  _______, _______, _______, _______
-   ),
-  [_SYM_NUM] = LAYOUT_split_3x5_3(
+  [_NUM] = LAYOUT_split_3x5_3(
       JP_QUES, JP_LBRC, JP_RBRC, JP_COLN, C(KC_F2),              JP_PLUS,  KC_7, KC_8, KC_9, JP_ASTR,
       JP_AMPR, JP_LPRN, JP_RPRN, JP_SCLN, JP_AT,                 JP_MINS,  KC_4, KC_5, KC_6, JP_SLSH,
-      JP_DQUO, JP_QUOT, JP_UNDS, JP_EXLM, JP_PIPE,                JP_EQL,  KC_1, KC_2, KC_3,    KC_0,
-                                  _______,  NUM,  _______,     KC_ENT,  OSL(_SYM), _______
+      JP_DQUO, JP_QUOT, JP_UNDS, JP_EXLM, JP_PIPE,                JP_EQL,  KC_1, KC_2, KC_3,    KC_DOT,
+                                  _______,  NUM,  _______,     KC_ENT,    KC_0, _______
                               ),
-  [_NAV_EXT] = LAYOUT_split_3x5_3(
-      G(KC_Z), G(KC_X), G(KC_C), PASTE,   LSG(KC_Z),              _______,    _______,   _EISU,   _KANA, _ROMAJI,
-      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, KC_TAB,                 KC_DEL,     KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
-      KC_HOME, KC_PGUP, KC_PGDN, KC_END,  KC_INS,                 HYPR(KC_B), KC_MPLY, KC_VOLD, KC_VOLU, KC_MUTE,
-      _______,     KC_ESC, OSL(_EXT),  _______, NAV,  _______
+  [_NAV] = LAYOUT_split_3x5_3(
+      G(KC_Z), G(KC_X), G(KC_C), PASTE,   LSG(KC_Z),              LSG(KC_5),   _______,   _EISU,   _KANA,  _______,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,                  _______,     KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
+      KC_HOME, KC_PGUP, KC_PGDN, KC_END, XXXXXXX,                HYPR(KC_B), KC_MPLY, KC_VOLD, KC_VOLU, KC_MUTE,
+                               _______,     KC_ESC, KC_TAB,     _______, NAV,  _______
                               ),
   [_EXT] = LAYOUT_split_3x5_3(
-      MEH(KC_X), MEH(KC_M), MEH(KC_L), S(LAG(KC_V)),  MEH(KC_P),         LSG(KC_5), _______, _______, _______, _______,
-      MEH(KC_S), MEH(KC_T), MEH(KC_R),     MEH(KC_D), HYPR(KC_Y),           _______, _______, _______, _______, _______,
-      MEH(KC_V), MEH(KC_K), MEH(KC_J),     MEH(KC_G),  MEH(KC_W),           _______,   GOOGL,   GTRNS,   DFINE, JP_CAPS,
-                                  _______,     _______, _______,  MEH(KC_SPC), _______,  _______
-                              ),
-  [_SYM] = LAYOUT_split_3x5_3(
-      JP_ZKHK, JP_MHEN, JP_HENK, JP_KANA, _______,                      LSA(JP_8), JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, JP_BSLS,                      JP_TILD,   JP_PERC, JP_LCBR, JP_RCBR,    JP_GRV,
-      JP_EISU,    FUN2,    FUN1,  KC_LPAD, KC_SCRL,                     KC_NUHS,    JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
+       _______, _______, _______,  S(LAG(KC_V)), _______,             LSA(JP_8),   JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
+       _______, A(KC_DEL),  _______, KC_DEL, HYPR(KC_Y),                JP_TILD,   JP_PERC, JP_LCBR, JP_RCBR,    JP_GRV,
+      JP_CAPS,   DFINE,   GTRNS,   GOOGL, _______,                      KC_NUHS,    JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
                                 XXXXXXX, XXXXXXX, XXXXXXX,   _______, _______, _______
                               ),
-  [_FUN1] = LAYOUT_split_3x5_3(
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, XXXXXXX,                    KC_NUM,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(_MAGICSTURDY),          KC_PAUS,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
+  [_FUN] = LAYOUT_split_3x5_3(
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_NUM,                  KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      KC_LSFT, KC_LOPT, KC_LCMD, KC_LCTL, KC_INS,                  KC_SCRL,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(_MAGICSTURDY),        KC_PAUS,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-                               ),
-  [_FUN2] = LAYOUT_split_3x5_3(
-     S(KC_F21), S(KC_F22), S(KC_F23), S(KC_F24), S(KC_F10),          XXXXXXX,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
-     S(KC_F17), S(KC_F18), S(KC_F19), S(KC_F20), S(KC_F11),          XXXXXXX,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
-     S(KC_F13), S(KC_F14), S(KC_F15), S(KC_F16), S(KC_F12),          XXXXXXX,  KC_F13,  KC_F14,  KC_F15,  KC_F16,
-                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-                               )
+                              ),
+  [_WIN] = LAYOUT_split_3x5_3(
+      MEH(KC_X), MEH(KC_M), MEH(KC_L),  MEH(KC_C),  MEH(KC_P),           _______,  _______, _______, _______, _______,
+      MEH(KC_S), MEH(KC_T), MEH(KC_R),  MEH(KC_D),  MEH(KC_Y),           _______, _______, _______, _______, _______,
+      MEH(KC_V), MEH(KC_K), MEH(KC_J),  MEH(KC_G),  MEH(KC_W),           _______,   _______,   _______,   _______,   _______, 
+                               _______,   _______,  MEH(KC_SPC),       _______,  , _______,  _______
+                              )
 };
 
 
@@ -1490,7 +713,7 @@ void nav_rep_finished(tap_dance_state_t *state, void *user_data) {
             tap_code16(QK_REP);
             break;
         case TD_SINGLE_HOLD:
-            layer_on(_NAV_EXT);
+            layer_on(_NAV);
             break;
         default:
             break;
@@ -1500,7 +723,7 @@ void nav_rep_finished(tap_dance_state_t *state, void *user_data) {
 void nav_rep_reset(tap_dance_state_t *state, void *user_data) {
     // If the key was held down and now is released then switch off the layer
     if (nav_rep_tap_state.state == TD_SINGLE_HOLD) {
-        layer_off(_NAV_EXT);
+        layer_off(_NAV);
     }
     nav_rep_tap_state.state = TD_NONE;
 }
@@ -1541,6 +764,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     return true;
   case NAV:
     return true;
+      case EXT:
+    return true;
   default :
     // Do not select the hold action when another key is tapped.
     return false;
@@ -1575,21 +800,16 @@ void oled_render_layer_state(void) {
       oled_write_ln_P(PSTR("CAPS WORD"), false);
       return;
   }
-  DISPLAY_LAYER_NAME(_FUN2, "FUN 2");
-  DISPLAY_LAYER_NAME(_FUN1, "FUN 1");
-  DISPLAY_LAYER_NAME(_SYM, "SYM");
+
+  DISPLAY_LAYER_NAME(_FUN, "FUN ");
   DISPLAY_LAYER_NAME(_EXT, "EXT");
-  DISPLAY_LAYER_NAME(_NAV_EXT, "NAV EXT");
-  DISPLAY_LAYER_NAME(_SYM_NUM, "SYM NUM");
+  DISPLAY_LAYER_NAME(_NAV_EXT, "NAV");
+  DISPLAY_LAYER_NAME(_SYM_NUM, "NUM");
   DISPLAY_LAYER_NAME(_MAGICSTURDY, "MAGIC STURDY");
   DISPLAY_LAYER_NAME(_TRON_BASE, "TRON BASE");
   DISPLAY_LAYER_NAME(_TRON_BLUE, "TRON BLUE");
   DISPLAY_LAYER_NAME(_TRON_RED, "TRON RED");
   DISPLAY_LAYER_NAME(_TRON_PURPLE, "TRON PURPLE");
-  DISPLAY_LAYER_NAME(_TRON_ROMAJI_BASE, "TRON ROMAJI BASE");
-  DISPLAY_LAYER_NAME(_TRON_ROMAJI_BLUE, "TRON ROMAJI BLUE");
-  DISPLAY_LAYER_NAME(_TRON_ROMAJI_RED, "TRON ROMAJI RED");
-  DISPLAY_LAYER_NAME(_TRON_ROMAJI_PURPLE, "TRON ROMAJI PURPLE");
 }
 
 char keylog_str[24] = {};
