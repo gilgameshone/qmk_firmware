@@ -38,7 +38,7 @@ enum crkbd_layers {
 };
 
 #define NUM LT(_NUM,KC_BSPC)
-#define NAV LT(_NAV,KC_ENT)
+#define NAV MO(_NAV)
 #define EXT LT(_EXT,KC_SPC)
 #define FUN MO(_FUN)
 
@@ -53,14 +53,14 @@ enum crkbd_layers {
 #define HSCMD_R LGUI_T(KC_R)
 #define HSOPT_T LALT_T(KC_T)
 #define HSSFT_S LSFT_T(KC_S)
-
+#define HSHYP_G HYPR_T(KC_G)
 
 // magic sturdy Right-hand home row mods
 #define HSCTL_N RCTL_T(KC_N)
 #define HSCMD_E RGUI_T(KC_E)
 #define HSOPT_A RALT_T(KC_A)
 #define HSSFT_I RSFT_T(KC_I)
-
+#define HSHYP_H HYPR_T(KC_H)
 
 
 // TRON Left-hand home row mods // defunct
@@ -97,6 +97,24 @@ enum crkbd_layers {
 //     I * -> ION    R * -> RL
 //
 
+
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+    switch (keycode) {
+        case KC_C: return KC_Y;
+        case KC_P: return KC_Y;
+        case HSCTL_D: return KC_Y;
+        case HSHYP_G: return KC_Y;
+        case HSCMD_R: return KC_L;
+        case KC_U: return KC_E;
+        case HSCMD_E: return KC_U;
+        case KC_O: return KC_A;
+        case HSOPT_A: return KC_O;
+        case KC_X: return KC_T;
+        case KC_M: return KC_T;
+        case HSOPT_T: return KC_M;
+    }
+    return KC_TRNS; 
+}
 
 
 //tron japanese laid over JIS kana
@@ -558,7 +576,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     } else {
       // when keycode DFINE is released
     }
-    return false;
+     return false;
+     
   }
   return true;
 }
@@ -630,10 +649,10 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MAGICSTURDY] = LAYOUT_split_3x5_3(
-           KC_X,     KC_M,    KC_L,         KC_C, KC_P,              KC_B,       KC_NUBS,    KC_U,    KC_O,    KC_Q,
-        HSSFT_S,  HSOPT_T, HSCMD_R,      HSCTL_D, KC_Y,              KC_F,       HSCTL_N, HSCMD_E, HSOPT_A, HSSFT_I,
-           KC_V,     KC_K,    KC_J, HYPR_T(KC_G), KC_W,              KC_Z,  HYPR_T(KC_H), JP_COMM, JP_DOT,  JP_MINS,
-                           _______,          NUM,  EXT,     OSM(MOD_LSFT),           NAV,  QK_REP
+           KC_X,     KC_M,    KC_L,    KC_C, KC_P,              KC_B,  QK_AREP,    KC_U,    KC_O,    KC_Q,
+        HSSFT_S,  HSOPT_T, HSCMD_R, HSCTL_D, KC_Y,              KC_F,  HSCTL_N, HSCMD_E, HSOPT_A, HSSFT_I,
+           KC_V,     KC_K,    KC_J, HSHYP_G, KC_W,              KC_Z,  HSHYP_H, JP_COMM, JP_DOT,  JP_MINS,
+                           _______,     NUM,  EXT,     OSM(MOD_LSFT),      NAV,  QK_REP
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
            KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
@@ -666,9 +685,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _______, _______, _______,            _______, _______, _______
                                     ),
   [_NUM] = LAYOUT_split_3x5_3(
-      JP_QUES, JP_LBRC, JP_RBRC, JP_COLN, C(KC_F2),              JP_PLUS,  KC_7, KC_8, KC_9, JP_ASTR,
-      JP_AMPR, JP_LPRN, JP_RPRN, JP_SCLN,    JP_AT,              JP_MINS,  KC_4, KC_5, KC_6, JP_SLSH,
-      JP_DQUO, JP_QUOT, JP_UNDS, JP_EXLM,  JP_PIPE,               JP_EQL,  KC_1, KC_2, KC_3,  KC_DOT,
+      JP_EXLM, JP_LBRC, JP_RBRC, JP_COLN, C(KC_F2),              JP_PLUS,  KC_7, KC_8, KC_9, JP_ASTR,
+      JP_AMPR, JP_LPRN, JP_RPRN, JP_SCLN, JP_AT,                 JP_MINS,  KC_4, KC_5, KC_6, JP_SLSH,
+      JP_QUES, JP_UNDS, JP_DQUO, JP_QUOT, JP_PIPE,               JP_EQL,   KC_1, KC_2, KC_3,  KC_DOT,
                         _______,     NUM,  _______,               KC_ENT,  KC_0, _______
                               ),
   [_NAV] = LAYOUT_split_3x5_3(
@@ -732,8 +751,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-
-
 // OLED STUFF
 
 #ifdef OLED_ENABLE
@@ -758,8 +775,8 @@ void oled_render_layer_state(void) {
       oled_write_ln_P(PSTR("CAPS WORD"), false);
       return;
   }
-
-  DISPLAY_LAYER_NAME(_FUN, "FUN ");
+  DISPLAY_LAYER_NAME(_QWERTY, "QWERTY");
+  DISPLAY_LAYER_NAME(_FUN, "FUN");
   DISPLAY_LAYER_NAME(_EXT, "EXT");
   DISPLAY_LAYER_NAME(_NAV, "NAV");
   DISPLAY_LAYER_NAME(_NUM, "NUM");
