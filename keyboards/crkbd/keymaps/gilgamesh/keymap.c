@@ -790,7 +790,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case EXT:
             return TAPPING_TERM - 80;
         case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
-            return 200;
+            return 200;       
         default:
             return TAPPING_TERM;
     }
