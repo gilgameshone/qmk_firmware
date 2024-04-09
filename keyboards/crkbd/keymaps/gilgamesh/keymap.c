@@ -181,23 +181,6 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
 
 
-//tron japanese laid over JIS romaji
-
-
-#define TRJ_A JP_A
-#define TRJ_I JP_I
-#define TRJ_U JP_U
-#define TRJ_E JP_E
-#define TRJ_O JP_O
-#define TRJ_LKAGIKAKO JP_LBRC
-#define TRJ_RKAGIKAKO JP_RBRC
-#define TRJ_DOUTEN JP_COMM
-#define TRJ_KUTEN JP_DOT
-#define TRJ_NAKAGURO JP_SLSH
-#define TRJ_CHOUONNPU JP_MINS
-
-
-
 
 // magic sturdy
 
