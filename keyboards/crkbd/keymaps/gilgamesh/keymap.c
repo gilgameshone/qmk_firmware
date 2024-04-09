@@ -38,7 +38,6 @@ enum crkbd_layers {
 };
 
 #define NUM LT(_NUM,KC_BSPC)
-#define NAV MO(_NAV)
 #define EXT LT(_EXT,KC_SPC)
 #define FUN MO(_FUN)
 
@@ -228,8 +227,31 @@ enum custom_keycodes {
     _EISU,
 };
 
+// TAP DANCE
 
+typedef struct {
+  bool is_press_action;
+  int state;
+} tap;
 
+//Define a type for as many tap dance states as you need
+enum {
+  SINGLE_TAP = 1,
+  SINGLE_HOLD = 2,
+};
+
+enum {
+  OSS_NAV = 0     //Our custom tap dance key; add any other tap dance keys to this enum 
+};
+
+//Declare the functions to be used with your tap dance key(s)
+
+//Function associated with all tap dances
+int cur_dance (qk_tap_dance_state_t *state);
+
+//Functions associated with individual tap dances
+void ql_finished (qk_tap_dance_state_t *state, void *user_data);
+void ql_reset (qk_tap_dance_state_t *state, void *user_data);
 
 // macros
 
@@ -648,13 +670,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_X,     KC_M,    KC_L,    KC_C, KC_P,              KC_B,  QK_AREP,    KC_U,    KC_O,    KC_Q,
         HSSFT_S,  HSOPT_T, HSCMD_R, HSCTL_D, KC_Y,              KC_F,  HSCTL_N, HSCMD_E, HSOPT_A, HSSFT_I,
            KC_V,     KC_K,    KC_J, HSHYP_G, KC_W,              KC_Z,  HSHYP_H, JP_COMM, JP_DOT,  JP_MINS,
-                           _______,     NUM,  EXT,     OSM(MOD_LSFT),      NAV,  QK_REP
+           _______,     NUM,  EXT,     QK_REP,  TD(OSS_NAV), _______
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
            KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
            KC_A,     KC_S,    KC_D,    KC_F,  KC_G,              KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,
            KC_Z,     KC_X,    KC_C,    KC_V,  KC_B,              KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
-                           _______,    NUM,    EXT,     OSM(MOD_LSFT),     NAV,  QK_REP
+                           _______,    NUM,    EXT,     QK_REP,  TD(OSS_NAV), _______
   ),
   [_TRON_BASE] = LAYOUT_split_3x5_3(
         TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,                        TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
@@ -713,13 +735,55 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
+// TAP DANCE
 
+//Determine the current tap dance state
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) {
+    if (!state->pressed) {
+      return SINGLE_TAP;
+    } else {
+      return SINGLE_HOLD;
+    }
+  } 
+  else return 8;
+}
+
+//Initialize tap structure associated with example tap dance key
+static tap ql_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+//Functions that control what our tap dance key does
+void ql_finished (qk_tap_dance_state_t *state, void *user_data) {
+  ql_tap_state.state = cur_dance(state);
+  switch (ql_tap_state.state) {
+    case SINGLE_TAP: 
+      set_oneshot_mods(MOD_BIT(KC_LSFT)); 
+      break;
+    case SINGLE_HOLD: 
+      layer_on(_NAV); 
+      break;
+  }
+}
+
+void ql_reset (qk_tap_dance_state_t *state, void *user_data) {
+  //if the key was held down and now is released then switch off the layer
+  if (ql_tap_state.state==SINGLE_HOLD) {
+    layer_off(_NAV);
+  }
+  ql_tap_state.state = 0;
+}
+
+//Associate our tap dance key with its functionality
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [OSS_NAV] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ql_finished, ql_reset, 275)
+};
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case NUM:
-            return TAPPING_TERM - 80;
-        case NAV:
             return TAPPING_TERM - 80;
         case EXT:
             return TAPPING_TERM - 80;
@@ -734,8 +798,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
   case NUM:
     // Immediately select the hold action when another key is tapped.
-    return true;
-  case NAV:
     return true;
   case EXT:
     return true;
