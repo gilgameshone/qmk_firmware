@@ -587,12 +587,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // combos
 
-const uint16_t PROGMEM combo_capsword[] = {EXT, OSM(MOD_LSFT), COMBO_END};
+const uint16_t PROGMEM combo_capsword[] = {EXT, QK_REP, COMBO_END};
 const uint16_t PROGMEM combo_qkboot[] = {KC_X, HSSFT_S, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_Y, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_C, HSCTL_D, KC_G, COMBO_END};
 const uint16_t PROGMEM combo_fun[] = {EXT, NUM, COMBO_END};
-const uint16_t PROGMEM combo_win[] = {OSM(MOD_LSFT), NAV, COMBO_END};
+const uint16_t PROGMEM combo_win[] = {QK_REP, NAV, COMBO_END};
 const uint16_t PROGMEM combo_sorcery[] = {KC_C, QK_AREP, COMBO_END};
 const uint16_t PROGMEM combo_back_char[] = {HSHYP_G, KC_J, COMBO_END};
 const uint16_t PROGMEM combo_for_char[] = {HSHYP_H, JP_COMM, COMBO_END};
@@ -758,10 +758,10 @@ void ql_finished(tap_dance_state_t *state, void *user_data) {
     ql_tap_state.state = cur_dance(state);
     switch (ql_tap_state.state) {
         case TD_SINGLE_TAP:
-            tap_code(KC_QUOT);
+            set_oneshot_mods(MOD_BIT(KC_LSFT));
             break;
         case TD_SINGLE_HOLD:
-            layer_on(_MY_LAYER);
+            layer_on(_NAV);
             break;      
         default:
             break;
@@ -771,7 +771,7 @@ void ql_finished(tap_dance_state_t *state, void *user_data) {
 void ql_reset(tap_dance_state_t *state, void *user_data) {
     // If the key was held down and now is released then switch off the layer
     if (ql_tap_state.state == TD_SINGLE_HOLD) {
-        layer_off(_MY_LAYER);
+        layer_off(_NAV);
     }
     ql_tap_state.state = TD_NONE;
 }
