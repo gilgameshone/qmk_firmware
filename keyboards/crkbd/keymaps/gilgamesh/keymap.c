@@ -529,7 +529,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // when keycode GOOGL is pressed
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
                   SS_UP(X_LCMD));  // command C
-      SEND_STRING(SS_DOWN(X_LCMD)  SS_TAP(X_SPC) SS_UP(X_LCMD));  // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                  SS_UP(X_LSFT) SS_UP(X_LCTL)
+                  SS_UP(X_LCMD));  // open alfred
       wait_ms(50);
       SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
@@ -543,7 +546,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // when keycode GTRNS is pressed
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
                   SS_UP(X_LCMD));  // command C
-      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_SPC) SS_UP(X_LCMD));  // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                  SS_UP(X_LSFT) SS_UP(X_LCTL)
+                  SS_UP(X_LCMD));  // open alfred
       wait_ms(50);
       SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
@@ -557,7 +563,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // when keycode DFINE is pressed
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
                   SS_UP(X_LCMD));  // command C
-      SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_SPC) SS_UP(X_LCMD));  // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
+                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
+                  SS_UP(X_LSFT) SS_UP(X_LCTL)
+                  SS_UP(X_LCMD));  // open alfred
       wait_ms(200);
       SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
@@ -587,17 +596,6 @@ const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_Y, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_C, HSCTL_D, KC_G, COMBO_END};
 const uint16_t PROGMEM combo_fun[] = {EXT, NUM, COMBO_END};
 const uint16_t PROGMEM combo_win[] = {OSM(MOD_LSFT), NAV, COMBO_END};
-const uint16_t PROGMEM combo_sorcery[] = {KC_C, QK_AREP, COMBO_END};
-const uint16_t PROGMEM combo_back_char[] = {HSHYP_G, KC_J, COMBO_END};
-const uint16_t PROGMEM combo_for_char[] = {HSHYP_H, JP_COMM, COMBO_END};
-const uint16_t PROGMEM combo_back_word[] = {KC_K, KC_J, COMBO_END};
-const uint16_t PROGMEM combo_for_word[] = {KC_COMM, JP_DOT, COMBO_END};
-const uint16_t PROGMEM combo_back_sent[] = {KC_K, HSHYP_G, COMBO_END};
-const uint16_t PROGMEM combo_for_sent[] = {HSHYP_H, JP_DOT, COMBO_END};
-const uint16_t PROGMEM combo_pre_line[] = {HSCTL_D, KC_J, COMBO_END};
-const uint16_t PROGMEM combo_next_line[] = {HSCTL_N, JP_COMM, COMBO_END};
-const uint16_t PROGMEM combo_pre_para[] = {HSOPT_T,  KC_J, COMBO_END};
-const uint16_t PROGMEM combo_next_para[] = {HSOPT_A, JP_COMM, COMBO_END};
 
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -607,17 +605,6 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_qkreboot, QK_RBT),
   COMBO(combo_fun, MO(_FUN)),
   COMBO(combo_win, MO(_WIN)),
-  COMBO(combo_sorcery, S(KC_NUBS)),
-    COMBO(combo_back_char, KC_LEFT),
-    COMBO(combo_for_char, KC_RGHT),
-    COMBO(combo_back_word, A(KC_LEFT)),
-    COMBO(combo_for_word, A(KC_RGHT)),
-    COMBO(combo_back_sent, KC_HOME),
-    COMBO(combo_for_sent, KC_END),
-    COMBO(combo_pre_line, KC_UP),
-    COMBO(combo_next_line, KC_DOWN),
-    COMBO(combo_pre_para, A(KC_UP)),
-    COMBO(combo_next_para, A(KC_DOWN)),
 };
 
 // caps word
@@ -665,7 +652,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_X,     KC_M,    KC_L,    KC_C, KC_P,              KC_B,  QK_AREP,    KC_U,    KC_O,    KC_Q,
         HSSFT_S,  HSOPT_T, HSCMD_R, HSCTL_D, KC_Y,              KC_F,  HSCTL_N, HSCMD_E, HSOPT_A, HSSFT_I,
            KC_V,     KC_K,    KC_J, HSHYP_G, KC_W,              KC_Z,  HSHYP_H, JP_COMM, JP_DOT,  JP_MINS,
-           _______,     NUM,  EXT,     OSM(MOD_LSFT),  QK_REP,     NAV
+                           _______,     NUM,  EXT,     OSM(MOD_LSFT),      NAV,  QK_REP
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
            KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
@@ -712,7 +699,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_EXT] = LAYOUT_split_3x5_3(
        _______,   _______, _______, S(LAG(KC_V)),    _______,         LSA(JP_8),  JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
        _______, A(KC_DEL), _______,       KC_DEL, HYPR(KC_Y),           JP_TILD,  JP_PERC, JP_LCBR, JP_RCBR,    JP_GRV,
-       JP_CAPS,     DFINE,   GTRNS,        GOOGL,    _______,           KC_NUBS,   JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
+       JP_CAPS,     DFINE,   GTRNS,        GOOGL,    _______,           KC_NUHS,   JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
                                 XXXXXXX, XXXXXXX,    XXXXXXX,           _______,  _______, _______
                               ),
   [_FUN] = LAYOUT_split_3x5_3(
@@ -762,3 +749,114 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+
+
+// OLED STUFF
+
+#ifdef OLED_ENABLE
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_0;
+    } else {
+        return rotation;
+    }
+}
+
+#define DISPLAY_LAYER_NAME(LAYER_NAME, LAYER_STRING) \
+  if(get_highest_layer(layer_state|default_layer_state) == LAYER_NAME) { \
+      oled_write_ln_P(PSTR(LAYER_STRING), false); \
+      return;\
+  }\
+
+
+void oled_render_layer_state(void) {
+  // if caps word is enabled, show
+  if(is_caps_word_on()) {
+      oled_write_ln_P(PSTR("CAPS WORD"), false);
+      return;
+  }
+  DISPLAY_LAYER_NAME(_QWERTY, "QWERTY");
+  DISPLAY_LAYER_NAME(_FUN, "FUN");
+  DISPLAY_LAYER_NAME(_EXT, "EXT");
+  DISPLAY_LAYER_NAME(_NAV, "NAV");
+  DISPLAY_LAYER_NAME(_NUM, "NUM");
+  DISPLAY_LAYER_NAME(_MAGICSTURDY, "MAGIC STURDY");
+  DISPLAY_LAYER_NAME(_TRON_BASE, "TRON BASE");
+  DISPLAY_LAYER_NAME(_TRON_BLUE, "TRON BLUE");
+  DISPLAY_LAYER_NAME(_TRON_RED, "TRON RED");
+  DISPLAY_LAYER_NAME(_TRON_PURPLE, "TRON PURPLE");
+}
+
+char keylog_str[24] = {};
+
+const char code_to_name[60] = {
+    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
+    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
+
+void set_keylog(uint16_t keycode, keyrecord_t *record) {
+  char name = ' ';
+    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
+        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
+  if (keycode < 60) {
+    name = code_to_name[keycode];
+  }
+
+  // update keylog
+  snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
+           record->event.key.row, record->event.key.col,
+           keycode, name);
+}
+
+void oled_render_keylog(void) {
+    oled_write(keylog_str, false);
+}
+
+
+void render_keylock_status(led_t led_state) {
+    oled_write_P(PSTR("Lock:"), false);
+    oled_write_P(PSTR(" "), false);
+    oled_write_P(PSTR("N"), led_state.num_lock);
+    oled_write_P(PSTR("C"), led_state.caps_lock);
+    oled_write_ln_P(PSTR("S"), led_state.scroll_lock);
+}
+
+void oled_render_mod_status(uint8_t modifiers) {
+    oled_write_P(PSTR("Shift"), (modifiers & MOD_MASK_SHIFT));
+    oled_write_P(PSTR(" "), false);
+    oled_write_P(PSTR("Option\n"), (modifiers & MOD_MASK_ALT));
+    oled_write_P(PSTR("Command"), (modifiers & MOD_MASK_GUI));
+    oled_write_P(PSTR(" "), false);
+    oled_write_P(PSTR("Control\n"), (modifiers & MOD_MASK_CTRL));
+}
+
+void oled_render_logo(void) {
+    static const char PROGMEM crkbd_logo[] = {
+        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
+        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
+        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
+        0};
+    oled_write_P(crkbd_logo, false);
+}
+
+void oled_render_status_main(void) {
+    /* Show Keyboard Layout  */
+    oled_render_layer_state();
+    oled_render_mod_status(get_mods());
+    render_keylock_status(host_keyboard_led_state());
+}
+
+bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+        oled_render_status_main();
+    } else {
+        oled_render_logo();
+    }
+    return false;
+}
+
+
+#endif // OLED_ENABLE
