@@ -570,6 +570,17 @@ const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_Y, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_C, HSCTL_D, KC_G, COMBO_END};
 const uint16_t PROGMEM combo_fun[] = {EXT, NUM, COMBO_END};
 const uint16_t PROGMEM combo_win[] = {OSM(MOD_LSFT), NAV, COMBO_END};
+const uint16_t PROGMEM combo_sorcery[] = {KC_C, QK_AREP, COMBO_END};
+const uint16_t PROGMEM combo_back_char[] = {HSHYP_G, KC_J, COMBO_END};
+const uint16_t PROGMEM combo_for_char[] = {HSHYP_H, JP_COMM, COMBO_END};
+const uint16_t PROGMEM combo_back_word[] = {KC_K, KC_J, COMBO_END};
+const uint16_t PROGMEM combo_for_word[] = {KC_COMM, JP_DOT, COMBO_END};
+const uint16_t PROGMEM combo_back_sent[] = {KC_K, HSHYP_G, COMBO_END};
+const uint16_t PROGMEM combo_for_sent[] = {HSHYP_H, JP_DOT, COMBO_END};
+const uint16_t PROGMEM combo_pre_line[] = {HSCTL_D, KC_J, COMBO_END};
+const uint16_t PROGMEM combo_next_line[] = {HSCTL_N, JP_COMM, COMBO_END};
+const uint16_t PROGMEM combo_pre_para[] = {HSOPT_T,  KC_J, COMBO_END};
+const uint16_t PROGMEM combo_next_para[] = {HSOPT_A, JP_COMM, COMBO_END};
 
 
 combo_t key_combos[COMBO_COUNT] = {
@@ -579,6 +590,17 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_qkreboot, QK_RBT),
   COMBO(combo_fun, MO(_FUN)),
   COMBO(combo_win, MO(_WIN)),
+    COMBO(combo_sorcery, S(KC_NUBS)),
+    COMBO(combo_back_char, KC_LEFT),
+    COMBO(combo_for_char, KC_RGHT),
+    COMBO(combo_back_word, A(KC_LEFT)),
+    COMBO(combo_for_word, A(KC_RGHT)),
+    COMBO(combo_back_sent, KC_HOME),
+    COMBO(combo_for_sent, KC_END),
+    COMBO(combo_pre_line, KC_UP),
+    COMBO(combo_next_line, KC_DOWN),
+    COMBO(combo_pre_para, A(KC_UP)),
+    COMBO(combo_next_para, A(KC_DOWN)),
 };
 
 // caps word
