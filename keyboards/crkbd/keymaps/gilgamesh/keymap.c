@@ -228,30 +228,31 @@ enum custom_keycodes {
 };
 
 // TAP DANCE
+// Define a type for as many tap dance states as you need
+typedef enum {
+    TD_NONE,
+    TD_UNKNOWN,
+    TD_SINGLE_TAP,
+    TD_SINGLE_HOLD,
+} td_state_t;
 
 typedef struct {
-  bool is_press_action;
-  int state;
-} tap;
-
-//Define a type for as many tap dance states as you need
-enum {
-  SINGLE_TAP = 1,
-  SINGLE_HOLD = 2,
-};
+    bool is_press_action;
+    td_state_t state;
+} td_tap_t;
 
 enum {
-  OSS_NAV = 0     //Our custom tap dance key; add any other tap dance keys to this enum 
+    OSS_NAV, // Our custom tap dance key; add any other tap dance keys to this enum 
 };
 
-//Declare the functions to be used with your tap dance key(s)
+// Declare the functions to be used with your tap dance key(s)
 
-//Function associated with all tap dances
-int cur_dance (qk_tap_dance_state_t *state);
+// Function associated with all tap dances
+td_state_t cur_dance(tap_dance_state_t *state);
 
-//Functions associated with individual tap dances
-void ql_finished (qk_tap_dance_state_t *state, void *user_data);
-void ql_reset (qk_tap_dance_state_t *state, void *user_data);
+// Functions associated with individual tap dances
+void ql_finished(tap_dance_state_t *state, void *user_data);
+void ql_reset(tap_dance_state_t *state, void *user_data);
 
 // macros
 
@@ -670,30 +671,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_X,     KC_M,    KC_L,    KC_C, KC_P,              KC_B,  QK_AREP,    KC_U,    KC_O,    KC_Q,
         HSSFT_S,  HSOPT_T, HSCMD_R, HSCTL_D, KC_Y,              KC_F,  HSCTL_N, HSCMD_E, HSOPT_A, HSSFT_I,
            KC_V,     KC_K,    KC_J, HSHYP_G, KC_W,              KC_Z,  HSHYP_H, JP_COMM, JP_DOT,  JP_MINS,
-           _______,     NUM,  EXT,     QK_REP,  TD(OSS_NAV), _______
+                           _______,     NUM,  EXT,              QK_REP,  TD(OSS_NAV), _______
   ),
   [_QWERTY] = LAYOUT_split_3x5_3(
-           KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-           KC_A,     KC_S,    KC_D,    KC_F,  KC_G,              KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,
-           KC_Z,     KC_X,    KC_C,    KC_V,  KC_B,              KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
-                           _______,    NUM,    EXT,     QK_REP,  TD(OSS_NAV), _______
+           KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,            KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
+           KC_A,     KC_S,    KC_D,    KC_F,  KC_G,            KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,
+           KC_Z,     KC_X,    KC_C,    KC_V,  KC_B,            KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
+                           _______,    NUM,    EXT,            QK_REP,  TD(OSS_NAV), _______
   ),
   [_TRON_BASE] = LAYOUT_split_3x5_3(
-        TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,                        TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
-        TJ_TA,   TJ_TO,   TJ_KA,   TJ_TE,   TJ_MO,                        TJ_WO,    TJ_I,    TJ_U,  TJ_SHI,   TJ_NN,
-        TJ_MA,   TJ_RI,   TJ_NI,   TJ_SA,   TJ_NA,                        TJ_SU,  TJ_TSU,TJ_DOUTEN,TJ_KUTEN,TJ_XTSU,
-               _______,  TRON_NUM,  MO(_TRON_RED),               MO(_TRON_BLUE),TRON_NAV,  _______
+        TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,            TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
+        TJ_TA,   TJ_TO,   TJ_KA,   TJ_TE,   TJ_MO,            TJ_WO,    TJ_I,    TJ_U,  TJ_SHI,   TJ_NN,
+        TJ_MA,   TJ_RI,   TJ_NI,   TJ_SA,   TJ_NA,            TJ_SU,  TJ_TSU,TJ_DOUTEN,TJ_KUTEN,TJ_XTSU,
+               _______,  TRON_NUM,  MO(_TRON_RED),            MO(_TRON_BLUE),TRON_NAV,  _______
                          ),
   [_TRON_BLUE] = LAYOUT_split_3x5_3(
-        TJ_BI,   TJ_ZO,   TJ_GO,  TJ_BA,    TJ_BO,                         TJ_E,   TJ_KE,   TJ_ME,   TJ_MU,  TJ_RO,
-        TJ_DA,   TJ_DO,   TJ_GA,  TJ_DE,    TJ_BU,                         TJ_O,  TJ_CHI,TJ_CHOUONNPU,TJ_MI,  TJ_YA,
-        TJ_XE,   TJ_XO,    TJ_ZE,  TJ_ZA,   TJ_BE,                        TJ_WA,   TJ_XI,   TJ_XA, _______,   TJ_XU,
-              _______,  _______, MO(_TRON_PURPLE),                      _______, _______, _______
+        TJ_BI,   TJ_ZO,   TJ_GO,  TJ_BA,    TJ_BO,            TJ_E,   TJ_KE,   TJ_ME,   TJ_MU,  TJ_RO,
+        TJ_DA,   TJ_DO,   TJ_GA,  TJ_DE,    TJ_BU,            TJ_O,  TJ_CHI,TJ_CHOUONNPU,TJ_MI,  TJ_YA,
+        TJ_XE,   TJ_XO,    TJ_ZE,  TJ_ZA,   TJ_BE,            TJ_WA,   TJ_XI,   TJ_XA, _______,   TJ_XU,
+              _______,  _______, MO(_TRON_PURPLE),             _______, _______, _______
                                     ),
   [_TRON_RED] = LAYOUT_split_3x5_3(
-        TJ_HI,   TJ_SO,TJ_NAKAGURO,TJ_XYA,  TJ_HO,                        TJ_GI,   TJ_GE,  TJ_GU,  _______, _______,
-        TJ_NU,   TJ_NE,  TJ_XYU,   TJ_YO,   TJ_FU,                         TJ_O,  TJ_DZI,  TJ_VU,    TJ_JI, _______,
-        TJ_XE,   TJ_XO,   TJ_SE,   TJ_YU,   TJ_HE,                        TJ_ZU,  TJ_DZU,TJ_LKAGIKAKO,TJ_RKAGIKAKO, TJ_XU,
+        TJ_HI,   TJ_SO,TJ_NAKAGURO,TJ_XYA,  TJ_HO,             TJ_GI,   TJ_GE,  TJ_GU,  _______, _______,
+        TJ_NU,   TJ_NE,  TJ_XYU,   TJ_YO,   TJ_FU,             TJ_O,  TJ_DZI,  TJ_VU,    TJ_JI, _______,
+        TJ_XE,   TJ_XO,   TJ_SE,   TJ_YU,   TJ_HE,             TJ_ZU,  TJ_DZU,TJ_LKAGIKAKO,TJ_RKAGIKAKO, TJ_XU,
                        _______,  _______, _______,             MO(_TRON_PURPLE), _______, _______
                                     ),
   [_TRON_PURPLE] = LAYOUT_split_3x5_3(
@@ -703,16 +704,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _______, _______, _______,            _______, _______, _______
                                     ),
   [_NUM] = LAYOUT_split_3x5_3(
-      JP_EXLM, JP_LBRC, JP_RBRC, JP_COLN, C(KC_F2),              JP_PLUS,  KC_7, KC_8, KC_9, JP_ASTR,
-      JP_AMPR, JP_LPRN, JP_RPRN, JP_SCLN, JP_AT,                 JP_MINS,  KC_4, KC_5, KC_6, JP_SLSH,
-      JP_QUES, JP_UNDS, JP_DQUO, JP_QUOT, JP_PIPE,               JP_EQL,   KC_1, KC_2, KC_3,  KC_DOT,
-                        _______,     NUM,  _______,               KC_ENT,  KC_0, _______
+      JP_EXLM, JP_LBRC, JP_RBRC, JP_COLN, C(KC_F2),           JP_PLUS,  KC_7, KC_8, KC_9, JP_ASTR,
+      JP_AMPR, JP_LPRN, JP_RPRN, JP_SCLN, JP_AT,              JP_MINS,  KC_4, KC_5, KC_6, JP_SLSH,
+      JP_QUES, JP_UNDS, JP_DQUO, JP_QUOT, JP_PIPE,            JP_EQL,   KC_1, KC_2, KC_3,  KC_DOT,
+                        _______,     NUM,  _______,           KC_ENT,  KC_0, _______
                               ),
   [_NAV] = LAYOUT_split_3x5_3(
-      G(KC_Z), G(KC_X), G(KC_C), PASTE,   LSG(KC_Z),                 LSG(KC_5), KC_LNG2,   _EISU,   _KANA, KC_LNG1,
-      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT,   XXXXXXX,                   _______, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
-      KC_HOME, KC_PGUP, KC_PGDN, KC_END,    XXXXXXX,                HYPR(KC_B), KC_MPLY, KC_VOLD, KC_VOLU, KC_MUTE,
-                        _______, KC_ESC,     KC_TAB,                   _______,     NAV, _______
+      G(KC_Z), G(KC_X), G(KC_C), PASTE,   LSG(KC_Z),          LSG(KC_5), KC_LNG2,   _EISU,   _KANA, KC_LNG1,
+      KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT,   XXXXXXX,          _______, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
+      KC_HOME, KC_PGUP, KC_PGDN, KC_END,    XXXXXXX,          HYPR(KC_B), KC_MPLY, KC_VOLD, KC_VOLU, KC_MUTE,
+                        _______, KC_ESC,     KC_TAB,          _______,     NAV, _______
                               ),
   [_EXT] = LAYOUT_split_3x5_3(
        _______,   _______, _______, S(LAG(KC_V)),    _______,         LSA(JP_8),  JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
@@ -721,10 +722,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 XXXXXXX, XXXXXXX,    XXXXXXX,           _______,  _______, _______
                               ),
   [_FUN] = LAYOUT_split_3x5_3(
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           KC_NUM,                 KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-      XXXXXXX, XXXXXXX, XXXXXXX, DF(_QWERTY),       KC_INS,                 KC_SCRL,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
-      XXXXXXX, XXXXXXX, XXXXXXX, DF(_MAGICSTURDY), XXXXXXX,                 KC_PAUS,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
-                                 XXXXXXX, XXXXXXX, XXXXXXX,                 XXXXXXX, XXXXXXX, XXXXXXX
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           KC_NUM,             KC_PSCR,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+      XXXXXXX, XXXXXXX, XXXXXXX, DF(_QWERTY),       KC_INS,             KC_SCRL,   KC_F5,   KC_F6,   KC_F7,   KC_F8,
+      XXXXXXX, XXXXXXX, XXXXXXX, DF(_MAGICSTURDY), XXXXXXX,             KC_PAUS,   KC_F1,   KC_F2,   KC_F3,   KC_F4,
+                                 XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX
                               ),
   [_WIN] = LAYOUT_split_3x5_3(
       MEH(KC_X), MEH(KC_M), MEH(KC_L),  MEH(KC_C),  MEH(KC_P),           _______, _______, _______, _______, _______,
@@ -737,49 +738,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // TAP DANCE
 
-//Determine the current tap dance state
-int cur_dance (qk_tap_dance_state_t *state) {
-  if (state->count == 1) {
-    if (!state->pressed) {
-      return SINGLE_TAP;
-    } else {
-      return SINGLE_HOLD;
+// Determine the current tap dance state
+td_state_t cur_dance(tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (!state->pressed) return TD_SINGLE_TAP;
+        else return TD_SINGLE_HOLD;
+    } 
+    else return TD_UNKNOWN;
+}
+
+// Initialize tap structure associated with example tap dance key
+static td_tap_t ql_tap_state = {
+    .is_press_action = true,
+    .state = TD_NONE
+};
+
+// Functions that control what our tap dance key does
+void ql_finished(tap_dance_state_t *state, void *user_data) {
+    ql_tap_state.state = cur_dance(state);
+    switch (ql_tap_state.state) {
+        case TD_SINGLE_TAP:
+            tap_code(KC_QUOT);
+            break;
+        case TD_SINGLE_HOLD:
+            layer_on(_MY_LAYER);
+            break;      
+        default:
+            break;
     }
-  } 
-  else return 8;
 }
 
-//Initialize tap structure associated with example tap dance key
-static tap ql_tap_state = {
-  .is_press_action = true,
-  .state = 0
+void ql_reset(tap_dance_state_t *state, void *user_data) {
+    // If the key was held down and now is released then switch off the layer
+    if (ql_tap_state.state == TD_SINGLE_HOLD) {
+        layer_off(_MY_LAYER);
+    }
+    ql_tap_state.state = TD_NONE;
+}
+
+// Associate our tap dance key with its functionality
+tap_dance_action_t tap_dance_actions[] = {
+    [OSS_NAV] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ql_finished, ql_reset)
 };
 
-//Functions that control what our tap dance key does
-void ql_finished (qk_tap_dance_state_t *state, void *user_data) {
-  ql_tap_state.state = cur_dance(state);
-  switch (ql_tap_state.state) {
-    case SINGLE_TAP: 
-      set_oneshot_mods(MOD_BIT(KC_LSFT)); 
-      break;
-    case SINGLE_HOLD: 
-      layer_on(_NAV); 
-      break;
-  }
-}
 
-void ql_reset (qk_tap_dance_state_t *state, void *user_data) {
-  //if the key was held down and now is released then switch off the layer
-  if (ql_tap_state.state==SINGLE_HOLD) {
-    layer_off(_NAV);
-  }
-  ql_tap_state.state = 0;
-}
-
-//Associate our tap dance key with its functionality
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [OSS_NAV] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ql_finished, ql_reset, 275)
-};
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -788,7 +790,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case EXT:
             return TAPPING_TERM - 80;
         case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
-            return 275;
+            return 200;
         default:
             return TAPPING_TERM;
     }
