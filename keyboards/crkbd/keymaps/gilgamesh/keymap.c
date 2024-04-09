@@ -529,10 +529,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // when keycode GOOGL is pressed
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
                   SS_UP(X_LCMD));  // command C
-      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                  SS_UP(X_LSFT) SS_UP(X_LCTL)
-                  SS_UP(X_LCMD));  // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD)  SS_TAP(X_SPC) SS_UP(X_LCMD));  // open alfred
       wait_ms(50);
       SEND_STRING(SS_TAP(X_G) SS_TAP(X_SPC));  // tap G
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
@@ -546,10 +543,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // when keycode GTRNS is pressed
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
                   SS_UP(X_LCMD));  // command C
-      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                  SS_UP(X_LSFT) SS_UP(X_LCTL)
-                  SS_UP(X_LCMD));  // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD)  SS_TAP(X_SPC) SS_UP(X_LCMD));  // open alfred
       wait_ms(50);
       SEND_STRING(SS_TAP(X_T) SS_TAP(X_SPC));  // tap T
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V) SS_UP(X_LCMD)
@@ -563,10 +557,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // when keycode DFINE is pressed
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_C)
                   SS_UP(X_LCMD));  // command C
-      SEND_STRING(SS_DOWN(X_LCMD) SS_DOWN(X_LCTL) SS_DOWN(X_LSFT)
-                  SS_DOWN(X_LOPT) SS_TAP(X_SPC) SS_UP(X_LOPT)
-                  SS_UP(X_LSFT) SS_UP(X_LCTL)
-                  SS_UP(X_LCMD));  // open alfred
+      SEND_STRING(SS_DOWN(X_LCMD)  SS_TAP(X_SPC) SS_UP(X_LCMD));  // open alfred
       wait_ms(200);
       SEND_STRING(SS_TAP(X_D) SS_TAP(X_SPC));  // tap D
       SEND_STRING(SS_DOWN(X_LCMD) SS_TAP(X_V)
