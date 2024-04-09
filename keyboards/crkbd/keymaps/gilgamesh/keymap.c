@@ -592,7 +592,7 @@ const uint16_t PROGMEM combo_qkboot[] = {KC_X, HSSFT_S, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_qkreboot[] = {KC_P, KC_Y, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_qkeeprom[] = {KC_C, HSCTL_D, KC_G, COMBO_END};
 const uint16_t PROGMEM combo_fun[] = {EXT, NUM, COMBO_END};
-const uint16_t PROGMEM combo_win[] = {QK_REP, NAV, COMBO_END};
+const uint16_t PROGMEM combo_win[] = {QK_REP, TD(OSS_NAV), COMBO_END};
 const uint16_t PROGMEM combo_sorcery[] = {KC_C, QK_AREP, COMBO_END};
 const uint16_t PROGMEM combo_back_char[] = {HSHYP_G, KC_J, COMBO_END};
 const uint16_t PROGMEM combo_for_char[] = {HSHYP_H, JP_COMM, COMBO_END};
@@ -613,17 +613,17 @@ combo_t key_combos[COMBO_COUNT] = {
   COMBO(combo_qkreboot, QK_RBT),
   COMBO(combo_fun, MO(_FUN)),
   COMBO(combo_win, MO(_WIN)),
-    COMBO(combo_sorcery, S(KC_NUBS)),
-    COMBO(combo_back_char, KC_LEFT),
-    COMBO(combo_for_char, KC_RGHT),
-    COMBO(combo_back_word, A(KC_LEFT)),
-    COMBO(combo_for_word, A(KC_RGHT)),
-    COMBO(combo_back_sent, KC_HOME),
-    COMBO(combo_for_sent, KC_END),
-    COMBO(combo_pre_line, KC_UP),
-    COMBO(combo_next_line, KC_DOWN),
-    COMBO(combo_pre_para, A(KC_UP)),
-    COMBO(combo_next_para, A(KC_DOWN)),
+  COMBO(combo_sorcery, S(KC_NUBS)),
+  COMBO(combo_back_char, KC_LEFT),
+  COMBO(combo_for_char, KC_RGHT),
+  COMBO(combo_back_word, A(KC_LEFT)),
+  COMBO(combo_for_word, A(KC_RGHT)),
+  COMBO(combo_back_sent, KC_HOME),
+  COMBO(combo_for_sent, KC_END),
+  COMBO(combo_pre_line, KC_UP),
+  COMBO(combo_next_line, KC_DOWN),
+  COMBO(combo_pre_para, A(KC_UP)),
+  COMBO(combo_next_para, A(KC_DOWN)),
 };
 
 // caps word
@@ -713,7 +713,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       G(KC_Z), G(KC_X), G(KC_C), PASTE,   LSG(KC_Z),          LSG(KC_5), KC_LNG2,   _EISU,   _KANA, KC_LNG1,
       KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT,   XXXXXXX,          _______, KC_RCTL, KC_RGUI, KC_RALT, KC_RSFT,
       KC_HOME, KC_PGUP, KC_PGDN, KC_END,    XXXXXXX,          HYPR(KC_B), KC_MPLY, KC_VOLD, KC_VOLU, KC_MUTE,
-                        _______, KC_ESC,     KC_TAB,          _______,     NAV, _______
+                        _______, KC_ESC,     KC_TAB,          _______, _______, _______
                               ),
   [_EXT] = LAYOUT_split_3x5_3(
        _______,   _______, _______, S(LAG(KC_V)),    _______,         LSA(JP_8),  JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
@@ -736,7 +736,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-// TAP DANCE
+// TAP DANCE 
 
 // Determine the current tap dance state
 td_state_t cur_dance(tap_dance_state_t *state) {
