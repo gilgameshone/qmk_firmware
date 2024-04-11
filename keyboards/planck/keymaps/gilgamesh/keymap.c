@@ -103,6 +103,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
         case HSCTL_D: return KC_Y;
         case HSHYP_G: return KC_Y;
         case HSCMD_R: return KC_L;
+        case KC_L: return HSCMD_R;
         case KC_U: return KC_E;
         case HSCMD_E: return KC_U;
         case KC_O: return KC_A;
