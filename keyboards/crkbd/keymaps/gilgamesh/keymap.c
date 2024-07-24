@@ -45,6 +45,8 @@ enum crkbd_layers {
 
 #define TRON_NUM LT(_NUM,KC_BSPC)
 #define TRON_NAV MO(_NAV)
+#define TRON_SPC LT(_TRON_RED,KC_SPC)
+#define TRON_RET LT(_TRON_BLUE,KC_ENT)
 
 
 // magic sturdy Left-hand home row mods
@@ -78,8 +80,8 @@ enum crkbd_layers {
 
 
 // This keymap uses Ikcelaks' Magic Sturdy layout for the base layer (see
-// https://github.com/Ikcelaks/keyboard_layouts). I've also made some twists of
-// my own. The "magic" is a key whose function depends on the last pressed key,
+// https://github.com/Ikcelaks/keyboard_layouts). Getreuer also made some twists of
+// his own, along with myself. The "magic" is a key whose function depends on the last pressed key,
 // implemented using the Alternate Repeat Key. This key is used to remove the
 // top SFBs and type common n-grams.
 //
@@ -88,12 +90,12 @@ enum crkbd_layers {
 //
 // SFB removal and common n-grams:
 //
-//     A * -> AO     L * -> LK      S * -> SK
-//     C * -> CY     M * -> MENT    T * -> TMENT
+//     A * -> AO     L * -> LR      
+//     C * -> CY     M * -> MT      T * -> TM
 //     D * -> DY     O * -> OA      U * -> UE
-//     E * -> EU     P * -> PY      Y * -> YP
-//     G * -> GY     Q * -> QUEN    spc * -> THE
-//     I * -> ION    R * -> RL
+//     E * -> EU     P * -> PY      V * -> VS      
+//     G * -> GY     R * -> RL      X * -> XT
+//                   
 //
 
 
@@ -104,7 +106,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
         case HSCTL_D: return KC_Y;
         case HSHYP_G: return KC_Y;
         case HSCMD_R: return KC_L;
-        case KC_L: return HSCMD_R;
+        case KC_L: return KC_R;
         case KC_U: return KC_E;
         case HSCMD_E: return KC_U;
         case KC_O: return KC_A;
@@ -112,6 +114,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
         case KC_X: return KC_T;
         case KC_M: return KC_T;
         case HSOPT_T: return KC_M;
+        case KC_V: return KC_S;
     }
     return KC_TRNS; 
 }
@@ -684,7 +687,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TJ_RA,   TJ_RU,   TJ_KO,   TJ_HA,  TJ_XYO,            TJ_KI,   TJ_NO,   TJ_KU,    TJ_A,   TJ_RE,
         TJ_TA,   TJ_TO,   TJ_KA,   TJ_TE,   TJ_MO,            TJ_WO,    TJ_I,    TJ_U,  TJ_SHI,   TJ_NN,
         TJ_MA,   TJ_RI,   TJ_NI,   TJ_SA,   TJ_NA,            TJ_SU,  TJ_TSU,TJ_DOUTEN,TJ_KUTEN,TJ_XTSU,
-               _______,  TRON_NUM,  MO(_TRON_RED),            MO(_TRON_BLUE),TRON_NAV,  _______
+                    _______,   TRON_NUM,  TRON_SPC,            TRON_RET, TRON_NAV,  _______
                          ),
   [_TRON_BLUE] = LAYOUT_split_3x5_3(
         TJ_BI,   TJ_ZO,   TJ_GO,  TJ_BA,    TJ_BO,            TJ_E,   TJ_KE,   TJ_ME,   TJ_MU,  TJ_RO,
@@ -717,9 +720,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _______, KC_ESC,     KC_TAB,          _______, _______, _______
                               ),
   [_EXT] = LAYOUT_split_3x5_3(
-       _______,   _______, _______, S(LAG(KC_V)),    _______,         LSA(JP_8),  JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
-       _______, A(KC_DEL), _______,       KC_DEL, HYPR(KC_Y),           JP_TILD,  JP_PERC, JP_LCBR, JP_RCBR,    JP_GRV,
-       JP_CAPS,     DFINE,   GTRNS,        GOOGL,    _______,           KC_NUBS,   JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
+       _______,   _______, G(KC_C),    PASTE,  S(LAG(KC_V)),         LSA(JP_8),  JP_HASH, JP_LABK, JP_RABK,   JP_CIRC,
+       _______, A(KC_DEL), _______,   KC_DEL,    HYPR(KC_Y),           JP_TILD,  JP_PERC, JP_LCBR, JP_RCBR,    JP_GRV,
+       JP_CAPS,     DFINE,   GTRNS,    GOOGL,       _______,           KC_NUBS,   JP_YEN,  JP_DLR, A(JP_3), LSA(JP_2),
                                 XXXXXXX, XXXXXXX,    XXXXXXX,           _______,  _______, _______
                               ),
   [_FUN] = LAYOUT_split_3x5_3(
